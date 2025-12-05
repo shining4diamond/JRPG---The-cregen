@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/saved_game.gd" id="1_pj5af"]
+
+[resource]
+script = ExtResource("1_pj5af")
+player_position = Vector2(179.74796, 32.4123)
