@@ -15,10 +15,12 @@ var melee:bool = true
 var _isAttackingMelee:bool = false
 var _isAttackingMelee2:bool = false
 var _isAttackingMeleeRun:bool = false
+var _isBeingAttacked:bool = false
 var	_isAttacking:bool = false
 var _isTurning:bool = false
 var _isRunning:bool = false
 var _isCrouching:bool = false
+var _isDead:bool = false
 
 var last_direction: Vector2 = Vector2.ZERO
 
@@ -31,6 +33,8 @@ var melee_texture = preload("res://Assets/characters/2D HD Character Knight/Spri
 var melee2_texture = preload("res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/Melee2.png")
 var crouchidle_texture = preload("res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/CrouchIdle.png")
 var crouchrun_texture = preload("res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/CrouchRun.png")
+var takedamage_texture = preload("res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/TakeDamage.png")
+var die_texture = preload("res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/Die.png")
 
 func _ready() -> void:
 	playback = animation_tree["parameters/playback"]
@@ -38,6 +42,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	#if _isDead:
+		#return
 	update_animation_parameters()
 	#check_180turn()
 	setSprite2DTexture()
@@ -45,10 +51,16 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not _isTurning and not _isAttacking:
+	if _isDead:
+		if Input.is_action_just_pressed("revive"):
+			_isDead = false
+			animation_tree["parameters/conditions/die"] = false
+	
+	
+	if not _isTurning and not _isAttacking and not _isDead:
 		input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if _isAttacking and not _isRunning:
+	if (_isAttacking and not _isRunning) or _isDead:
 		return
 	
 	if _isRunning and not _isCrouching:
@@ -62,8 +74,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func update_animation_parameters():
-	handle_movement_and_crouch()
-	handle_attack_simple()
+	if not _isDead:
+		handle_movement_and_crouch()
+		handle_attack_simple()
 	set_blend_positions()
 
 
@@ -106,19 +119,28 @@ func handle_attack_simple():
 	animation_tree["parameters/conditions/melee"] = false
 	animation_tree["parameters/conditions/melee2"] = false
 	animation_tree["parameters/conditions/meleeRun"] = false
+	animation_tree["parameters/conditions/takeDamage"] = false
 	
 	# Early return se non devo attaccare
-	if not Input.is_action_just_pressed("attack") or _isAttacking:
+	if (not Input.is_action_just_pressed("attack") and not Input.is_action_just_pressed("takeDamage") and not Input.is_action_just_pressed("Die")) or _isAttacking or _isBeingAttacked:
 		return
 	
 	# Reset flags
 	_isAttackingMelee = false
 	_isAttackingMelee2 = false
 	_isAttackingMeleeRun = false
+	_isBeingAttacked = false
 	_isCrouching = false
 	
 	# Logica semplificata
-	if Input.is_action_pressed("run"):
+	if Input.is_action_just_pressed("takeDamage"):
+		animation_tree["parameters/conditions/takeDamage"] = true
+		_isBeingAttacked = true
+	elif Input.is_action_just_pressed("Die"):
+		animation_tree["parameters/conditions/die"] = true
+		reset_movement_conditions()
+		_isDead = true
+	elif Input.is_action_pressed("run"):
 		animation_tree["parameters/conditions/meleeRun"] = true
 		_isAttackingMeleeRun = true
 	else:
@@ -153,17 +175,24 @@ func set_blend_positions():
 		animation_tree["parameters/MeleeRun/blend_position"] = input
 		animation_tree["parameters/CrouchIdle/blend_position"] = input
 		animation_tree["parameters/CrouchRun/blend_position"] = input
+		animation_tree["parameters/TakeDamage/blend_position"] = input
+		animation_tree["parameters/Die/blend_position"] = input
 
 func setSprite2DTexture():
-	sprite_2d.texture = idle_texture
+	
+	# Set default sprite
+	sprite_2d.texture = idle_texture	
+	
+	# Set sprite based on state
 	if animation_tree["parameters/conditions/walk"] == true: sprite_2d.texture = walk_texture
-	elif animation_tree["parameters/conditions/walk"] == true: sprite_2d.texture = walk_texture
 	elif animation_tree["parameters/conditions/run"] == true: sprite_2d.texture = run_texture
 	elif animation_tree["parameters/conditions/crouchIdle"] == true: sprite_2d.texture = crouchidle_texture
 	elif animation_tree["parameters/conditions/crouchRun"] == true: sprite_2d.texture = crouchrun_texture
 	elif _isAttacking and _isAttackingMeleeRun: sprite_2d.texture = meleerun_texture
 	elif _isAttacking and _isAttackingMelee: sprite_2d.texture = melee_texture
 	elif _isAttacking and _isAttackingMelee2: sprite_2d.texture = melee2_texture
+	elif _isAttacking and _isBeingAttacked: sprite_2d.texture = takedamage_texture
+	elif _isDead: sprite_2d.texture = die_texture
 
 
 
@@ -172,6 +201,8 @@ func _on_attacking_timeout() -> void:
 	_isAttackingMelee = false
 	_isAttackingMelee2 = false
 	_isAttackingMeleeRun = false
+	_isBeingAttacked = false
+
 	#_isTurning = false
 	#animation_tree["parameters/conditions/180turn"] = false
 
