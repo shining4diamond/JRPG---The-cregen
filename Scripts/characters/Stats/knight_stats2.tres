@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://dhns1420pp8g0"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_6prdk"]
+
+[resource]
+script = ExtResource("1_6prdk")
+max_hp = 100
+current_hp = 72
+max_mp = 100
+current_mp = 100
+attack = 10
+defense = 5
+m_attack = 4
+m_defense = 5
+turn_speed = 50
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"
