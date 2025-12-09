@@ -66,7 +66,7 @@ var player_battlers = []
 var enemy_battler = []
 
 var current_turn : Node2D
-var current_turn_index : int
+var current_turn_index : int = 0
 
 func _ready() -> void:
 	player_hpmp.stats = character.stats
@@ -102,7 +102,7 @@ func _ready() -> void:
 	battlers.sort_custom(_sort_turn_order_ascending)
 	current_turn = battlers[0]
 	attack_button.pressed.connect(_on_attack_button_pressed)
-
+	Engine.time_scale = 3.0
 
 func _sort_turn_order_ascending(battler_1, battler_2) -> bool:
 	if battler_1.stats.turn_speed < battler_2.stats.turn_speed:
@@ -130,9 +130,8 @@ func _next_turn() -> void:
 func show_select_button(show:bool):
 	if show:
 		for character in enemy_battler:
-			if character.state.isDead:
-				return
-			character.get_node("Sprite2D/Select_Button").show()
+			if not character.state.isDead:
+				character.get_node("Sprite2D/Select_Button").show()
 	else:
 		for character in enemy_battler:
 			character.get_node("Sprite2D/Select_Button").hide()

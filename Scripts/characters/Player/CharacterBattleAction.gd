@@ -43,9 +43,9 @@ func execute_take_damage(attacker: Character):
 	var damage = attacker.stats.attack - character.stats.defense
 	if damage > 0:
 		character.stats.current_hp -= damage
-	if character.stats.current_hp <= 0:
-		character.stats.current_hp = 0
-		execute_death()
+		if character.stats.current_hp <= 0:
+			character.stats.current_hp = 0
+			execute_death()
 
 func execute_death():
 	set_condition("die", true)

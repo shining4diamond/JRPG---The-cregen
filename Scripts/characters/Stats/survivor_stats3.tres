@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_uuu5p")
 max_hp = 50
-current_hp = 50
+current_hp = 10
 max_mp = 100
 current_mp = 100
 attack = 7
