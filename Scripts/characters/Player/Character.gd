@@ -42,11 +42,11 @@ func _process(_delta: float) -> void:
 	animation.update_sprite_texture()
 	animation.update_blend_positions()
 
-	if Input.is_action_just_pressed("debug"):
-		print(self)
-		#print(state.combatMode)
-		print(stats)
-		print(stats.current_hp)
+	#if Input.is_action_just_pressed("debug"):
+		#print(self)
+		##print(state.combatMode)
+		#print(stats)
+		#print(stats.current_hp)
 
 
 func _physics_process(_delta: float) -> void:

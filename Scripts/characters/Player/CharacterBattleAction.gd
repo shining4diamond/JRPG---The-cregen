@@ -29,7 +29,6 @@ p_character: Character):
 
 
 func execute_attack():
-
 	set_condition("melee", true)
 	state.isAttackingMelee = true
 		
