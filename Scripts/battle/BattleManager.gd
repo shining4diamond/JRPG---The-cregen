@@ -81,7 +81,7 @@ func _on_attack_button_pressed():
 	ui.show_select_button(true)
 	
 func _on_skip_button_pressed():
-	turn_manager._next_turn()
+	turn_manager._next_turn(true)
 	
 
 

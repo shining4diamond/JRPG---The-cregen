@@ -81,7 +81,7 @@ func _update_hp_ui(current_hp: int, party_member: int):
 	var hp_bar = panel.get_node("%HP_ProgressBar")
 	
 	hp_bar.value = current_hp
-	hp_bar.get_node("Current_HP_Label").text = "%d/%d" % [current_hp, hp_bar.max_value]
+	hp_bar.get_node("Current_HP_Label").text = "%d" % [current_hp]
 	
 	_update_hp_bar_color(hp_bar, current_hp)
 

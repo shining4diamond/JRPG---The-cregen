@@ -37,7 +37,7 @@ func _update_turn() -> void:
 func is_player_turn() -> bool:
 	return current_battler.stats.character_type == StatsResource.CharacterType.PLAYER
 
-func _next_turn() -> void:
+func _next_turn(skipTimer:bool = false) -> void:
 	var last_battler = current_battler
 	current_turn_index = (current_turn_index + 1) % battlers.size()
 	current_battler = battlers[current_turn_index]
@@ -45,7 +45,8 @@ func _next_turn() -> void:
 		if current_battler.state.isDead:
 				_next_turn()
 				return
-		await parent_node.get_tree().create_timer(2.0).timeout
+		if not skipTimer:
+			await parent_node.get_tree().create_timer(2.0).timeout
 		_update_turn()
 		parent_node.emit_signal("toggle_focus_on_player", last_battler.stats.party_member)
 		parent_node.emit_signal("toggle_focus_on_player", current_battler.stats.party_member)

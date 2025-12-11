@@ -8,6 +8,9 @@
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_ivai1")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
 [node name="Label" type="Label" parent="."]
 offset_left = 1072.0
 offset_top = 349.0
@@ -24,6 +27,7 @@ SPACE - ATTACK
 1 - TAKE DAMAGE
 2 - DIE
 3 - REVIVE"
+metadata/_edit_use_anchors_ = true
 
 [node name="Character" parent="." instance=ExtResource("2_63vvg")]
 position = Vector2(594, 321)
