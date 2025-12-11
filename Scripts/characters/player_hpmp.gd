@@ -1,12 +1,12 @@
-extends Label
+extends MarginContainer
 
-var stats:StatsResource = null
+@onready var hpmp_player1: PanelContainer = $GridContainer/Player_Character_1/HPMP_Player
+@onready var hpmp_player2: PanelContainer = $GridContainer/Player_Character_2/HPMP_Player
+@onready var hpmp_player3: PanelContainer = $GridContainer/Player_Character_3/HPMP_Player
+
+
+
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if stats:
-		text = "HP: %d / %d\nMP: %d / %d" % [stats.current_hp, stats.max_mp, stats.current_mp, stats.max_mp]
+#func _ready() -> void:
+	#hp_bar.max_value = stats.max_hp
+	#hp_bar.value = stats.current_hp

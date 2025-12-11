@@ -12,3 +12,4 @@ func attack(attacking: Character, defender: Character):
 	attacking.battleAction.execute_attack()
 	await parent_node.get_tree().create_timer(0.5).timeout
 	defender.battleAction.execute_take_damage(attacking)
+	

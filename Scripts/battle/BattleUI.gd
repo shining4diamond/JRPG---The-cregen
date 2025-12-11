@@ -19,9 +19,9 @@ func show_select_button(show:bool):
 
 func show_battle_hud(show:bool):
 	if show:
-			parent_node.battle_hud.show()
+			parent_node.battle_hud.get_node("%BattleOptions_Container").show()
 	else:
-			parent_node.battle_hud.hide()
+			parent_node.battle_hud.get_node("%BattleOptions_Container").hide()
 
 
 func setup_enemy_buttons(enemies: Array[Character]):

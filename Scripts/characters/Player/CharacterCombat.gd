@@ -15,12 +15,14 @@ func _init(p_anim_tree: AnimationTree, p_state: CharacterState, p_timer: Timer, 
 
 func handle_attack_simple():
 	
-	# Reset conditions all'inizio
-	reset_attack_conditions()
+
 	
 	# Early return se non devo attaccare
 	if not can_attack():
 		return
+		
+	# Reset conditions all'inizio
+	reset_attack_conditions()
 	
 	# Reset flags
 	state.reset_attack_flags()

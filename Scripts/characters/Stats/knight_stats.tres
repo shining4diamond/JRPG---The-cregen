@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_eej15")
-max_hp = 100
+max_hp = 323
 current_hp = 72
 max_mp = 100
 current_mp = 100

@@ -7,6 +7,14 @@ enum CharacterType{
 }
 @export var character_type:CharacterType
 
+enum PartyMember{
+	NONE,
+	ONE,
+	TWO,
+	THREE
+}
+@export var party_member:PartyMember = PartyMember.NONE
+
 @export var max_hp:int
 @export var current_hp:int
 

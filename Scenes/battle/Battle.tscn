@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk1hpwbuhhtc4"]
+[gd_scene load_steps=5 format=3 uid="uid://dk1hpwbuhhtc4"]
 
 [ext_resource type="Script" uid="uid://dcsfgrnktuscf" path="res://Scripts/battle/BattleManager.gd" id="1_ivai1"]
 [ext_resource type="PackedScene" uid="uid://le313740ui70" path="res://Scenes/characters/character_15fps.tscn" id="2_63vvg"]
 [ext_resource type="Resource" uid="uid://l1k38fa52vcu" path="res://Scripts/characters/Stats/knight_stats.tres" id="3_eerim"]
-[ext_resource type="Script" uid="uid://bb1h1dhnk5rmf" path="res://Scripts/characters/player_hpmp.gd" id="4_qd48p"]
 [ext_resource type="PackedScene" uid="uid://ca6lx1vrqdvv8" path="res://Scenes/battle/Battle_HUD.tscn" id="5_mgqhe"]
 
 [node name="Battle" type="Node2D"]
@@ -30,19 +29,8 @@ SPACE - ATTACK
 position = Vector2(594, 321)
 stats = ExtResource("3_eerim")
 
-[node name="PlayerHPMP" type="Label" parent="Character"]
-offset_left = -19.0
-offset_top = -81.0
-offset_right = 21.0
-offset_bottom = -32.0
-text = "HP: 0/0
-MP: 0/0"
-script = ExtResource("4_qd48p")
-
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1280, 0)
-
-[node name="Battle_HUD" parent="." instance=ExtResource("5_mgqhe")]
 
 [node name="BattleEnd_HUD" type="CanvasLayer" parent="."]
 visible = false
@@ -80,17 +68,6 @@ text = "VICTORY"
 layout_mode = 2
 text = "RESET BATTLE"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
+[node name="Battle_HUD" parent="." instance=ExtResource("5_mgqhe")]
 
 [connection signal="pressed" from="BattleEnd_HUD/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

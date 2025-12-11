@@ -33,6 +33,9 @@ func load_textures():
 func update_movement_animation():
 	# Reset tutte le conditions
 	reset_movement_conditions()
+	
+	if state.isAttacking:
+		return
 
 	if not state.is_moving():
 		# Fermo

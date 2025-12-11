@@ -9,6 +9,8 @@ var select_button: Button
 var selected: Label
 var character: Character
 
+signal update_hpmp_ui(current_hp: int, party_member: int)
+
 func _init(p_anim_tree: AnimationTree, \
 p_state: CharacterState, \
 p_timer: Timer, \
@@ -45,6 +47,9 @@ func execute_take_damage(attacker: Character):
 		if character.stats.current_hp <= 0:
 			character.stats.current_hp = 0
 			execute_death()
+		#update_hpmp_ui.emit()
+		emit_signal("update_hpmp_ui", character.stats.current_hp, character.stats.party_member)
+		
 
 func execute_death():
 	set_condition("die", true)

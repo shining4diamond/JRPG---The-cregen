@@ -50,9 +50,13 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	if config.type == "PLAYER":
 		entity.stats.character_type = StatsResource.CharacterType.PLAYER
 		entity.animation.set_blend_positions(Vector2(930, 288))
+		entity.stats.party_member = player_battlers.size()+1		
+		entity.name = "Player" + str(entity.stats.party_member)
 	else:
 		entity.stats.character_type = StatsResource.CharacterType.ENEMY
 		entity.animation.set_blend_positions(Vector2(350, 288))
+		entity.stats.party_member = 0
+
 	
 	# Add UI
 	_add_ui_to_entity(entity)
@@ -60,7 +64,10 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	return entity
 
 func _add_ui_to_entity(entity: Character):
-	var ui_scene = load(HPMP_UI_SCENE) as PackedScene
-	var ui_node = ui_scene.instantiate()
-	entity.add_child(ui_node)
-	ui_node.get_child(0).stats = entity.stats
+	#var ui_scene = load(HPMP_UI_SCENE) as PackedScene
+	#var ui_node = ui_scene.instantiate()
+	#entity.add_child(ui_node)
+	#ui_node.get_node("PlayerHPMP").stats = entity.stats
+	#ui_node.get_node("%HP_Bar").max_value = entity.stats.max_hp
+	#ui_node.get_node("%MP_Bar").max_value = entity.stats.max_mp
+	pass
