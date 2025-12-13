@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=3 uid="uid://8nvx8mjxxpni"]
+
+[ext_resource type="PackedScene" uid="uid://dtwrwafmny1gy" path="res://Scenes/ui/HP_ProgressBar.tscn" id="1_gjgl3"]
+[ext_resource type="PackedScene" uid="uid://yhcilnbxqsda" path="res://Scenes/ui/MP_ProgressBar.tscn" id="2_cxcpl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd4mw"]
+bg_color = Color(0.12955844, 0.1295585, 0.12955838, 0.25490198)
+
+[node name="HPMP_Player" type="PanelContainer"]
+offset_right = 197.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pd4mw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="HP_HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HP_HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="HP_Bar_VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HP_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HP_HBoxContainer/HP_Bar_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="HP_ProgressBar" parent="VBoxContainer/HP_HBoxContainer/HP_Bar_VBoxContainer" instance=ExtResource("1_gjgl3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HP_HBoxContainer/HP_Bar_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="HP_VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HP_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+
+[node name="HP" type="Label" parent="VBoxContainer/HP_HBoxContainer/HP_VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "HP"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HP_HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="MP_HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MP_HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="MP_Bar_VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MP_HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MP_HBoxContainer2/MP_Bar_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="MP_ProgressBar" parent="VBoxContainer/MP_HBoxContainer2/MP_Bar_VBoxContainer" instance=ExtResource("2_cxcpl")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MP_HBoxContainer2/MP_Bar_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="MP_VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MP_HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+
+[node name="MP" type="Label" parent="VBoxContainer/MP_HBoxContainer2/MP_VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MP"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MP_HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_right = 30
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
