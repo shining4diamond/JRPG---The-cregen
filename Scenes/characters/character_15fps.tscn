@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=3 uid="uid://le313740ui70"]
+[gd_scene load_steps=183 format=3 uid="uid://le313740ui70"]
 
 [ext_resource type="Script" uid="uid://dn31uivrars56" path="res://Scripts/characters/Player/Character.gd" id="1_o4vxh"]
 [ext_resource type="Texture2D" uid="uid://dwcnvbbtu3853" path="res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/Kick.png" id="2_1k0sv"]
@@ -1037,6 +1037,10 @@ states/Walk/position = Vector2(-110, -134)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ntir4"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_jjfrh"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_p7386"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_cttja"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_isewi"), "Melee", "Walk", SubResource("AnimationNodeStateMachineTransition_by61i"), "Melee", "Melee2", SubResource("AnimationNodeStateMachineTransition_l85go"), "Melee2", "Idle", SubResource("AnimationNodeStateMachineTransition_o0ghi"), "Melee2", "Walk", SubResource("AnimationNodeStateMachineTransition_x8o1i"), "Walk", "Melee", SubResource("AnimationNodeStateMachineTransition_rrbej"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_sqd5p"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_yy1wh"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_ocs66"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_6s7p6"), "Run", "MeleeRun", SubResource("AnimationNodeStateMachineTransition_rty2j"), "MeleeRun", "Run", SubResource("AnimationNodeStateMachineTransition_fixxl"), "Melee", "Run", SubResource("AnimationNodeStateMachineTransition_2euhb"), "Melee2", "Run", SubResource("AnimationNodeStateMachineTransition_fls3y"), "CrouchIdle", "Idle", SubResource("AnimationNodeStateMachineTransition_nibfr"), "Walk", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_urru2"), "CrouchIdle", "Walk", SubResource("AnimationNodeStateMachineTransition_lsoyf"), "Idle", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_oc7mc"), "CrouchIdle", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_cr77l"), "CrouchRun", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_h40ur"), "CrouchRun", "Walk", SubResource("AnimationNodeStateMachineTransition_eyt55"), "Walk", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_gnpvg"), "CrouchRun", "Idle", SubResource("AnimationNodeStateMachineTransition_odmlr"), "Idle", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_88jx2"), "CrouchRun", "Run", SubResource("AnimationNodeStateMachineTransition_lmulr"), "CrouchIdle", "Run", SubResource("AnimationNodeStateMachineTransition_kieep"), "CrouchRun", "Melee", SubResource("AnimationNodeStateMachineTransition_b5u73"), "CrouchIdle", "Melee", SubResource("AnimationNodeStateMachineTransition_50pfk"), "Run", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_5cv2o"), "Walk", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_tg0mb"), "Idle", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_kvnrr"), "CrouchIdle", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_0r5da"), "CrouchRun", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_twm3q"), "TakeDamage", "Run", SubResource("AnimationNodeStateMachineTransition_8liwr"), "TakeDamage", "Walk", SubResource("AnimationNodeStateMachineTransition_5cq8p"), "TakeDamage", "Idle", SubResource("AnimationNodeStateMachineTransition_2si0u"), "TakeDamage", "Die", SubResource("AnimationNodeStateMachineTransition_xj15x"), "Run", "Die", SubResource("AnimationNodeStateMachineTransition_fgiwp"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_2smwd"), "Idle", "Die", SubResource("AnimationNodeStateMachineTransition_gul8o"), "CrouchIdle", "Die", SubResource("AnimationNodeStateMachineTransition_tf8qx"), "CrouchRun", "Die", SubResource("AnimationNodeStateMachineTransition_sc2al"), "MeleeRun", "Die", SubResource("AnimationNodeStateMachineTransition_ny3fl"), "Melee", "Die", SubResource("AnimationNodeStateMachineTransition_5a6aj"), "Melee2", "Die", SubResource("AnimationNodeStateMachineTransition_fq1sf"), "Die", "Idle", SubResource("AnimationNodeStateMachineTransition_ktxk4")]
 graph_offset = Vector2(-240, -144)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b4rur"]
+radius = 7.0
+height = 42.0
+
 [node name="Player" type="CharacterBody2D" groups=["game_events"]]
 script = ExtResource("1_o4vxh")
 
@@ -1045,7 +1049,7 @@ position = Vector2(0, 1)
 texture = ExtResource("2_1k0sv")
 hframes = 15
 vframes = 8
-frame = 32
+frame = 37
 
 [node name="Select_Button" type="Button" parent="Sprite2D"]
 visible = false
@@ -1122,8 +1126,9 @@ parameters/Special2/blend_position = Vector2(0, 0)
 parameters/TakeDamage/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0.26245213, 0.5062344)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="Attacking" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_b4rur")
 
 [connection signal="timeout" from="Attacking" to="." method="_on_attacking_timeout"]

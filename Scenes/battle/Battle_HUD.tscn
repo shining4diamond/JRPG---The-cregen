@@ -69,8 +69,8 @@ unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -71.0
-offset_right = 98.0
+offset_top = -237.0
+offset_right = 415.0
 grow_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -80,25 +80,65 @@ theme_override_constants/margin_bottom = 20
 [node name="GridContainer" type="GridContainer" parent="BattleOptions_Container"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="BattleOptions_Container/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BattleOptions_Container/GridContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer"]
-layout_mode = 2
-
-[node name="Attack_Button" type="Button" parent="BattleOptions_Container/GridContainer/VBoxContainer"]
+[node name="Attack_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Attack
 "
 
-[node name="Skip_Button" type="Button" parent="BattleOptions_Container/GridContainer/VBoxContainer"]
+[node name="Skip_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Skip"
+
+[node name="MarginContainer2" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "BUTTON1
+"
+
+[node name="Button2" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "BUTTON2
+"
+
+[node name="Button3" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "BUTTON3
+"
+
+[node name="Button4" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "BUTTON4
+"
+
+[node name="Button5" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "BUTTON5
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100

@@ -6,3 +6,6 @@ res://Scenes/battle/Battle.tscn
 res://Scripts/battle/BattleAI.gd
 res://Scripts/battle/BattleCombat.gd
 res://Scripts/ui/HUD_Battle.gd
+res://Scenes/battle/Battle_HUD.tscn
+res://Scenes/characters/character_15fps.tscn
+res://Scenes/characters/character_14fps.tscn
