@@ -30,8 +30,8 @@ res://AddonsExamples/godot_state_charts_examples/save_and_load/save_and_load.tsc
 res://AddonsExamples/godot_state_charts_examples/stepping/stepping.tscn::a12c84bb63ea2b3e530c51d998b66579::1764926959::res://.godot/exported/133200997/export-8529d22f2b73a6fef5c4bb016dade240-stepping.scn
 res://AddonsExamples/godot_state_charts_examples/new_theme.tres::329b9fdf3a9f16868bedde004e534088::1764925412::res://.godot/exported/133200997/export-c044aff95caaefd923c0d3ee20c67494-new_theme.res
 res://AddonsExamples/safe_resource_loader_example/example.tscn::e3b9450ad547b99404ffcd3599822515::1764926962::res://.godot/exported/133200997/export-a448983eb0309e88b1db15aab00b5754-example.scn
-res://Scenes/battle/Battle_HUD.tscn::1a5af4342b0a9452e6b676c1a03e85ab::1765660923::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
-res://Scenes/characters/character_14fps.tscn::f87e2f63303a2aabded20816e0e47a9e::1765660082::res://.godot/exported/133200997/export-3c24d63006829f275b7228f3bb4d08bf-character_14fps.scn
+res://Scenes/battle/Battle_HUD.tscn::cf5e2364bec8d054fb9bb30300a38ac5::1765663999::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
+res://Scenes/characters/character_14fps.tscn::abe9126e859d761bce07edce103b0b32::1765664870::res://.godot/exported/133200997/export-3c24d63006829f275b7228f3bb4d08bf-character_14fps.scn
 res://Scenes/characters/character_15fps.tscn::6f232143e0a14d52528fce6ad44f3a9c::1765660082::res://.godot/exported/133200997/export-90dd54a49bce8a5cf8e444a4617fcf80-character_15fps.scn
 res://Scenes/characters/character_select_button.tres::887662826f30d06342c2de4abd75b255::1765224953::res://.godot/exported/133200997/export-2054df95591489eb9577c85687c110eb-character_select_button.res
 res://Scripts/characters/Stats/knight_stats2.tres::5387d98d09566f83dabf4ddee00915ac::1765272362::res://.godot/exported/133200997/export-c5a99f0f9d0cb282e0f452f7c8a81ae2-knight_stats2.res

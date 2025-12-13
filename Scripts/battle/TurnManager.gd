@@ -98,6 +98,7 @@ func _update_turn():
 		
 	if is_player_turn():
 		manager.show_battle_hud.emit(true)
+		manager.attack_button.grab_focus()
 	else:
 		manager.show_battle_hud.emit(false)
 		manager.request_ai_target.emit()

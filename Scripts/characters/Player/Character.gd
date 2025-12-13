@@ -43,6 +43,7 @@ func _process(_delta: float) -> void:
 		animation.set_condition("die", true)
 	animation.update_sprite_texture()
 	animation.update_blend_positions()
+	battleAction._process(_delta)
 
 	#if Input.is_action_just_pressed("debug"):
 		#print(self)

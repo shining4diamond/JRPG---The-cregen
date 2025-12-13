@@ -88,3 +88,13 @@ func set_tween():
 	tween = character.get_parent().get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
+
+
+func _process(delta: float) -> void:
+	var button = character.get_node_or_null("%Select_Button")
+	
+	if button and button.visible == false and tween:
+		_on_select_button_mouse_exited()
+
+	if character.state.isDead and button and button.visible:
+		button.visible = false

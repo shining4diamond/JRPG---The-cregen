@@ -104,21 +104,6 @@ func _connect_signals():
 	battle_ended.connect(_on_battle_ended)
 	combat_attack_requested.connect(_on_combat_attack_requested)
 	
-	# Segnali Selezione Nemici
-	enemy_select_1.focus_entered.connect(_on_enemy_select_1_focus)
-	enemy_select_1.focus_exited.connect(_on_enemy_select_1_unfocus)
-	enemy_select_1.mouse_entered.connect(_on_enemy_select_1_focus)
-	enemy_select_1.pressed.connect(_on_enemy_select_1_pressed)
-	
-	enemy_select_2.focus_entered.connect(_on_enemy_select_2_focus)
-	enemy_select_2.focus_exited.connect(_on_enemy_select_2_unfocus)
-	enemy_select_2.mouse_entered.connect(_on_enemy_select_2_focus)
-	enemy_select_2.pressed.connect(_on_enemy_select_2_pressed)
-	
-	enemy_select_3.focus_entered.connect(_on_enemy_select_3_focus)
-	enemy_select_3.focus_exited.connect(_on_enemy_select_3_unfocus)
-	enemy_select_3.mouse_entered.connect(_on_enemy_select_3_focus)
-	enemy_select_3.pressed.connect(_on_enemy_select_3_pressed)
 	
 	# Connetti componenti
 	spawner.all_entities_spawned.connect(func(p, e): entities_spawned.emit(p, e))
@@ -222,6 +207,25 @@ func _on_enemy_select_3_pressed():
 	_on_enemy_select_3_unfocus()
 	_on_select_enemy_pressed(selected_character)
 
+func _setup_enemy_select_1_signals():
+	enemy_select_1.focus_entered.connect(_on_enemy_select_1_focus)
+	enemy_select_1.focus_exited.connect(_on_enemy_select_1_unfocus)
+	enemy_select_1.mouse_entered.connect(_on_enemy_select_1_focus)
+	enemy_select_1.pressed.connect(_on_enemy_select_1_pressed)
+
+func _setup_enemy_select_2_signals():
+	enemy_select_2.focus_entered.connect(_on_enemy_select_2_focus)
+	enemy_select_2.focus_exited.connect(_on_enemy_select_2_unfocus)
+	enemy_select_2.mouse_entered.connect(_on_enemy_select_2_focus)
+	enemy_select_2.pressed.connect(_on_enemy_select_2_pressed)
+
+func _setup_enemy_select_3_signals():
+	enemy_select_3.focus_entered.connect(_on_enemy_select_3_focus)
+	enemy_select_3.focus_exited.connect(_on_enemy_select_3_unfocus)
+	enemy_select_3.mouse_entered.connect(_on_enemy_select_3_focus)
+	enemy_select_3.pressed.connect(_on_enemy_select_3_pressed)
+	
+	
 
 # ==============================================
 # PUBLIC API

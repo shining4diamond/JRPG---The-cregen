@@ -29,21 +29,6 @@ func show_battle_hud(show: bool):
 		var container = manager.battle_hud.get_node_or_null("%BattleOptions_Container")
 		if container:
 			container.visible = show
-		container = manager.battle_hud.get_node_or_null("%EnemyContainer")
-		if container:
-			container.visible = show
-
-func setup_enemy_buttons(enemies: Array[Character]):
-	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		
-		var button = enemy.get_node_or_null("Sprite2D/Select_Button")
-		if button:
-			# Usa callable per evitare riferimenti diretti
-			button.pressed.connect(
-				func(): manager.select_enemy_pressed.emit(enemy)
-			)
 
 func _show_battle_end_hud(message: String):
 	if is_instance_valid(manager.battleend_hud) and \
@@ -61,32 +46,15 @@ func _toggle_combat_options_buttons():
 		manager.skip_button.disabled = not manager.skip_button.disabled
 
 
-func _add_ui_to_enemy(entity: Character):
-	_add_hp_bar_to_enemy(entity)
-	_toggle_select_button_to_enemy(entity)
-
-func _add_hp_bar_to_enemy(entity: Character):
-	if not is_instance_valid(entity):
-		return
-
-	var ui_scene = load(ENEMY_HP_BAR_SCENE) as PackedScene
-	if not ui_scene:
-		push_error("Cannot load enemy HP bar scene!")
-		return
-	
-	var hp_bar = ui_scene.instantiate()
-	entity.add_child(hp_bar)
-	hp_bar.max_value = entity.stats.max_hp
-	hp_bar.value = entity.stats.current_hp
-
 func _toggle_select_button_to_enemy(entity: Character, visible: bool = true):
 	if not is_instance_valid(entity):
 		return
 	
+	print(entity, " ", visible)
+	
 	var enemy_select_button = _get_enemy_select(entity.stats.party_member)
 	if enemy_select_button:
 			enemy_select_button.visible = visible
-			enemy_select_button.disabled = false
 		
 
 func _get_enemy_select(party_member:int):
@@ -132,4 +100,58 @@ func _remove_ui_from_enemy(entity: Character):
 	hpbar.queue_free()
 	
 	_toggle_select_button_to_enemy(entity, false)
+
+
+
+func setup_enemy_buttons(enemies: Array[Character]):
+	for enemy in enemies:
+		if not is_instance_valid(enemy):
+			continue
+		
+		var button = enemy.get_node_or_null("Sprite2D/Select_Button")
+		if button:
+			# Usa callable per evitare riferimenti diretti
+			#button.pressed.connect(
+				#func(): manager.select_enemy_pressed.emit(enemy)
+			#)
+			_set_enemy_select_button(enemy.stats.party_member, button)
+
+func _set_enemy_select_button(party_member:int, button: Button):
+	match party_member:
+		-1:
+			manager.enemy_select_1 = button
+			manager.enemy_select_1.focus_neighbor_left = manager.attack_button.get_path()
+			manager.attack_button.focus_neighbor_right = manager.enemy_select_1.get_path()
+			manager._setup_enemy_select_1_signals()
+		-2:
+			manager.enemy_select_2 = button
+			manager.enemy_select_2.focus_neighbor_left = manager.attack_button.get_path()
+			manager.enemy_select_1.focus_neighbor_bottom = manager.enemy_select_2.get_path()
+			manager.enemy_select_2.focus_neighbor_top = manager.enemy_select_1.get_path()
+			manager._setup_enemy_select_2_signals()
+		-3:
+			manager.enemy_select_3 = button
+			manager.enemy_select_3.focus_neighbor_left = manager.attack_button.get_path()
+			manager.enemy_select_2.focus_neighbor_bottom = manager.enemy_select_3.get_path()
+			manager.enemy_select_3.focus_neighbor_top = manager.enemy_select_2.get_path()
+			manager._setup_enemy_select_3_signals()
+	return null
+
+
+func _add_ui_to_enemy(entity: Character):
+	_add_hp_bar_to_enemy(entity)
+	_toggle_select_button_to_enemy(entity, false)
+
+func _add_hp_bar_to_enemy(entity: Character):
+	if not is_instance_valid(entity):
+		return
+
+	var ui_scene = load(ENEMY_HP_BAR_SCENE) as PackedScene
+	if not ui_scene:
+		push_error("Cannot load enemy HP bar scene!")
+		return
 	
+	var hp_bar = ui_scene.instantiate()
+	entity.add_child(hp_bar)
+	hp_bar.max_value = entity.stats.max_hp
+	hp_bar.value = entity.stats.current_hp
