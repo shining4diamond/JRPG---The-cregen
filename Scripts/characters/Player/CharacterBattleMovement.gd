@@ -19,7 +19,9 @@ func toggle_focus_movement():
 	
 func calculate_velocity() -> Vector2:
 	if character.stats.character_type != 0:
+		character.animation.set_blend_positions(Vector2.LEFT)
 		return Vector2.ZERO
+		
 	if focus_on:
 		direction = Vector2.RIGHT if character.position.x < 560.0 else Vector2.ZERO
 		character.animation.set_condition("run",true)

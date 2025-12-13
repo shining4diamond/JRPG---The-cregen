@@ -3,6 +3,7 @@ extends Resource
 
 # Stati booleani
 var combatMode: bool = false
+
 var isAttacking: bool = false
 var isAttackingMelee: bool = false
 var isAttackingMelee2: bool = false

@@ -3,14 +3,19 @@ extends Node
 
 enum AIBehavior { RANDOM, WEAKEST, STRONGEST, LOWEST_HP }
 
-var behavior: AIBehavior = AIBehavior.RANDOM
-var parent_node: Node2D
+@export var behavior: AIBehavior = AIBehavior.RANDOM
+var parent_node: BattleManager
 
-func _init(p_parent: Node2D):
+func _init(p_parent: BattleManager):
 	parent_node = p_parent
 
 func choose_target() -> Character:
-	var alive_players = parent_node.turn_manager.player_battlers.filter(func(p): return not p.state.isDead)
+	if not parent_node.turn_manager:
+		return null
+	
+	var alive_players = parent_node.turn_manager.player_battlers.filter(
+		func(p): return not p.state.isDead
+	)
 	
 	if alive_players.is_empty():
 		return null
@@ -28,22 +33,10 @@ func choose_target() -> Character:
 	return alive_players.pick_random()
 
 func _get_weakest(targets: Array) -> Character:
-	var weakest = targets[0]
-	for target in targets:
-		if target.stats.attack < weakest.stats.attack:
-			weakest = target
-	return weakest
+	return targets.reduce(func(a, b): return a if a.stats.attack < b.stats.attack else b)
 
 func _get_strongest(targets: Array) -> Character:
-	var strongest = targets[0]
-	for target in targets:
-		if target.stats.attack > strongest.stats.attack:
-			strongest = target
-	return strongest
+	return targets.reduce(func(a, b): return a if a.stats.attack > b.stats.attack else b)
 
 func _get_lowest_hp(targets: Array) -> Character:
-	var lowest = targets[0]
-	for target in targets:
-		if target.stats.current_hp < lowest.stats.current_hp:
-			lowest = target
-	return lowest
+	return targets.reduce(func(a, b): return a if a.stats.current_hp < b.stats.current_hp else b)

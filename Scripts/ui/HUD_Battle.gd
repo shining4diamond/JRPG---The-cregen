@@ -38,7 +38,7 @@ func connect_player_signals():
 	
 	for player_name in PLAYERS:
 		var player = get_parent().get_node_or_null(player_name)
-		var battleManager = get_parent()
+		var battleManager = get_parent().get_node_or_null("BattleManager")
 		if player:
 			var battle_action = player.battleAction
 			if battle_action.has_signal("update_hpmp_ui"):
@@ -173,9 +173,6 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 	var panel_data = player_panels[party_member]
 	var spacer = panel_data.spacer
 	
-	# Determina direzione animazione
-	var target_scale = Vector2.ZERO if spacer.visible else Vector2.ONE
-	
 	# Crea tween
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -183,7 +180,7 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 	
 	if spacer.visible:
 		# Rimpicciolisci e poi nascondi
-		await tween.tween_property(spacer, "size_flags_stretch_ratio", 0.0, 0.3)
+		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.0, 0.3)
 		tween.tween_callback(spacer.hide)
 	else:
 		# Mostra e poi ingrandisci

@@ -1,25 +1,29 @@
 class_name BattleSpawner
 extends Node
 
+signal spawn_entity(entity: Character)
 signal entity_spawned(entity: Character)
 signal all_entities_spawned(players: Array, enemies: Array)
 
-const ENEMY_HP_BAR_SCENE = "res://Scenes/ui/HP_ProgressBar_Enemy.tscn"
 
-var parent_node: Node2D
+var parent_node: BattleManager
 var player_battlers: Array[Character] = []
 var enemy_battlers: Array[Character] = []
 
-func _init(p_parent: Node2D):
+func _init(p_parent: BattleManager):
 	parent_node = p_parent
+	
 
 func spawn_entities(entities_config: Dictionary):
+	if entities_config.size() == 0:
+		print("No entities to spawn")
+		return
 	player_battlers.clear()
 	enemy_battlers.clear()
 	
 	for key in entities_config:
 		var config = entities_config[key]
-		var entity = _spawn_single_entity(config)
+		var entity = await _spawn_single_entity(config)
 		
 		if entity:
 			if config.type == "PLAYER":
@@ -40,11 +44,14 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	var entity = scene.instantiate() as Character
 	
 	# Setup entity
-	entity.textureBasePath = config.textureBasePath
-	parent_node.add_child(entity)
+	
+	await parent_node.get_parent().get_tree().create_timer(0.1).timeout
+	spawn_entity.emit(entity)
 	entity.global_position = config.position
 	entity.state.combatMode = true
 	entity.stats = load(config.statsPath)
+	entity.textureBasePath = config.textureBasePath
+	entity.animation.load_textures(config.textureBasePath)
 	
 	# Set character type
 	if config.type == "PLAYER":
@@ -58,16 +65,9 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 		entity.stats.party_member = (player_battlers.size()) * (-1)
 		entity.name = "Enemy" + str(enemy_battlers.size()+1)
 		# Add UI
-		_add_ui_to_entity(entity)
+		parent_node.ui._add_hp_bar_to_enemy(entity)
 
 	
 	
 	
 	return entity
-
-func _add_ui_to_entity(entity: Character):
-	var ui_scene = load(ENEMY_HP_BAR_SCENE) as PackedScene
-	var hp_bar = ui_scene.instantiate()
-	entity.add_child(hp_bar)
-	hp_bar.max_value = entity.stats.max_hp
-	hp_bar.value = entity.stats.current_hp

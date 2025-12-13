@@ -6,8 +6,8 @@ var state: CharacterState
 var animation: CharacterAnimation
 var attack_timer: Timer
 var select_button: Button
-var selected: Label
 var character: Character
+var tween
 
 signal update_hpmp_ui(current_hp: int, party_member: int)
 
@@ -16,14 +16,12 @@ p_state: CharacterState, \
 p_timer: Timer, \
 p_animation: CharacterAnimation, \
 p_select_button: Button, \
-p_selected: Label, \
 p_character: Character):
 	animation_tree = p_anim_tree
 	state = p_state
 	attack_timer = p_timer
 	animation = p_animation
 	select_button = p_select_button
-	selected = p_selected
 	character = p_character
 	attack_timer.timeout.connect(_on_attack_timeout)
 	select_button.mouse_entered.connect(_on_select_button_mouse_entered)
@@ -44,10 +42,10 @@ func execute_take_damage(attacker: Character):
 	var damage = attacker.stats.attack - character.stats.defense
 	if damage > 0:
 		character.stats.current_hp -= damage
-		if character.stats.current_hp <= 0:
+		if character.stats.current_hp < 1:
 			character.stats.current_hp = 0
 			execute_death()
-		#update_hpmp_ui.emit()
+		
 		emit_signal("update_hpmp_ui", character.stats.current_hp, character.stats.party_member)
 		
 
@@ -78,8 +76,17 @@ func _on_attack_timeout():
 
 
 func _on_select_button_mouse_entered() -> void:
-	selected.show()
-
+	set_tween()
+	tween.set_loops()
+	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 0.4), 0.5)
+	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
 
 func _on_select_button_mouse_exited() -> void:
-	selected.hide()
+	tween.kill()
+	set_tween()
+	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
+
+func set_tween():
+	tween = character.get_parent().get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)

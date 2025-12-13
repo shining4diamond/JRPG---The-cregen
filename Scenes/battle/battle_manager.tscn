@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://diroiw1728k50"]
+
+[ext_resource type="Script" uid="uid://dcsfgrnktuscf" path="res://Scripts/battle/BattleManager.gd" id="1_12yvw"]
+
+[node name="BattleManager" type="Node" node_paths=PackedStringArray("battle_hud", "battleend_hud") groups=["game_events"]]
+script = ExtResource("1_12yvw")
+battle_hud = NodePath("")
+battleend_hud = NodePath("")

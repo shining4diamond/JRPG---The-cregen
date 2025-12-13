@@ -1,19 +1,17 @@
-extends Resource
-class_name StatsResource
+class_name SavedCharacterData
+extends SavedData
 
-enum CharacterType{
-	PLAYER,
-	ENEMY
-}
-@export var character_type:CharacterType
+@export var stats:StatsResource
+@export var entity_name:String
+@export var textureBasePath:String
 
-enum PartyMember{
-	NONE,
-	ONE,
-	TWO,
-	THREE
-}
-@export var party_member:PartyMember = PartyMember.NONE
+
+# Stati booleani
+@export var combatMode: bool = false
+@export var isDead: bool = false
+
+
+# STATS
 @export var character_name:String
 
 @export var max_hp:int

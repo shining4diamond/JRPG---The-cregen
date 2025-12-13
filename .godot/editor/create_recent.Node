@@ -1,14 +1,14 @@
+Node
+RayCast2D
+Button
+VBoxContainer
+GridContainer
+MarginContainer
+CanvasLayer
 Marker
 Camera2D
-VBoxContainer
 HBoxContainer
-MarginContainer
 Label
 ProgressBar
 PanelContainer
 Panel
-GridContainer
-Button
-CanvasLayer
-Label      - Matches the "text" keyword.
-Marker2D

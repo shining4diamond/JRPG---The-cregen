@@ -1037,16 +1037,15 @@ states/Walk/position = Vector2(-110, -134)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ntir4"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_jjfrh"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_p7386"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_cttja"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_isewi"), "Melee", "Walk", SubResource("AnimationNodeStateMachineTransition_by61i"), "Melee", "Melee2", SubResource("AnimationNodeStateMachineTransition_l85go"), "Melee2", "Idle", SubResource("AnimationNodeStateMachineTransition_o0ghi"), "Melee2", "Walk", SubResource("AnimationNodeStateMachineTransition_x8o1i"), "Walk", "Melee", SubResource("AnimationNodeStateMachineTransition_rrbej"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_sqd5p"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_yy1wh"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_ocs66"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_6s7p6"), "Run", "MeleeRun", SubResource("AnimationNodeStateMachineTransition_rty2j"), "MeleeRun", "Run", SubResource("AnimationNodeStateMachineTransition_fixxl"), "Melee", "Run", SubResource("AnimationNodeStateMachineTransition_2euhb"), "Melee2", "Run", SubResource("AnimationNodeStateMachineTransition_fls3y"), "CrouchIdle", "Idle", SubResource("AnimationNodeStateMachineTransition_nibfr"), "Walk", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_urru2"), "CrouchIdle", "Walk", SubResource("AnimationNodeStateMachineTransition_lsoyf"), "Idle", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_oc7mc"), "CrouchIdle", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_cr77l"), "CrouchRun", "CrouchIdle", SubResource("AnimationNodeStateMachineTransition_h40ur"), "CrouchRun", "Walk", SubResource("AnimationNodeStateMachineTransition_eyt55"), "Walk", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_gnpvg"), "CrouchRun", "Idle", SubResource("AnimationNodeStateMachineTransition_odmlr"), "Idle", "CrouchRun", SubResource("AnimationNodeStateMachineTransition_88jx2"), "CrouchRun", "Run", SubResource("AnimationNodeStateMachineTransition_lmulr"), "CrouchIdle", "Run", SubResource("AnimationNodeStateMachineTransition_kieep"), "CrouchRun", "Melee", SubResource("AnimationNodeStateMachineTransition_b5u73"), "CrouchIdle", "Melee", SubResource("AnimationNodeStateMachineTransition_50pfk"), "Run", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_5cv2o"), "Walk", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_tg0mb"), "Idle", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_kvnrr"), "CrouchIdle", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_0r5da"), "CrouchRun", "TakeDamage", SubResource("AnimationNodeStateMachineTransition_twm3q"), "TakeDamage", "Run", SubResource("AnimationNodeStateMachineTransition_8liwr"), "TakeDamage", "Walk", SubResource("AnimationNodeStateMachineTransition_5cq8p"), "TakeDamage", "Idle", SubResource("AnimationNodeStateMachineTransition_2si0u"), "TakeDamage", "Die", SubResource("AnimationNodeStateMachineTransition_xj15x"), "Run", "Die", SubResource("AnimationNodeStateMachineTransition_fgiwp"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_2smwd"), "Idle", "Die", SubResource("AnimationNodeStateMachineTransition_gul8o"), "CrouchIdle", "Die", SubResource("AnimationNodeStateMachineTransition_tf8qx"), "CrouchRun", "Die", SubResource("AnimationNodeStateMachineTransition_sc2al"), "MeleeRun", "Die", SubResource("AnimationNodeStateMachineTransition_ny3fl"), "Melee", "Die", SubResource("AnimationNodeStateMachineTransition_5a6aj"), "Melee2", "Die", SubResource("AnimationNodeStateMachineTransition_fq1sf"), "Die", "Idle", SubResource("AnimationNodeStateMachineTransition_ktxk4")]
 graph_offset = Vector2(-370, -348)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["game_events"]]
 script = ExtResource("1_ag3cr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_jpck7")
 hframes = 14
 vframes = 8
-frame = 36
+frame = 33
 
 [node name="Select_Button" type="Button" parent="Sprite2D"]
 visible = false
@@ -1066,20 +1065,6 @@ theme_override_styles/pressed = ExtResource("3_fd7gl")
 theme_override_styles/hover = ExtResource("3_fd7gl")
 theme_override_styles/disabled = ExtResource("3_fd7gl")
 theme_override_styles/focus = ExtResource("3_fd7gl")
-
-[node name="Selected" type="Label" parent="Sprite2D"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -97.0
-offset_top = -64.0
-offset_right = -31.0
-offset_bottom = -41.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Selected"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

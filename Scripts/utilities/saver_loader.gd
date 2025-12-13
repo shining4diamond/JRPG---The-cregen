@@ -1,10 +1,6 @@
 extends Node
 
-@onready var player: CharacterBody2D = %Player
-@onready var coins: Node = %Coins
-@onready var ui_death_count: Label = %UIDeathCount
-@onready var ui_time_passed_label: Label = %UITimePassedLabel
-@onready var ui_coins_collected_label: Label = %UICoinsCollectedLabel
+
 @onready var game: Node2D = $"../.."
 
 func _ready() -> void:
@@ -19,9 +15,6 @@ func save_game():
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	
 	saved_game.saved_data = saved_data
-#	saved_game.player_position = player.global_position
-#	saved_game.score = Globals.score
-#	saved_game.deaths = Globals.deathCount
 
 
 	ResourceSaver.save(saved_game, "user://savegame.tres")
@@ -34,11 +27,6 @@ func load_game():
 		print("Save game is unsafe!")
 		return
 	
-	player.global_position = saved_game.player_position
-#	Globals.score = saved_game.score
-#	Globals.coinsCollectedLabel = str(saved_game.score)
-#	Globals.deathCount = saved_game.deaths
-#	Globals.isDead = false
 	
 	get_tree().call_group("game_events", "on_before_load_game")
 	
@@ -46,13 +34,17 @@ func load_game():
 		if item.scene_path != null and item.scene_path != "":
 			var scene = load(item.scene_path) as PackedScene
 			var restored_node = scene.instantiate()
+			if restored_node.has_signal("toggle_focus_on_player"):
+				restored_node.battle_data = BattleData.new()
 			game.add_child(restored_node)
 		
 			if restored_node.has_method("on_load_game"):
 				restored_node.on_load_game(item)
+	
+	get_tree().call_group("game_events", "on_after_load_game")
+	
 
-#	ui_coins_collected_label.text = str(Globals.score)
-#	ui_death_count.text = "You died " + str(Globals.deathCount) + " times"
+
 
 
 func _on_save_button_pressed() -> void:

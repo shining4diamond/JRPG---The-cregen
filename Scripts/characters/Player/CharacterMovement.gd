@@ -5,11 +5,11 @@ const SPEED = 150
 const SPEED_RUNNING = 300
 const SPEED_CROUCHING = 100
 
-var Character: CharacterBody2D
+var ch: CharacterBody2D
 var state: CharacterState
 
 func _init(p_Character: CharacterBody2D, p_state: CharacterState):
-	Character = p_Character
+	ch = p_Character
 	state = p_state
 
 func handle_input():
@@ -40,5 +40,5 @@ func get_current_speed() -> float:
 	return SPEED
 
 func process_physics(_delta: float):
-	Character.velocity = calculate_velocity()
-	Character.move_and_slide()
+	ch.velocity = calculate_velocity()
+	ch.move_and_slide()

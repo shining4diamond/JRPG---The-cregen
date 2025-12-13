@@ -16,7 +16,7 @@ func _init(p_anim_tree: AnimationTree, p_sprite: Sprite2D, p_state: CharacterSta
 	base_path = p_basePath
 	load_textures()
 
-func load_textures():
+func load_textures(base_path:String = base_path):
 	textures = {
 		"idle": load(base_path + "Idle.png"),
 		"walk": load(base_path + "Walk.png"),
