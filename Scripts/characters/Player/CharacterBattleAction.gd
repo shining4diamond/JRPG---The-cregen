@@ -5,7 +5,6 @@ var animation_tree: AnimationTree
 var state: CharacterState
 var animation: CharacterAnimation
 var attack_timer: Timer
-var select_button: Button
 var character: Character
 var tween
 
@@ -21,11 +20,8 @@ p_character: Character):
 	state = p_state
 	attack_timer = p_timer
 	animation = p_animation
-	select_button = p_select_button
 	character = p_character
 	attack_timer.timeout.connect(_on_attack_timeout)
-	select_button.mouse_entered.connect(_on_select_button_mouse_entered)
-	select_button.mouse_exited.connect(_on_select_button_mouse_exited)
 
 
 func execute_attack():
@@ -76,15 +72,17 @@ func _on_attack_timeout():
 
 
 func _on_select_button_mouse_entered() -> void:
+	if tween:
+		tween.kill()
 	set_tween()
 	tween.set_loops()
 	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 0.4), 0.5)
 	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
 
 func _on_select_button_mouse_exited() -> void:
-	tween.kill()
-	set_tween()
-	await tween.tween_property(character.get_node("Sprite2D"), "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
+	if tween:
+		tween.kill()
+	character.get_node("Sprite2D").modulate = Color.WHITE
 
 func set_tween():
 	tween = character.get_parent().get_tree().create_tween()

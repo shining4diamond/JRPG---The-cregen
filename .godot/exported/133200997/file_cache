@@ -30,9 +30,9 @@ res://AddonsExamples/godot_state_charts_examples/save_and_load/save_and_load.tsc
 res://AddonsExamples/godot_state_charts_examples/stepping/stepping.tscn::a12c84bb63ea2b3e530c51d998b66579::1764926959::res://.godot/exported/133200997/export-8529d22f2b73a6fef5c4bb016dade240-stepping.scn
 res://AddonsExamples/godot_state_charts_examples/new_theme.tres::329b9fdf3a9f16868bedde004e534088::1764925412::res://.godot/exported/133200997/export-c044aff95caaefd923c0d3ee20c67494-new_theme.res
 res://AddonsExamples/safe_resource_loader_example/example.tscn::e3b9450ad547b99404ffcd3599822515::1764926962::res://.godot/exported/133200997/export-a448983eb0309e88b1db15aab00b5754-example.scn
-res://Scenes/battle/Battle_HUD.tscn::26038f80ed19cdaa8067e7e46362e907::1765537818::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
-res://Scenes/characters/character_14fps.tscn::20573abed58e21044f8195af3e6e4386::1765581060::res://.godot/exported/133200997/export-3c24d63006829f275b7228f3bb4d08bf-character_14fps.scn
-res://Scenes/characters/character_15fps.tscn::ef0c34642d79a6f17cf037b139ddf2ee::1765576647::res://.godot/exported/133200997/export-90dd54a49bce8a5cf8e444a4617fcf80-character_15fps.scn
+res://Scenes/battle/Battle_HUD.tscn::1a5af4342b0a9452e6b676c1a03e85ab::1765660923::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
+res://Scenes/characters/character_14fps.tscn::f87e2f63303a2aabded20816e0e47a9e::1765660082::res://.godot/exported/133200997/export-3c24d63006829f275b7228f3bb4d08bf-character_14fps.scn
+res://Scenes/characters/character_15fps.tscn::6f232143e0a14d52528fce6ad44f3a9c::1765660082::res://.godot/exported/133200997/export-90dd54a49bce8a5cf8e444a4617fcf80-character_15fps.scn
 res://Scenes/characters/character_select_button.tres::887662826f30d06342c2de4abd75b255::1765224953::res://.godot/exported/133200997/export-2054df95591489eb9577c85687c110eb-character_select_button.res
 res://Scripts/characters/Stats/knight_stats2.tres::5387d98d09566f83dabf4ddee00915ac::1765272362::res://.godot/exported/133200997/export-c5a99f0f9d0cb282e0f452f7c8a81ae2-knight_stats2.res
 res://Scripts/characters/Stats/knight_stats3.tres::527c4d25785d90e564e27bc99ec9e701::1765272362::res://.godot/exported/133200997/export-1560ecc4fc3d2b2b885dbbec557d32ee-knight_stats3.res
@@ -40,12 +40,12 @@ res://Scripts/characters/Stats/knight_stats.tres::9740b81ff9d32d4be14c50156c9e87
 res://Scripts/characters/Stats/survivor_stats2.tres::5b208d19a9befc543c419d9f0cb01ff6::1765277312::res://.godot/exported/133200997/export-b9137efdb0cd7724f288efdb73d97b97-survivor_stats2.res
 res://Scripts/characters/Stats/survivor_stats3.tres::b48056b797eea0c6c946859161c36efb::1765277312::res://.godot/exported/133200997/export-a1259de69911187889ceda3d11bd1759-survivor_stats3.res
 res://Scripts/characters/Stats/survivor_stats.tres::8b487bbca1fe8d3977c9aa5a97f85731::1765277312::res://.godot/exported/133200997/export-94914810483695b44adec677048cc248-survivor_stats.res
-res://Scenes/battle/Battle.tscn::7a557f74d2033004178e403c8c649353::1765630973::res://.godot/exported/133200997/export-63aa238447712cee020c0ec6f9e0ea3f-Battle.scn
+res://Scenes/battle/Battle.tscn::7a557f74d2033004178e403c8c649353::1765658011::res://.godot/exported/133200997/export-63aa238447712cee020c0ec6f9e0ea3f-Battle.scn
 res://Scenes/ui/bg_progressbar.tres::320171ca51ccf9d1e05e06818393855b::1765445755::res://.godot/exported/133200997/export-db91c2f7c619de966625815870e24fb7-bg_progressbar.res
 res://Scenes/ui/fill_progressbar.tres::63e7e382ab214990352ff7f73ac3bcda::1765458070::res://.godot/exported/133200997/export-3773dba865958054b1e3a81f55fad183-fill_progressbar.res
 res://Scenes/ui/HPMP_Player.tscn::a161a4edaaa3f326a1efebc9030ee499::1765446430::res://.godot/exported/133200997/export-df4bb72ec7a86828178068ee3178f1fc-HPMP_Player.scn
 res://Scenes/ui/HP_ProgressBar.tscn::e118f2bc09cf4bf7439fc1a6ebf28c04::1765462091::res://.godot/exported/133200997/export-088f3d5c030d2415b23815842cf6f096-HP_ProgressBar.scn
 res://Scenes/ui/MP_ProgressBar.tscn::9a16271f33b42ce42e8202718fb02884::1765449426::res://.godot/exported/133200997/export-80fe58101025822b96d602e3ceacac19-MP_ProgressBar.scn
-res://Scenes/ui/HP_ProgressBar_Enemy.tscn::d75d94171fac2c70f063adee413ba5cb::1765472049::res://.godot/exported/133200997/export-386acad04e2ec5b1b5d8dcfa3dd3a1ff-HP_ProgressBar_Enemy.scn
+res://Scenes/ui/HP_ProgressBar_Enemy.tscn::afda8f19774d6c617f7c6329b7e01334::1765637073::res://.godot/exported/133200997/export-386acad04e2ec5b1b5d8dcfa3dd3a1ff-HP_ProgressBar_Enemy.scn
 res://Scenes/battle/battle_manager.tscn::150fbe77d04d3ca985b9047ddb4bf786::1765574510::res://.godot/exported/133200997/export-a071c82a1d58b22360d20a454c455efe-battle_manager.scn
 res://Scripts/utilities/Saved_game/savegame.tres::131e8646af98160dbb961b4a7272c811::1764925209::res://.godot/exported/133200997/export-a66cd0870be56655d75f9d9cbcf12c39-savegame.res

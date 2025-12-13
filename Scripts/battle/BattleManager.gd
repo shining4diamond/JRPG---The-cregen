@@ -20,6 +20,7 @@ signal combat_attack_completed()
 signal next_turn_requested(skip_timer: bool)
 signal show_battle_hud(show: bool)
 signal show_select_buttons(show: bool)
+signal remove_ui_from_enemy(entity: Character)
 signal battle_ended(message: String)
 
 # ==============================================
@@ -29,11 +30,19 @@ signal battle_ended(message: String)
 @onready var battleend_hud: CanvasLayer = get_parent().get_node("BattleEnd_HUD")
 @onready var attack_button: Button = battle_hud.get_node("%Attack_Button")
 @onready var skip_button: Button = battle_hud.get_node("%Skip_Button")
+@onready var enemy_select_1: Button = battle_hud.get_node("%Enemy_Select_1")
+@onready var enemy_select_2: Button = battle_hud.get_node("%Enemy_Select_2")
+@onready var enemy_select_3: Button = battle_hud.get_node("%Enemy_Select_3")
 @onready var restart_button: Button = battleend_hud.get_node("%RestartBattleButton")
 @onready var battleend_label: Label = battleend_hud.get_node("%EndBattleLabel")
 
 @export_group("Battle Configuration")
 @export var battle_data: BattleData
+
+# ==============================================
+# VARIABILI LOCALI
+# ==============================================
+var selected_character: Character
 
 # ==============================================
 # COMPONENTI
@@ -91,8 +100,25 @@ func _connect_signals():
 	next_turn_requested.connect(_on_next_turn_requested)
 	show_battle_hud.connect(_on_show_battle_hud)
 	show_select_buttons.connect(_on_show_select_buttons)
+	remove_ui_from_enemy.connect(_on_remove_ui_from_enemy)
 	battle_ended.connect(_on_battle_ended)
 	combat_attack_requested.connect(_on_combat_attack_requested)
+	
+	# Segnali Selezione Nemici
+	enemy_select_1.focus_entered.connect(_on_enemy_select_1_focus)
+	enemy_select_1.focus_exited.connect(_on_enemy_select_1_unfocus)
+	enemy_select_1.mouse_entered.connect(_on_enemy_select_1_focus)
+	enemy_select_1.pressed.connect(_on_enemy_select_1_pressed)
+	
+	enemy_select_2.focus_entered.connect(_on_enemy_select_2_focus)
+	enemy_select_2.focus_exited.connect(_on_enemy_select_2_unfocus)
+	enemy_select_2.mouse_entered.connect(_on_enemy_select_2_focus)
+	enemy_select_2.pressed.connect(_on_enemy_select_2_pressed)
+	
+	enemy_select_3.focus_entered.connect(_on_enemy_select_3_focus)
+	enemy_select_3.focus_exited.connect(_on_enemy_select_3_unfocus)
+	enemy_select_3.mouse_entered.connect(_on_enemy_select_3_focus)
+	enemy_select_3.pressed.connect(_on_enemy_select_3_pressed)
 	
 	# Connetti componenti
 	spawner.all_entities_spawned.connect(func(p, e): entities_spawned.emit(p, e))
@@ -159,9 +185,43 @@ func _on_show_battle_hud(show: bool):
 
 func _on_show_select_buttons(show: bool):
 	ui.show_select_button(show)
+	
+func _on_remove_ui_from_enemy(entity: Character):
+	ui._remove_ui_from_enemy(entity)
 
 func _on_battle_ended(message: String):
 	ui._show_battle_end_hud(message)
+
+func _on_enemy_select_1_focus():
+	selected_character = ui._focus_enemy(-1);
+
+func _on_enemy_select_1_unfocus():
+	ui._unfocus_enemy(-1);
+
+func _on_enemy_select_2_focus():
+	selected_character = ui._focus_enemy(-2);
+
+func _on_enemy_select_2_unfocus():
+	ui._unfocus_enemy(-2);
+
+func _on_enemy_select_3_focus():
+	selected_character = ui._focus_enemy(-3);
+
+func _on_enemy_select_3_unfocus():
+	ui._unfocus_enemy(-3);
+
+func _on_enemy_select_1_pressed():
+	_on_enemy_select_1_unfocus()
+	_on_select_enemy_pressed(selected_character)
+
+func _on_enemy_select_2_pressed():
+	_on_enemy_select_2_unfocus()
+	_on_select_enemy_pressed(selected_character)
+
+func _on_enemy_select_3_pressed():
+	_on_enemy_select_3_unfocus()
+	_on_select_enemy_pressed(selected_character)
+
 
 # ==============================================
 # PUBLIC API
@@ -206,7 +266,10 @@ func on_after_load_game():
 	var enemy_battlers: Array[Character] = []
 	for enemy in get_tree().get_nodes_in_group("enemy_battlers"):
 		enemy_battlers.append(enemy)
-		ui._add_hp_bar_to_enemy(enemy)
+		
+		ui._add_ui_to_enemy(enemy)
+		if enemy.state.isDead:
+			remove_ui_from_enemy.emit(enemy)
 	
 	
 	entities_spawned.emit(player_battlers, enemy_battlers)

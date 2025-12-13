@@ -69,8 +69,8 @@ unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -237.0
-offset_right = 415.0
+offset_top = -154.0
+offset_right = 240.0
 grow_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -107,38 +107,45 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_right = 100
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
+[node name="EnemyContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 835.0
+offset_right = 1029.0
+offset_bottom = 720.0
+size_flags_horizontal = 8
 
-[node name="Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "BUTTON1
-"
-
-[node name="Button2" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "BUTTON2
-"
-
-[node name="Button3" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "BUTTON3
-"
-
-[node name="Button4" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "BUTTON4
-"
-
-[node name="Button5" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "BUTTON5
-"
-
-[node name="MarginContainer" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="EnemyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="Enemy_Select_1" type="Button" parent="EnemyContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
+disabled = true
+text = "Enemy1"
+
+[node name="Enemy_Select_2" type="Button" parent="EnemyContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Enemy2"
+
+[node name="Enemy_Select_3" type="Button" parent="EnemyContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Enemy3"
+
+[node name="MarginContainer4" type="MarginContainer" parent="EnemyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 50

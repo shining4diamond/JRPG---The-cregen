@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://c6m64in7tshnp" path="res://Scenes/ui/bg_progressbar.tres" id="1_bunu1"]
 [ext_resource type="StyleBox" uid="uid://ukqk8hg6dbje" path="res://Scenes/ui/fill_progressbar.tres" id="2_q144e"]
 
-[node name="HP_ProgressBar_Ememy" type="ProgressBar"]
+[node name="HP_ProgressBar_Enemy" type="ProgressBar"]
 offset_left = 55.0
 offset_top = -60.0
 offset_right = 163.80263

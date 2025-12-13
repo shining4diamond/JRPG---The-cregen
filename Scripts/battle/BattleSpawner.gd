@@ -65,6 +65,6 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 		
 		# Add UI usando il manager
 		if is_instance_valid(manager.ui):
-			manager.ui._add_hp_bar_to_enemy(entity)
+			manager.ui._add_ui_to_enemy(entity)
 	
 	return entity

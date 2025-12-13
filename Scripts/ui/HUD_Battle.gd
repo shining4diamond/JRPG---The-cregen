@@ -17,13 +17,13 @@ extends CanvasLayer
 
 @onready var enemy_panels = {
 	-1: {
-		"hp_bar": "Enemy1/HP_ProgressBar_Ememy",
+		"hp_bar": "Enemy1/HP_ProgressBar_Enemy",
 	},
 	-2: {
-		"hp_bar": "Enemy2/HP_ProgressBar_Ememy",
+		"hp_bar": "Enemy2/HP_ProgressBar_Enemy",
 	},
 	-3: {
-		"hp_bar": "Enemy3/HP_ProgressBar_Ememy",
+		"hp_bar": "Enemy3/HP_ProgressBar_Enemy",
 	}
 }
 
