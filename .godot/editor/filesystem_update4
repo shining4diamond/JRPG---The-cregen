@@ -1,2 +1,8 @@
 res://Scripts/battle/TurnManager.gd
 res://Scripts/battle/BattleManager.gd
+res://Scripts/battle/BattleSpawner.gd
+res://Scripts/battle/BattleUI.gd
+res://Scenes/battle/Battle.tscn
+res://Scripts/battle/BattleAI.gd
+res://Scripts/battle/BattleCombat.gd
+res://Scripts/ui/HUD_Battle.gd
