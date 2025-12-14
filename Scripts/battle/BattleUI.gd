@@ -50,12 +50,10 @@ func _toggle_select_button_to_enemy(entity: Character, visible: bool = true):
 	if not is_instance_valid(entity):
 		return
 	
-	print(entity, " ", visible)
-	
 	var enemy_select_button = _get_enemy_select(entity.stats.party_member)
 	if enemy_select_button:
 			enemy_select_button.visible = visible
-		
+
 
 func _get_enemy_select(party_member:int):
 	match party_member:

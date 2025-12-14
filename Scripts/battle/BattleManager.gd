@@ -9,9 +9,13 @@ extends Node
 # ==============================================
 signal entities_spawned(players: Array, enemies: Array)
 signal select_enemy_pressed(selected_character: Character)
+@warning_ignore("unused_signal")
 signal attack_button_pressed()
+@warning_ignore("unused_signal")
 signal skip_button_pressed()
+@warning_ignore("unused_signal")
 signal restart_button_pressed()
+@warning_ignore("unused_signal")
 signal toggle_focus_on_player(party_member: int)
 signal request_ai_target()
 signal ai_target_chosen(target: Character)
@@ -30,9 +34,9 @@ signal battle_ended(message: String)
 @onready var battleend_hud: CanvasLayer = get_parent().get_node("BattleEnd_HUD")
 @onready var attack_button: Button = battle_hud.get_node("%Attack_Button")
 @onready var skip_button: Button = battle_hud.get_node("%Skip_Button")
-@onready var enemy_select_1: Button = battle_hud.get_node("%Enemy_Select_1")
-@onready var enemy_select_2: Button = battle_hud.get_node("%Enemy_Select_2")
-@onready var enemy_select_3: Button = battle_hud.get_node("%Enemy_Select_3")
+@onready var enemy_select_1: Button
+@onready var enemy_select_2: Button
+@onready var enemy_select_3: Button
 @onready var restart_button: Button = battleend_hud.get_node("%RestartBattleButton")
 @onready var battleend_label: Label = battleend_hud.get_node("%EndBattleLabel")
 
@@ -75,7 +79,8 @@ func _validate_configuration():
 		return
 	
 	if not battle_data:
-		push_warning("BattleManager: No BattleData provided, using default")
+		#push_warning("BattleManager: No BattleData provided, using default")
+		print("BattleManager: No BattleData provided, using default")
 		battle_data = BattleData.create_default()
 
 func _initialize_components():
@@ -126,14 +131,14 @@ func _on_entities_spawned(players: Array, enemies: Array):
 	
 	battle_hud.connect_enemy_signals()
 	for enemy in enemies:
-		battle_hud._update_hp_ui(enemy.stats.current_hp, enemy.stats.party_member)
+		battle_hud._update_hp_ui(enemy)
 	
 	# Start first turn
 	turn_manager.start_first_turn()
 
-func _on_select_enemy_pressed(selected_character: Character):
+func _on_select_enemy_pressed(selected_char: Character):
 	show_battle_hud.emit(false)
-	combat_attack_requested.emit(turn_manager.get_current_battler(), selected_character)
+	combat_attack_requested.emit(turn_manager.get_current_battler(), selected_char)
 
 func _on_combat_attack_requested(attacker: Character, defender: Character):
 	await combat.execute_attack(attacker, defender)

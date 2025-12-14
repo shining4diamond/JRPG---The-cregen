@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://2kq0tp85jg63"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_u13qf"]
+
+[resource]
+script = ExtResource("1_u13qf")
+character_name = "Orc Berserk"
+max_hp = 350
+current_hp = 350
+max_mp = 50
+current_mp = 50
+attack = 45
+defense = 25
+m_attack = 8
+m_defense = 12
+turn_speed = 30
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

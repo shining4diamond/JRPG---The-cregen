@@ -2,14 +2,17 @@ extends CanvasLayer
 
 @onready var player_panels = {
 	1: {
+		"container": %Player_Character_1,
 		"panel": $HPMP_Container/GridContainer/Player_Character_1/HPMP_Player1,
 		"spacer": $HPMP_Container/GridContainer/Player_Character_1/Spacer_Player1
 	},
 	2: {
+		"container": %Player_Character_2,
 		"panel": $HPMP_Container/GridContainer/Player_Character_2/HPMP_Player2,
 		"spacer": $HPMP_Container/GridContainer/Player_Character_2/Spacer_Player2
 	},
 	3: {
+		"container": %Player_Character_3,
 		"panel": $HPMP_Container/GridContainer/Player_Character_3/HPMP_Player3,
 		"spacer": $HPMP_Container/GridContainer/Player_Character_3/Spacer_Player3
 	}
@@ -60,7 +63,11 @@ func connect_player_signals():
 func connect_enemy_signals():
 	
 	for enemy_name in ENEMIES:
-		var enemy = get_parent().get_node_or_null(enemy_name)
+		var enemy_nodes = get_parent().get_tree().get_nodes_in_group("enemy_battlers")
+		var enemy = null
+		for enemy_node in enemy_nodes:
+			if enemy_name == enemy_node.name:
+				enemy = enemy_node
 		if enemy:
 			var battle_action = enemy.battleAction
 			if battle_action.has_signal("update_hpmp_ui"):
@@ -82,8 +89,12 @@ func initialize_player_ui(stats: StatsResource, party_member: int):
 		return
 	
 	var panel_data = player_panels[party_member]
+	var container = panel_data.container
 	var panel = panel_data.panel
 	var spacer = panel_data.spacer
+	
+	# Mostra container HPMP
+	container.show()
 	
 	# Nascondi spacer
 	spacer.visible = true
@@ -108,7 +119,9 @@ func initialize_player_ui(stats: StatsResource, party_member: int):
 
 
 # Update HP
-func _update_hp_ui(current_hp: int, party_member: int):
+func _update_hp_ui(character: Character):
+	var current_hp = character.stats.current_hp
+	var party_member = character.stats.party_member
 	# Player update
 	if player_panels.has(party_member):
 		_update_player_hp(current_hp, party_member)
@@ -116,7 +129,7 @@ func _update_hp_ui(current_hp: int, party_member: int):
 	
 	# Enemy update
 	if enemy_panels.has(party_member):
-		_update_enemy_hp(current_hp, party_member)
+		_update_enemy_hp(current_hp, character)
 		return
 	
 	push_warning("Party member non riconosciuto: %d" % party_member)
@@ -135,12 +148,11 @@ func _update_player_hp(current_hp: int, party_member: int):
 	# Update colore
 	_update_hp_bar_color(hp_bar, current_hp)
 
-func _update_enemy_hp(current_hp: int, party_member: int):
-	var hp_bar_path = enemy_panels[party_member].hp_bar
-	var hp_bar = get_parent().get_node_or_null(hp_bar_path)
+func _update_enemy_hp(current_hp: int, character: Character):
+	var hp_bar = character.get_node_or_null("HP_ProgressBar_Enemy")
 	
 	if not hp_bar:
-		push_error("HP bar enemy non trovata: %s" % hp_bar_path)
+		push_error("HP bar enemy non trovata: %s" % character)
 		return
 	
 	# Animazione smooth

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://celhoj83hba0o"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_ls54m"]
+
+[resource]
+script = ExtResource("1_ls54m")
+character_name = "Paladin"
+max_hp = 380
+current_hp = 380
+max_mp = 150
+current_mp = 150
+attack = 28
+defense = 28
+m_attack = 25
+m_defense = 25
+turn_speed = 35
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

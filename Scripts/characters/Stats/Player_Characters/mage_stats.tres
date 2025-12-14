@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://csbu75a4lahxi"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_jnemp"]
+
+[resource]
+script = ExtResource("1_jnemp")
+character_name = "Mage"
+max_hp = 180
+current_hp = 180
+max_mp = 250
+current_mp = 250
+attack = 12
+defense = 10
+m_attack = 55
+m_defense = 35
+turn_speed = 45
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

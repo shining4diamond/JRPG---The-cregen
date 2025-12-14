@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://iikxlakr2xp6"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_ed0pw"]
+
+[resource]
+script = ExtResource("1_ed0pw")
+character_name = "Lich"
+max_hp = 400
+current_hp = 400
+max_mp = 350
+current_mp = 350
+attack = 25
+defense = 30
+m_attack = 70
+m_defense = 55
+turn_speed = 40
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

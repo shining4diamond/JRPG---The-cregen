@@ -1,7 +1,7 @@
 class_name BattleSpawner
 extends Node
 
-signal spawn_entity(entity: Character)
+signal spawn_entity(entity: Character, type: String)
 signal entity_spawned(entity: Character)
 signal all_entities_spawned(players: Array, enemies: Array)
 
@@ -43,23 +43,21 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	var entity = scene.instantiate() as Character
 	
 	await manager.get_parent().get_tree().create_timer(0.1).timeout
-	spawn_entity.emit(entity)
+	spawn_entity.emit(entity, config.type)
 	
-	entity.global_position = config.position
+	entity.stats = load(config.statsPath).duplicate()
 	entity.state.combatMode = true
-	entity.stats = load(config.statsPath)
 	entity.textureBasePath = config.textureBasePath
 	entity.animation.load_textures(config.textureBasePath)
 	
 	# Set character type
 	if config.type == "PLAYER":
+		entity.global_position = config.position
 		entity.stats.character_type = StatsResource.CharacterType.PLAYER
-		entity.animation.set_blend_positions(Vector2(930, 288))
 		entity.stats.party_member = player_battlers.size() + 1
 		entity.name = "Player" + str(entity.stats.party_member)
 	else:
 		entity.stats.character_type = StatsResource.CharacterType.ENEMY
-		entity.animation.set_blend_positions(Vector2(350, 288))
 		entity.stats.party_member = (player_battlers.size()) * (-1)
 		entity.name = "Enemy" + str(enemy_battlers.size() + 1)
 		

@@ -26,7 +26,7 @@ func _ready() -> void:
 	animation = CharacterAnimation.new(animation_tree, sprite_2d, state, textureBasePath)
 	movement = CharacterMovement.new(self, state)
 	combat = CharacterCombat.new(animation_tree, state, attacking_timer, animation)
-	battleAction = CharacterBattleAction.new(animation_tree, state, attacking_timer, animation, select_button, self)
+	battleAction = CharacterBattleAction.new(animation_tree, state, attacking_timer, animation, self)
 	battleMovement = CharacterBattleMovement.new(self, state)
 
 	animation_tree.active = true

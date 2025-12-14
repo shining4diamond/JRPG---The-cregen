@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dk1hpwbuhhtc4"]
 
-[ext_resource type="Script" uid="uid://ctpqbpndx1x2s" path="res://Scenes/battle/battle.gd" id="1_c1xev"]
+[ext_resource type="Script" uid="uid://ctpqbpndx1x2s" path="res://Scripts/battle/battle.gd" id="1_c1xev"]
 [ext_resource type="PackedScene" uid="uid://b1438rf3cshls" path="res://Scenes/battle/battle_end_hud.tscn" id="2_ivai1"]
 [ext_resource type="PackedScene" uid="uid://w7r871fv5wnt" path="res://Scenes/battle/save_load_debug.tscn" id="4_63vvg"]
 [ext_resource type="PackedScene" uid="uid://diroiw1728k50" path="res://Scenes/battle/battle_manager.tscn" id="4_c1xev"]

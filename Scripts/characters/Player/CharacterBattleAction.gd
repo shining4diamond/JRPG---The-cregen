@@ -8,13 +8,12 @@ var attack_timer: Timer
 var character: Character
 var tween
 
-signal update_hpmp_ui(current_hp: int, party_member: int)
+signal update_hpmp_ui(character: Character)
 
 func _init(p_anim_tree: AnimationTree, \
 p_state: CharacterState, \
 p_timer: Timer, \
 p_animation: CharacterAnimation, \
-p_select_button: Button, \
 p_character: Character):
 	animation_tree = p_anim_tree
 	state = p_state
@@ -42,7 +41,7 @@ func execute_take_damage(attacker: Character):
 			character.stats.current_hp = 0
 			execute_death()
 		
-		emit_signal("update_hpmp_ui", character.stats.current_hp, character.stats.party_member)
+		emit_signal("update_hpmp_ui", character)
 		
 
 func execute_death():
@@ -90,7 +89,7 @@ func set_tween():
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var button = character.get_node_or_null("%Select_Button")
 	
 	if button and button.visible == false and tween:

@@ -4,13 +4,14 @@
 
 [resource]
 script = ExtResource("1_7q0fx")
-max_hp = 50
-current_hp = 10
-max_mp = 100
-current_mp = 100
-attack = 7
-defense = 3
-m_attack = 2
-m_defense = 3
-turn_speed = 50
+character_name = "Survivor"
+max_hp = 450
+current_hp = 450
+max_mp = 80
+current_mp = 80
+attack = 35
+defense = 30
+m_attack = 8
+m_defense = 18
+turn_speed = 40
 metadata/_custom_type_script = "uid://dt2ty4876uv6i"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://w7r871fv5wnt"]
 
-[ext_resource type="Script" uid="uid://ctald15i5l7g5" path="res://Scenes/battle/save_load_debug.gd" id="1_7t2if"]
+[ext_resource type="Script" uid="uid://ctald15i5l7g5" path="res://Scripts/utilities/save_load_debug.gd" id="1_7t2if"]
 
 [node name="SAVE_LOAD_DEBUG" type="CanvasLayer" groups=["SaveMenu"]]
 script = ExtResource("1_7t2if")

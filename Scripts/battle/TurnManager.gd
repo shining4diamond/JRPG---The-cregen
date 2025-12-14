@@ -63,6 +63,10 @@ func advance_turn(skip_timer: bool = false):
 		is_processing_turn = false
 		return
 	
+	# Emetti segnale per il battler precedente (usando party_member salvato)
+	if last_battler_party_member != -999 and is_instance_valid(manager) and last_battler_party_member > 0:
+		manager.toggle_focus_on_player.emit(last_battler_party_member)
+	
 	# Salta battler morti
 	if not is_instance_valid(current_battler) or current_battler.state.isDead:
 		is_processing_turn = false
@@ -81,10 +85,7 @@ func advance_turn(skip_timer: bool = false):
 	if not is_instance_valid(manager):
 		is_processing_turn = false
 		return
-	
-	# Emetti segnale per il battler precedente (usando party_member salvato)
-	if last_battler_party_member != -999 and is_instance_valid(manager):
-		manager.toggle_focus_on_player.emit(last_battler_party_member)
+
 	
 	# Attiva nuovo battler
 	_activate_battler(current_battler)
@@ -117,7 +118,8 @@ func _activate_battler(battler: Character):
 	if battler.stats.character_type == StatsResource.CharacterType.PLAYER:
 		battler.battleMovement.toggle_focus_movement()
 	
-	manager.toggle_focus_on_player.emit(battler.stats.party_member)
+	if battler.stats.party_member > 0:
+		manager.toggle_focus_on_player.emit(battler.stats.party_member)
 
 # ==============================================
 # BATTLE END CHECK

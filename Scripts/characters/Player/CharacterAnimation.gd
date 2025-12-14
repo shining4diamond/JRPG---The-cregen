@@ -16,18 +16,18 @@ func _init(p_anim_tree: AnimationTree, p_sprite: Sprite2D, p_state: CharacterSta
 	base_path = p_basePath
 	load_textures()
 
-func load_textures(base_path:String = base_path):
+func load_textures(path:String = base_path):
 	textures = {
-		"idle": load(base_path + "Idle.png"),
-		"walk": load(base_path + "Walk.png"),
-		"run": load(base_path + "Run.png"),
-		"melee": load(base_path + "Melee.png"),
-		"melee2": load(base_path + "Melee2.png"),
-		"meleerun": load(base_path + "MeleeRun.png"),
-		"crouch_idle": load(base_path + "CrouchIdle.png"),
-		"crouch_run": load(base_path + "CrouchRun.png"),
-		"take_damage": load(base_path + "TakeDamage.png"),
-		"die": load(base_path + "Die.png")
+		"idle": load(path + "Idle.png"),
+		"walk": load(path + "Walk.png"),
+		"run": load(path + "Run.png"),
+		"melee": load(path + "Melee.png"),
+		"melee2": load(path + "Melee2.png"),
+		"meleerun": load(path + "MeleeRun.png"),
+		"crouch_idle": load(path + "CrouchIdle.png"),
+		"crouch_run": load(path + "CrouchRun.png"),
+		"take_damage": load(path + "TakeDamage.png"),
+		"die": load(path + "Die.png")
 	}
 
 func update_movement_animation():

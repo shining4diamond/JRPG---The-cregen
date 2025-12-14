@@ -40,4 +40,4 @@ func _on_language_button_pressed() -> void:
 
 func change_language(lang: String):
 	TranslationServer.set_locale(lang)
-	print(lang)
+	print("New language has been configured: ", lang)

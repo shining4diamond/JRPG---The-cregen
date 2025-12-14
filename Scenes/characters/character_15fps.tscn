@@ -1,7 +1,8 @@
-[gd_scene load_steps=182 format=3 uid="uid://le313740ui70"]
+[gd_scene load_steps=183 format=3 uid="uid://le313740ui70"]
 
 [ext_resource type="Script" uid="uid://dn31uivrars56" path="res://Scripts/characters/Player/Character.gd" id="1_o4vxh"]
 [ext_resource type="Texture2D" uid="uid://dwcnvbbtu3853" path="res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/Kick.png" id="2_1k0sv"]
+[ext_resource type="StyleBox" uid="uid://cvpclcjc006yh" path="res://Scenes/characters/character_select_button.tres" id="3_b4rur"]
 [ext_resource type="AnimationLibrary" uid="uid://dgcyx1vhu6i5l" path="res://Assets/AnimationPlayerRes/Melee.res" id="5_estjc"]
 
 [sub_resource type="Animation" id="Animation_5cv2o"]
@@ -1048,7 +1049,26 @@ position = Vector2(0, 1)
 texture = ExtResource("2_1k0sv")
 hframes = 15
 vframes = 8
-frame = 36
+frame = 38
+
+[node name="Select_Button" type="Button" parent="Sprite2D"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("3_b4rur")
+theme_override_styles/pressed = ExtResource("3_b4rur")
+theme_override_styles/hover = ExtResource("3_b4rur")
+theme_override_styles/disabled = ExtResource("3_b4rur")
+theme_override_styles/focus = ExtResource("3_b4rur")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
