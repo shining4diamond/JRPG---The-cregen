@@ -2,10 +2,33 @@ extends Node
 
 
 @onready var game: Node2D = $"../.."
+@onready var save_menu: CanvasLayer = game.get_node_or_null("%SAVE_LOAD_DEBUG")
 
 func _ready() -> void:
-#	Globals.save_signal.connect(save_game)
-	pass
+	# Connetti i segnali del menu save
+	if save_menu:
+		if save_menu.has_signal("save_requested"):
+			save_menu.save_requested.connect(save_game)
+			print("✅ Save signal connected")
+		
+		if save_menu.has_signal("load_requested"):
+			save_menu.load_requested.connect(load_game)
+			print("✅ Load signal connected")
+	else:
+		push_warning("SaveMenu not found, trying alternative connection method")
+		# Metodo alternativo: cerca nell'albero
+		call_deferred("_connect_save_menu_deferred")
+
+func _connect_save_menu_deferred():
+	# Cerca il SaveMenu nell'albero della scena
+	var menus = get_tree().get_nodes_in_group("save_menu")
+	if menus.size() > 0:
+		save_menu = menus[0]
+		if save_menu.has_signal("save_requested"):
+			save_menu.save_requested.connect(save_game)
+		if save_menu.has_signal("load_requested"):
+			save_menu.load_requested.connect(load_game)
+
 
 func save_game():
 	

@@ -91,14 +91,13 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Attack
-"
+text = "Attack"
 
 [node name="Skip_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Skip"
+text = "Skip Turn"
 
 [node name="MarginContainer2" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

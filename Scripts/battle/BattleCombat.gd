@@ -20,6 +20,6 @@ func execute_attack(attacker: Character, defender: Character):
 	if is_instance_valid(defender):
 		defender.battleAction.execute_take_damage(attacker)
 		await manager.get_tree().create_timer(0.5).timeout
-	
-	if defender.state.isDead:
+		
+	if is_instance_valid(defender) and defender.state.isDead:
 		manager.remove_ui_from_enemy.emit(defender)

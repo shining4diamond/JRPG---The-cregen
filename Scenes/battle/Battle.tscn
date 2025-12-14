@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk1hpwbuhhtc4"]
+[gd_scene load_steps=7 format=3 uid="uid://dk1hpwbuhhtc4"]
 
 [ext_resource type="Script" uid="uid://ctpqbpndx1x2s" path="res://Scenes/battle/battle.gd" id="1_c1xev"]
+[ext_resource type="PackedScene" uid="uid://b1438rf3cshls" path="res://Scenes/battle/battle_end_hud.tscn" id="2_ivai1"]
+[ext_resource type="PackedScene" uid="uid://w7r871fv5wnt" path="res://Scenes/battle/save_load_debug.tscn" id="4_63vvg"]
 [ext_resource type="PackedScene" uid="uid://diroiw1728k50" path="res://Scenes/battle/battle_manager.tscn" id="4_c1xev"]
 [ext_resource type="Script" uid="uid://da4i4cbswwe5n" path="res://Scripts/utilities/saver_loader.gd" id="5_ivai1"]
 [ext_resource type="PackedScene" uid="uid://ca6lx1vrqdvv8" path="res://Scenes/battle/Battle_HUD.tscn" id="5_mgqhe"]
@@ -11,46 +13,13 @@ script = ExtResource("1_c1xev")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 
-[node name="BattleEnd_HUD" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
+[node name="BattleEnd_HUD" parent="." instance=ExtResource("2_ivai1")]
 visible = false
 
-[node name="Panel" type="Panel" parent="BattleEnd_HUD"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleEnd_HUD/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -393.5
-offset_top = -107.5
-offset_right = 393.5
-offset_bottom = 107.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="EndBattleLabel" type="Label" parent="BattleEnd_HUD/Panel/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 148
-text = "VICTORY"
-
-[node name="RestartBattleButton" type="Button" parent="BattleEnd_HUD/Panel/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "RESET BATTLE"
-
 [node name="Battle_HUD" parent="." instance=ExtResource("5_mgqhe")]
+unique_name_in_owner = true
+
+[node name="SAVE_LOAD_DEBUG" parent="." instance=ExtResource("4_63vvg")]
 unique_name_in_owner = true
 
 [node name="Instructions" type="Label" parent="."]
@@ -77,41 +46,4 @@ metadata/_edit_use_anchors_ = true
 [node name="SaverLoader" type="Node" parent="Utilities"]
 script = ExtResource("5_ivai1")
 
-[node name="SAVE_LOAD_DEBUG" type="CanvasLayer" parent="."]
-
-[node name="MarginContainer" type="MarginContainer" parent="SAVE_LOAD_DEBUG"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="SAVE_LOAD_DEBUG/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SAVE_LOAD_DEBUG/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SaveButton" type="Button" parent="SAVE_LOAD_DEBUG/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Save"
-
-[node name="LoadButton" type="Button" parent="SAVE_LOAD_DEBUG/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Load"
-
 [node name="BattleManager" parent="." instance=ExtResource("4_c1xev")]
-
-[connection signal="pressed" from="SAVE_LOAD_DEBUG/MarginContainer/GridContainer/VBoxContainer/SaveButton" to="Utilities/SaverLoader" method="_on_save_button_pressed"]
-[connection signal="pressed" from="SAVE_LOAD_DEBUG/MarginContainer/GridContainer/VBoxContainer/LoadButton" to="Utilities/SaverLoader" method="_on_load_button_pressed"]
