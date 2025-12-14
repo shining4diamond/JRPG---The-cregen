@@ -1,6 +1,3 @@
-# ==============================================
-# BattleManager.gd - REFACTORED WITH SIGNALS
-# ==============================================
 class_name BattleManager
 extends Node
 
@@ -34,9 +31,6 @@ signal battle_ended(message: String)
 @onready var battleend_hud: CanvasLayer = get_parent().get_node("BattleEnd_HUD")
 @onready var attack_button: Button = battle_hud.get_node("%Attack_Button")
 @onready var skip_button: Button = battle_hud.get_node("%Skip_Button")
-@onready var enemy_select_1: Button
-@onready var enemy_select_2: Button
-@onready var enemy_select_3: Button
 @onready var restart_button: Button = battleend_hud.get_node("%RestartBattleButton")
 @onready var battleend_label: Label = battleend_hud.get_node("%EndBattleLabel")
 
@@ -47,6 +41,8 @@ signal battle_ended(message: String)
 # VARIABILI LOCALI
 # ==============================================
 var selected_character: Character
+# Dictionary per mappare party_member -> Button
+var enemy_select_buttons: Dictionary = {}
 
 # ==============================================
 # COMPONENTI
@@ -79,7 +75,6 @@ func _validate_configuration():
 		return
 	
 	if not battle_data:
-		#push_warning("BattleManager: No BattleData provided, using default")
 		print("BattleManager: No BattleData provided, using default")
 		battle_data = BattleData.create_default()
 
@@ -108,7 +103,6 @@ func _connect_signals():
 	remove_ui_from_enemy.connect(_on_remove_ui_from_enemy)
 	battle_ended.connect(_on_battle_ended)
 	combat_attack_requested.connect(_on_combat_attack_requested)
-	
 	
 	# Connetti componenti
 	spawner.all_entities_spawned.connect(func(p, e): entities_spawned.emit(p, e))
@@ -182,55 +176,79 @@ func _on_remove_ui_from_enemy(entity: Character):
 func _on_battle_ended(message: String):
 	ui._show_battle_end_hud(message)
 
-func _on_enemy_select_1_focus():
-	selected_character = ui._focus_enemy(-1);
-
-func _on_enemy_select_1_unfocus():
-	ui._unfocus_enemy(-1);
-
-func _on_enemy_select_2_focus():
-	selected_character = ui._focus_enemy(-2);
-
-func _on_enemy_select_2_unfocus():
-	ui._unfocus_enemy(-2);
-
-func _on_enemy_select_3_focus():
-	selected_character = ui._focus_enemy(-3);
-
-func _on_enemy_select_3_unfocus():
-	ui._unfocus_enemy(-3);
-
-func _on_enemy_select_1_pressed():
-	_on_enemy_select_1_unfocus()
-	_on_select_enemy_pressed(selected_character)
-
-func _on_enemy_select_2_pressed():
-	_on_enemy_select_2_unfocus()
-	_on_select_enemy_pressed(selected_character)
-
-func _on_enemy_select_3_pressed():
-	_on_enemy_select_3_unfocus()
-	_on_select_enemy_pressed(selected_character)
-
-func _setup_enemy_select_1_signals():
-	enemy_select_1.focus_entered.connect(_on_enemy_select_1_focus)
-	enemy_select_1.focus_exited.connect(_on_enemy_select_1_unfocus)
-	enemy_select_1.mouse_entered.connect(_on_enemy_select_1_focus)
-	enemy_select_1.pressed.connect(_on_enemy_select_1_pressed)
-
-func _setup_enemy_select_2_signals():
-	enemy_select_2.focus_entered.connect(_on_enemy_select_2_focus)
-	enemy_select_2.focus_exited.connect(_on_enemy_select_2_unfocus)
-	enemy_select_2.mouse_entered.connect(_on_enemy_select_2_focus)
-	enemy_select_2.pressed.connect(_on_enemy_select_2_pressed)
-
-func _setup_enemy_select_3_signals():
-	enemy_select_3.focus_entered.connect(_on_enemy_select_3_focus)
-	enemy_select_3.focus_exited.connect(_on_enemy_select_3_unfocus)
-	enemy_select_3.mouse_entered.connect(_on_enemy_select_3_focus)
-	enemy_select_3.pressed.connect(_on_enemy_select_3_pressed)
+# ==============================================
+# DYNAMIC ENEMY SELECTION HANDLERS
+# ==============================================
+func setup_enemy_select_button(party_member: int, button: Button):
+	"""Configura dinamicamente un bottone di selezione nemico"""
+	# Salva riferimento
+	enemy_select_buttons[party_member] = button
 	
+	# Connetti segnali con closures
+	button.focus_entered.connect(func(): _on_enemy_focus(party_member))
+	button.focus_exited.connect(func(): _on_enemy_unfocus(party_member))
+	button.mouse_entered.connect(func(): _on_enemy_focus(party_member))
+	button.pressed.connect(func(): _on_enemy_pressed(party_member))
 	
+	# Setup focus navigation
+	_setup_focus_navigation(party_member, button)
+
+func _setup_focus_navigation(party_member: int, button: Button):
+	"""Configura la navigazione tra i bottoni"""
+	# Left neighbor: sempre il bottone Attack
+	button.focus_neighbor_left = attack_button.get_path()
+	
+	# Right neighbor: sempre Attack (in base al layout della UI)
+	attack_button.focus_neighbor_right = button.get_path()
+	
+	# Vertical navigation tra nemici
+	var enemy_indices = enemy_select_buttons.keys()
+	enemy_indices.sort()
+	
+	if enemy_indices.size() > 1:
+		var prev_button = enemy_select_buttons[enemy_indices[1]]
+		prev_button.focus_neighbor_bottom = button.get_path()
+		button.focus_neighbor_top = prev_button.get_path()
+
+func _on_enemy_focus(party_member: int):
+	"""Handler per quando un bottone nemico riceve il focus"""
+	var character = ui._return_enemy_on_party_member(party_member)
+	if character:
+		selected_character = character
+		character.battleAction._on_select_button_mouse_entered()
+		
+		# Assicura che il bottone abbia il focus
+		if enemy_select_buttons.has(party_member):
+			enemy_select_buttons[party_member].grab_focus()
+
+func _on_enemy_unfocus(party_member: int):
+	"""Handler per quando un bottone nemico perde il focus"""
+	var character = ui._return_enemy_on_party_member(party_member)
+	if character:
+		character.battleAction._on_select_button_mouse_exited()
+
+func _on_enemy_pressed(party_member: int):
+	"""Handler per quando un bottone nemico viene premuto"""
+	_on_enemy_unfocus(party_member)
+	if selected_character:
+		_on_select_enemy_pressed(selected_character)
+
+func get_enemy_select_button(party_member: int) -> Button:
+	"""Ottiene il bottone di selezione per un party_member specifico"""
+	return enemy_select_buttons.get(party_member, null)
+
+func remove_enemy_select_button(party_member: int):
+	"""Rimuove un bottone dalla lista (quando il nemico muore)"""
+	if enemy_select_buttons.has(party_member):
+		enemy_select_buttons.erase(party_member)
+		# Aggiorna la navigazione focus per i bottoni rimanenti
+		_update_all_focus_navigation()
+
+func _update_all_focus_navigation():
+	"""Aggiorna la navigazione focus per tutti i bottoni rimasti"""
+	for party_member in enemy_select_buttons.keys():
+		var button = enemy_select_buttons[party_member]
+		_setup_focus_navigation(party_member, button)
 
 # ==============================================
 # PUBLIC API
@@ -249,7 +267,7 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		Engine.time_scale = 0.0
+		print(enemy_select_buttons)
 
 # ==============================================
 # SAVE/LOAD
@@ -261,6 +279,9 @@ func on_save_game(saved_data: Array[SavedData]):
 	saved_data.append(my_data)
 
 func on_before_load_game():
+	for hpmp_tab in battle_hud.get_node_or_null("%HPMP_Tab_Grid_Container").get_children():
+		hpmp_tab.get_parent().remove_child(hpmp_tab)
+		hpmp_tab.queue_free()
 	get_parent().remove_child(self)
 	queue_free()
 
@@ -279,6 +300,5 @@ func on_after_load_game():
 		ui._add_ui_to_enemy(enemy)
 		if enemy.state.isDead:
 			remove_ui_from_enemy.emit(enemy)
-	
 	
 	entities_spawned.emit(player_battlers, enemy_battlers)

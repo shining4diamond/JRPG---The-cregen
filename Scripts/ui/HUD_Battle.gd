@@ -18,42 +18,25 @@ extends CanvasLayer
 	}
 }
 
-@onready var enemy_panels = {
-	-1: {
-		"hp_bar": "Enemy1/HP_ProgressBar_Enemy",
-	},
-	-2: {
-		"hp_bar": "Enemy2/HP_ProgressBar_Enemy",
-	},
-	-3: {
-		"hp_bar": "Enemy3/HP_ProgressBar_Enemy",
-	}
-}
-
 const HP_COLOR_CRITICAL = Color.RED
 const HP_COLOR_LOW = Color.YELLOW
 const HP_COLOR_NORMAL = Color.WEB_GREEN
-const ENEMIES = ["Enemy1", "Enemy2", "Enemy3"]
-const PLAYERS = ["Player1", "Player2", "Player3"]
+const HPMP_PLAYER_TAB_SCENEPATH = "res://Scenes/ui/HPMP_Player_Tab.tscn"
 
 
 func connect_player_signals():
-	
-	for player_name in PLAYERS:
-		var player = get_parent().get_node_or_null(player_name)
-		if player:
-			var battle_action = player.battleAction
-			if battle_action.has_signal("update_hpmp_ui"):
-				battle_action.update_hpmp_ui.connect(_update_hp_ui)
-				print("✅ battle_action Connesso: ", player_name)
-			else:
-				print("❌ battle_action Segnale mancante su: ", player_name)
+	var players = get_parent().get_tree().get_nodes_in_group("player_battlers")
+	for player in players:
+		var battle_action = player.battleAction
+		if battle_action.has_signal("update_hpmp_ui"):
+			battle_action.update_hpmp_ui.connect(_update_hp_ui)
+			print("✅ battle_action Connesso: ", player.name)
 		else:
-			print("⚠️ Player non trovato: ", player_name)
+			print("❌ battle_action Segnale mancante su: ", player.name)
 	
 	var battleManager = get_parent().get_node_or_null("BattleManager")
-
-	_reset_focus_on_hpmp_players()
+	
+	#_reset_focus_on_hpmp_players()
 	if battleManager.has_signal("toggle_focus_on_player"):
 		battleManager.toggle_focus_on_player.connect(_toggle_focus_on_hpmp_player)
 		print("✅ toggle_focus_on_player Connesso",)
@@ -62,21 +45,14 @@ func connect_player_signals():
 
 func connect_enemy_signals():
 	
-	for enemy_name in ENEMIES:
-		var enemy_nodes = get_parent().get_tree().get_nodes_in_group("enemy_battlers")
-		var enemy = null
-		for enemy_node in enemy_nodes:
-			if enemy_name == enemy_node.name:
-				enemy = enemy_node
-		if enemy:
-			var battle_action = enemy.battleAction
-			if battle_action.has_signal("update_hpmp_ui"):
-				battle_action.update_hpmp_ui.connect(_update_hp_ui)
-				print("✅ battle_action Connesso: ", enemy_name)
-			else:
-				print("❌ battle_action Segnale mancante su: ", enemy_name)
+	var enemies = get_parent().get_tree().get_nodes_in_group("enemy_battlers")
+	for enemy in enemies:
+		var battle_action = enemy.battleAction
+		if battle_action.has_signal("update_hpmp_ui"):
+			battle_action.update_hpmp_ui.connect(_update_hp_ui)
+			print("✅ battle_action Connesso: ", enemy.name)
 		else:
-			print("⚠️ Enemy non trovato: ", enemy_name)
+			print("❌ battle_action Segnale mancante su: ", enemy.name)
 
 
 
@@ -84,14 +60,34 @@ func connect_enemy_signals():
 
 # Inizializza tutto
 func initialize_player_ui(stats: StatsResource, party_member: int):
-	if not player_panels.has(party_member):
-		push_error("Party member non valido: " + str(party_member))
+	if party_member < 0:
+		push_error("Party member non valido: ", party_member)
+		return
+		
+	var scene = load(HPMP_PLAYER_TAB_SCENEPATH) as PackedScene
+	if not scene:
+		push_error("Cannot load scene: " + HPMP_PLAYER_TAB_SCENEPATH)
+		return null
+	
+	var hpmp_tab = scene.instantiate() as HBoxContainer
+	
+	hpmp_tab.name = str(party_member)
+	
+	var tab_container = self.get_node_or_null("%HPMP_Tab_Grid_Container")
+	if not tab_container:
+		push_error("Cannot find tab_container: %HPMP_Tab_Grid_Container")
 		return
 	
-	var panel_data = player_panels[party_member]
-	var container = panel_data.container
-	var panel = panel_data.panel
-	var spacer = panel_data.spacer
+	tab_container.add_child(hpmp_tab)
+	
+
+	var container = tab_container
+	var panel = hpmp_tab.get_node("%HPMP_Player")
+	var spacer = hpmp_tab.get_node("%Spacer_Player")
+	
+	player_panels[party_member].container = container
+	player_panels[party_member].panel = panel
+	player_panels[party_member].spacer = spacer
 	
 	# Mostra container HPMP
 	container.show()
@@ -123,12 +119,12 @@ func _update_hp_ui(character: Character):
 	var current_hp = character.stats.current_hp
 	var party_member = character.stats.party_member
 	# Player update
-	if player_panels.has(party_member):
+	if party_member > 0:
 		_update_player_hp(current_hp, party_member)
 		return
 	
 	# Enemy update
-	if enemy_panels.has(party_member):
+	if party_member < 0:
 		_update_enemy_hp(current_hp, character)
 		return
 	
@@ -202,17 +198,17 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
 
 
-func _reset_focus_on_hpmp_players():
-	for panel in player_panels:
-		var panel_data = player_panels[panel]
-		var spacer = panel_data.spacer
-		
-		# Crea tween
-		var tween = create_tween()
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.set_trans(Tween.TRANS_CUBIC)
-		
-		# Mostra e poi ingrandisci
-		spacer.show()
-		spacer.size_flags_stretch_ratio = 0.0
-		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
+#func _reset_focus_on_hpmp_players():
+	#for panel in player_panels:
+		#var panel_data = player_panels[panel]
+		#var spacer = panel_data.spacer
+		#
+		## Crea tween
+		#var tween = create_tween()
+		#tween.set_ease(Tween.EASE_IN_OUT)
+		#tween.set_trans(Tween.TRANS_CUBIC)
+		#
+		## Mostra e poi ingrandisci
+		#spacer.show()
+		#spacer.size_flags_stretch_ratio = 0.0
+		#tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)

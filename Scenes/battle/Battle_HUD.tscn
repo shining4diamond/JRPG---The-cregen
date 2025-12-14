@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca6lx1vrqdvv8"]
+[gd_scene load_steps=2 format=3 uid="uid://ca6lx1vrqdvv8"]
 
 [ext_resource type="Script" uid="uid://cu5hxm4qmqqg3" path="res://Scripts/ui/HUD_Battle.gd" id="1_k14qo"]
-[ext_resource type="PackedScene" uid="uid://8nvx8mjxxpni" path="res://Scenes/ui/HPMP_Player.tscn" id="2_k14qo"]
 
 [node name="Battle_HUD" type="CanvasLayer"]
 script = ExtResource("1_k14qo")
@@ -20,52 +19,11 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="HPMP_Container"]
+[node name="HPMP_Tab_Grid_Container" type="GridContainer" parent="HPMP_Container"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Player_Character_1" type="HBoxContainer" parent="HPMP_Container/GridContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HPMP_Player1" parent="HPMP_Container/GridContainer/Player_Character_1" instance=ExtResource("2_k14qo")]
-layout_mode = 2
-
-[node name="Spacer_Player1" type="VBoxContainer" parent="HPMP_Container/GridContainer/Player_Character_1"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Player_Character_2" type="HBoxContainer" parent="HPMP_Container/GridContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HPMP_Player2" parent="HPMP_Container/GridContainer/Player_Character_2" instance=ExtResource("2_k14qo")]
-layout_mode = 2
-
-[node name="Spacer_Player2" type="VBoxContainer" parent="HPMP_Container/GridContainer/Player_Character_2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Player_Character_3" type="HBoxContainer" parent="HPMP_Container/GridContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HPMP_Player3" parent="HPMP_Container/GridContainer/Player_Character_3" instance=ExtResource("2_k14qo")]
-layout_mode = 2
-
-[node name="Spacer_Player3" type="VBoxContainer" parent="HPMP_Container/GridContainer/Player_Character_3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
 
 [node name="BattleOptions_Container" type="MarginContainer" parent="."]
 unique_name_in_owner = true

@@ -58,7 +58,7 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 		entity.name = "Player" + str(entity.stats.party_member)
 	else:
 		entity.stats.character_type = StatsResource.CharacterType.ENEMY
-		entity.stats.party_member = (player_battlers.size()) * (-1)
+		entity.stats.party_member = (enemy_battlers.size() + 1) * (-1)
 		entity.name = "Enemy" + str(enemy_battlers.size() + 1)
 		
 		# Add UI usando il manager
