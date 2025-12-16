@@ -191,9 +191,9 @@ func setup_enemy_select_button(party_member: int, button: Button):
 	button.pressed.connect(func(): _on_enemy_pressed(party_member))
 	
 	# Setup focus navigation
-	_setup_focus_navigation(party_member, button)
+	_setup_focus_navigation(button)
 
-func _setup_focus_navigation(party_member: int, button: Button):
+func _setup_focus_navigation(button: Button):
 	"""Configura la navigazione tra i bottoni"""
 	# Left neighbor: sempre il bottone Attack
 	button.focus_neighbor_left = attack_button.get_path()
@@ -248,7 +248,7 @@ func _update_all_focus_navigation():
 	"""Aggiorna la navigazione focus per tutti i bottoni rimasti"""
 	for party_member in enemy_select_buttons.keys():
 		var button = enemy_select_buttons[party_member]
-		_setup_focus_navigation(party_member, button)
+		_setup_focus_navigation(button)
 
 # ==============================================
 # PUBLIC API
@@ -267,7 +267,8 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		print(enemy_select_buttons)
+		for player in get_parent().get_tree().get_nodes_in_group("player_battlers"):
+			print(player.position.x)
 
 # ==============================================
 # SAVE/LOAD
@@ -302,3 +303,4 @@ func on_after_load_game():
 			remove_ui_from_enemy.emit(enemy)
 	
 	entities_spawned.emit(player_battlers, enemy_battlers)
+	battle_hud._reset_turn_order_bar(turn_manager.battlers)

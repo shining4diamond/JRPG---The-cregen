@@ -63,6 +63,20 @@ static func create_default() -> BattleData:
 			"position":Vector2(930, 519),
 			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Tank/skeleton_stats.tres",
 			"type":"ENEMY"
+		},
+		"9":{
+			"scenePath":character_15fps,
+			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
+			"position":Vector2(350, 519),
+			"statsPath":"res://Scripts/characters/Stats/Player_Characters/ranger_stats.tres",
+			"type":"PLAYER"
+		},
+		"10":{
+			"scenePath":character_15fps,
+			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
+			"position":Vector2(350, 519),
+			"statsPath":"res://Scripts/characters/Stats/Player_Characters/ranger_stats.tres",
+			"type":"PLAYER"
 		}
 	}
 	return data

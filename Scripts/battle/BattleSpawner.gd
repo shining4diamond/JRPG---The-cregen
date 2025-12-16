@@ -32,6 +32,7 @@ func spawn_entities(entities_config: Dictionary):
 			
 			entity_spawned.emit(entity)
 	
+	manager.battle_hud._initialize_turn_order_bar(player_battlers+enemy_battlers)
 	all_entities_spawned.emit(player_battlers, enemy_battlers)
 
 func _spawn_single_entity(config: Dictionary) -> Character:
@@ -52,7 +53,7 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	
 	# Set character type
 	if config.type == "PLAYER":
-		entity.global_position = config.position
+		#entity.global_position = config.position
 		entity.stats.character_type = StatsResource.CharacterType.PLAYER
 		entity.stats.party_member = player_battlers.size() + 1
 		entity.name = "Player" + str(entity.stats.party_member)

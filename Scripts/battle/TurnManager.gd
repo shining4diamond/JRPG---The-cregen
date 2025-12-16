@@ -115,6 +115,9 @@ func _activate_battler(battler: Character):
 	if not is_instance_valid(battler) or not is_instance_valid(manager):
 		return
 	
+	# Aggiorna la turn order bar
+	manager.battle_hud._set_current_turn_name(current_battler.stats.character_name)
+	
 	if battler.stats.character_type == StatsResource.CharacterType.PLAYER:
 		battler.battleMovement.toggle_focus_movement()
 	

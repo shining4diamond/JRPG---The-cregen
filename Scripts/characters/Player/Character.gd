@@ -119,7 +119,8 @@ func on_load_game(saved_data:SavedData):
 	stats.m_defense = my_data.m_defense
 	stats.turn_speed = my_data.turn_speed
 
-	global_position = my_data.position
+	if not state.combatMode:
+		global_position = my_data.position
 	textureBasePath = my_data.textureBasePath
 	animation.load_textures(textureBasePath)
 

@@ -25,6 +25,64 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="TurnOrder_Container" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_right = 220.0
+offset_bottom = 104.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TurnOrder_Container"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TurnOrder_Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TurnOrder_Container/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrentTurn" type="Label" parent="TurnOrder_Container/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Current Turn"
+
+[node name="CurrentTurn_Label" type="Label" parent="TurnOrder_Container/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CurrentTurn"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TurnOrder_Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TurnOrder_Container/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="NextTurn" type="Label" parent="TurnOrder_Container/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next Turn"
+
+[node name="TurnOrder_HBoxContainer" type="HBoxContainer" parent="TurnOrder_Container/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
 [node name="BattleOptions_Container" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 anchors_preset = 2

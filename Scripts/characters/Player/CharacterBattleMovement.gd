@@ -23,17 +23,18 @@ func calculate_velocity() -> Vector2:
 		return Vector2.ZERO
 		
 	if focus_on:
-		direction = Vector2.RIGHT if character.position.x < 560.0 else Vector2.ZERO
+		#direction = Vector2.RIGHT if character.position.x < 560.0 else Vector2.ZERO
+		direction = Vector2.RIGHT if character.position.x < 260.0 else Vector2.ZERO
 		character.animation.set_condition("run",true)
 		state.isRunning = true
 		state.input_direction = direction
 	else:
-		direction = Vector2.LEFT if character.position.x > 350.0 else Vector2.ZERO
+		direction = Vector2.LEFT if character.position.x > 0.0 else Vector2.ZERO
 		character.animation.set_condition("run",true)
 		state.isRunning = true
 		state.input_direction = direction
 	
-	if character.position.x <= 350.0:
+	if character.position.x <= 0.0:
 		character.animation.set_blend_positions(Vector2.RIGHT)
 	return direction * SPEED
 

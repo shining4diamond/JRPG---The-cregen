@@ -1,27 +1,14 @@
 extends CanvasLayer
 
-@onready var player_panels = {
-	1: {
-		"container": %Player_Character_1,
-		"panel": $HPMP_Container/GridContainer/Player_Character_1/HPMP_Player1,
-		"spacer": $HPMP_Container/GridContainer/Player_Character_1/Spacer_Player1
-	},
-	2: {
-		"container": %Player_Character_2,
-		"panel": $HPMP_Container/GridContainer/Player_Character_2/HPMP_Player2,
-		"spacer": $HPMP_Container/GridContainer/Player_Character_2/Spacer_Player2
-	},
-	3: {
-		"container": %Player_Character_3,
-		"panel": $HPMP_Container/GridContainer/Player_Character_3/HPMP_Player3,
-		"spacer": $HPMP_Container/GridContainer/Player_Character_3/Spacer_Player3
-	}
-}
+@onready var player_panels = {}
+@onready var current_turn_label: Label = %CurrentTurn_Label
+@onready var turn_order_h_box_container: HBoxContainer = %TurnOrder_HBoxContainer
 
 const HP_COLOR_CRITICAL = Color.RED
 const HP_COLOR_LOW = Color.YELLOW
 const HP_COLOR_NORMAL = Color.WEB_GREEN
 const HPMP_PLAYER_TAB_SCENEPATH = "res://Scenes/ui/HPMP_Player_Tab.tscn"
+
 
 
 func connect_player_signals():
@@ -85,9 +72,11 @@ func initialize_player_ui(stats: StatsResource, party_member: int):
 	var panel = hpmp_tab.get_node("%HPMP_Player")
 	var spacer = hpmp_tab.get_node("%Spacer_Player")
 	
-	player_panels[party_member].container = container
-	player_panels[party_member].panel = panel
-	player_panels[party_member].spacer = spacer
+	player_panels[party_member] = {
+		"container" : container,
+		"panel" : panel,
+		"spacer" : spacer
+	}
 	
 	# Mostra container HPMP
 	container.show()
@@ -197,18 +186,31 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 		spacer.size_flags_stretch_ratio = 0.0
 		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
 
+func _set_current_turn_name(name: String):
+	var label = current_turn_label.duplicate()
+	turn_order_h_box_container.add_child(label)
+	
+	current_turn_label.text = name
+	
+	var child = turn_order_h_box_container.get_child(0)
+	turn_order_h_box_container.remove_child(child)
+	child.queue_free()
 
-#func _reset_focus_on_hpmp_players():
-	#for panel in player_panels:
-		#var panel_data = player_panels[panel]
-		#var spacer = panel_data.spacer
-		#
-		## Crea tween
-		#var tween = create_tween()
-		#tween.set_ease(Tween.EASE_IN_OUT)
-		#tween.set_trans(Tween.TRANS_CUBIC)
-		#
-		## Mostra e poi ingrandisci
-		#spacer.show()
-		#spacer.size_flags_stretch_ratio = 0.0
-		#tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
+func _initialize_turn_order_bar(battlers: Array[Character]):
+	if not battlers:
+		return
+	
+	for battler in battlers:
+		if battler == battlers[0]:
+			current_turn_label.text = battler.stats.character_name
+		else:
+			var label = current_turn_label.duplicate()
+			label.text = battler.stats.character_name
+			turn_order_h_box_container.add_child(label)
+
+func _reset_turn_order_bar(battlers: Array[Character]):
+	for child in turn_order_h_box_container.get_children():
+		turn_order_h_box_container.remove_child(child)
+		child.queue_free()
+	
+	_initialize_turn_order_bar(battlers)

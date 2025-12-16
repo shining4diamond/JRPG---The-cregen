@@ -1041,7 +1041,7 @@ graph_offset = Vector2(-240, -144)
 radius = 7.0
 height = 42.0
 
-[node name="Player" type="CharacterBody2D" groups=["game_events"]]
+[node name="Character_15fps" type="CharacterBody2D" groups=["game_events"]]
 script = ExtResource("1_o4vxh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
