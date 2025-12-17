@@ -132,6 +132,18 @@ func _update_player_hp(current_hp: int, party_member: int):
 	
 	# Update colore
 	_update_hp_bar_color(hp_bar, current_hp)
+	
+func _update_player_mp(current_mp: int, party_member: int):
+	var panel = player_panels[party_member].panel
+	var mp_bar = panel.get_node("%MP_ProgressBar")
+	
+	# Animazione smooth (opzionale)
+	var tween = create_tween()
+	tween.tween_property(mp_bar, "value", current_mp, 0.3)
+	
+	# Update label
+	mp_bar.get_node("Current_MP_Label").text = str(current_mp)
+
 
 func _update_enemy_hp(current_hp: int, character: Character):
 	var hp_bar = character.get_node_or_null("HP_ProgressBar_Enemy")
@@ -186,11 +198,11 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 		spacer.size_flags_stretch_ratio = 0.0
 		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
 
-func _set_current_turn_name(name: String):
+func _set_current_turn_name(turn_name: String):
 	var label = current_turn_label.duplicate()
 	turn_order_h_box_container.add_child(label)
 	
-	current_turn_label.text = name
+	current_turn_label.text = turn_name
 	
 	var child = turn_order_h_box_container.get_child(0)
 	turn_order_h_box_container.remove_child(child)

@@ -58,3 +58,7 @@ enum PartyMember{
 @export var m_defense:int
 
 @export var turn_speed:int
+
+
+@export var equipped_skills: Array[SkillResource] = []
+@export var skill_cooldowns: Dictionary = {}

@@ -1,11 +1,11 @@
 Label
+HBoxContainer
 VBoxContainer
 MarginContainer
-HBoxContainer
+Button
 ScrollContainer
 HScrollBar
 PanelContainer
-Button
 GridContainer
 Node
 RayCast2D

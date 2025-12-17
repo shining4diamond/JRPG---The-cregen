@@ -115,6 +115,10 @@ func _activate_battler(battler: Character):
 	if not is_instance_valid(battler) or not is_instance_valid(manager):
 		return
 	
+	# Riduce cooldown dell'utilizzatore
+	if battler.skillSystem:
+		battler.skillSystem.reduce_cooldowns()
+	
 	# Aggiorna la turn order bar
 	manager.battle_hud._set_current_turn_name(current_battler.stats.character_name)
 	

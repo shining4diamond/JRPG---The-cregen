@@ -18,6 +18,7 @@ var movement: CharacterMovement
 var combat: CharacterCombat
 var battleAction: CharacterBattleAction
 var battleMovement: CharacterBattleMovement
+var skillSystem: CharacterSkillSystem
 
 func _ready() -> void:
 	# Inizializza stato
@@ -28,6 +29,7 @@ func _ready() -> void:
 	combat = CharacterCombat.new(animation_tree, state, attacking_timer, animation)
 	battleAction = CharacterBattleAction.new(animation_tree, state, attacking_timer, animation, self)
 	battleMovement = CharacterBattleMovement.new(self, state)
+	skillSystem = CharacterSkillSystem.new(self)
 
 	animation_tree.active = true
 
@@ -72,9 +74,23 @@ func revive():
 func get_stats():
 	return stats
 
+# ==============================================
+# Skill System
+# ==============================================
+
+func use_skill(skill: SkillResource, targets: Array[Character]) -> bool:
+	return skillSystem.use_skill(skill, targets)
+
+func get_usable_skills() -> Array[SkillResource]:
+	return skillSystem.get_usable_skills()
+
+func get_equipped_skills() -> Array[SkillResource]:
+	return skillSystem.equipped_skills
 
 
-
+# ==============================================
+# SAVE/LOAD
+# ==============================================
 func on_save_game(saved_data:Array[SavedData]):
 	var my_data = SavedCharacterData.new()
 	my_data.stats = stats
@@ -95,6 +111,8 @@ func on_save_game(saved_data:Array[SavedData]):
 	my_data.m_attack = stats.m_attack
 	my_data.m_defense = stats.m_defense
 	my_data.turn_speed = stats.turn_speed
+	my_data.equipped_skills = stats.equipped_skills
+	my_data.skill_cooldowns = stats.skill_cooldowns
 
 	saved_data.append(my_data)
 
@@ -118,6 +136,8 @@ func on_load_game(saved_data:SavedData):
 	stats.m_attack = my_data.m_attack
 	stats.m_defense = my_data.m_defense
 	stats.turn_speed = my_data.turn_speed
+	stats.equipped_skills = my_data.equipped_skills
+	stats.skill_cooldowns = my_data.skill_cooldowns
 
 	if not state.combatMode:
 		global_position = my_data.position

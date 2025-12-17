@@ -13,6 +13,10 @@ signal skip_button_pressed()
 @warning_ignore("unused_signal")
 signal restart_button_pressed()
 @warning_ignore("unused_signal")
+signal skill_button_pressed()
+signal skill_selected(skill: SkillResource)
+signal skill_execute_requested(skill: SkillResource, user: Character, targets: Array[Character])
+@warning_ignore("unused_signal")
 signal toggle_focus_on_player(party_member: int)
 signal request_ai_target()
 signal ai_target_chosen(target: Character)
@@ -21,6 +25,7 @@ signal combat_attack_completed()
 signal next_turn_requested(skip_timer: bool)
 signal show_battle_hud(show: bool)
 signal show_select_buttons(show: bool)
+signal show_skill_hud(show: bool)
 signal remove_ui_from_enemy(entity: Character)
 signal battle_ended(message: String)
 
@@ -31,6 +36,8 @@ signal battle_ended(message: String)
 @onready var battleend_hud: CanvasLayer = get_parent().get_node("BattleEnd_HUD")
 @onready var attack_button: Button = battle_hud.get_node("%Attack_Button")
 @onready var skip_button: Button = battle_hud.get_node("%Skip_Button")
+@onready var skill_button: Button = battle_hud.get_node("%Skill_Button")
+@onready var commands_label: Label = battle_hud.get_node("%Commands_Label")
 @onready var restart_button: Button = battleend_hud.get_node("%RestartBattleButton")
 @onready var battleend_label: Label = battleend_hud.get_node("%EndBattleLabel")
 
@@ -43,6 +50,9 @@ signal battle_ended(message: String)
 var selected_character: Character
 # Dictionary per mappare party_member -> Button
 var enemy_select_buttons: Dictionary = {}
+var selected_skill: SkillResource = null  # Skill temporaneamente selezionata
+var enemy_select_buttons_active: bool = false
+var skill_being_used: bool = false
 
 # ==============================================
 # COMPONENTI
@@ -52,6 +62,7 @@ var turn_manager: TurnManager
 var ui: BattleUI
 var ai: BattleAI
 var combat: BattleCombat
+var skill_executor: BattleSkillExecutor
 
 # Engine
 const time_scale: float = 3.0
@@ -84,11 +95,13 @@ func _initialize_components():
 	ai = BattleAI.new(self)
 	combat = BattleCombat.new(self)
 	turn_manager = TurnManager.new(self)
+	skill_executor = BattleSkillExecutor.new(self)
 
 func _connect_signals():
 	# Segnali UI
 	attack_button.pressed.connect(_on_attack_button_pressed)
 	skip_button.pressed.connect(_on_skip_button_pressed)
+	skill_button.pressed.connect(_on_skill_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	
 	# Segnali Manager
@@ -100,9 +113,12 @@ func _connect_signals():
 	next_turn_requested.connect(_on_next_turn_requested)
 	show_battle_hud.connect(_on_show_battle_hud)
 	show_select_buttons.connect(_on_show_select_buttons)
+	show_skill_hud.connect(_on_show_skill_hud)
 	remove_ui_from_enemy.connect(_on_remove_ui_from_enemy)
 	battle_ended.connect(_on_battle_ended)
 	combat_attack_requested.connect(_on_combat_attack_requested)
+	skill_selected.connect(_on_skill_selected)
+	skill_execute_requested.connect(_on_skill_execute_requested)
 	
 	# Connetti componenti
 	spawner.all_entities_spawned.connect(func(p, e): entities_spawned.emit(p, e))
@@ -132,7 +148,17 @@ func _on_entities_spawned(players: Array, enemies: Array):
 
 func _on_select_enemy_pressed(selected_char: Character):
 	show_battle_hud.emit(false)
-	combat_attack_requested.emit(turn_manager.get_current_battler(), selected_char)
+	skill_being_used = false
+	
+	var selecter_characters: Array[Character] = []
+	selecter_characters.append(selected_char)
+	# Se c'è una skill selezionata, usala
+	if selected_skill:
+		skill_execute_requested.emit(selected_skill, turn_manager.get_current_battler(), selecter_characters)
+		selected_skill = null  # Reset
+	else:
+		# Attacco normale
+		combat_attack_requested.emit(turn_manager.get_current_battler(), selected_char)
 
 func _on_combat_attack_requested(attacker: Character, defender: Character):
 	await combat.execute_attack(attacker, defender)
@@ -143,8 +169,12 @@ func _on_combat_attack_completed():
 
 func _on_attack_button_pressed():
 	show_select_buttons.emit(true)
+	show_battle_hud.emit(false)
+	show_skill_hud.emit(false)
+	skill_being_used = false
 
 func _on_skip_button_pressed():
+	show_skill_hud.emit(false)
 	next_turn_requested.emit(true)
 	ui._toggle_combat_options_buttons()
 	await get_tree().create_timer(0.25).timeout
@@ -155,7 +185,7 @@ func _on_restart_button_pressed():
 
 func _on_request_ai_target():
 	var target = ai.choose_target()
-	ai_target_chosen.emit(target)
+	ai_target_chosen.emit(target) 
 
 func _on_ai_target_chosen(target: Character):
 	if target:
@@ -169,12 +199,65 @@ func _on_show_battle_hud(show: bool):
 
 func _on_show_select_buttons(show: bool):
 	ui.show_select_button(show)
-	
+
+func _on_show_skill_hud(show: bool):
+	ui.show_skill_hud(show)
+
 func _on_remove_ui_from_enemy(entity: Character):
 	ui._remove_ui_from_enemy(entity)
 
 func _on_battle_ended(message: String):
 	ui._show_battle_end_hud(message)
+
+func _on_skill_button_pressed():
+	# Mostra menu skill
+	var current = turn_manager.get_current_battler()
+	if current:
+		ui.show_skill_menu(current)
+
+func _on_skill_selected(skill: SkillResource):
+	var user = turn_manager.get_current_battler()
+	if not user:
+		return
+	
+	
+	
+	# Determina tipo di target
+	match skill.target_type:
+		SkillResource.TargetType.SELF:
+			# Usa immediatamente su se stesso
+			skill_execute_requested.emit(skill, user, [user])
+		
+		SkillResource.TargetType.SINGLE_ENEMY:
+			# Mostra selezione nemico
+			show_battle_hud.emit(false)
+			show_select_buttons.emit(true)
+			skill_being_used = true
+			# Salva skill selezionata temporaneamente
+			selected_skill = skill
+		
+		SkillResource.TargetType.ALL_ENEMIES:
+			# Target tutti i nemici vivi
+			var targets = turn_manager.enemy_battlers.filter(
+				func(e): return is_instance_valid(e) and not e.state.isDead
+			)
+			skill_execute_requested.emit(skill, user, targets)
+		
+		SkillResource.TargetType.SINGLE_ALLY:
+			# Mostra selezione alleato (implementare UI)
+			pass
+		
+		SkillResource.TargetType.ALL_ALLIES:
+			# Target tutti gli alleati vivi
+			var targets = turn_manager.player_battlers.filter(
+				func(p): return is_instance_valid(p) and not p.state.isDead
+			)
+			skill_execute_requested.emit(skill, user, targets)
+
+func _on_skill_execute_requested(skill: SkillResource, user: Character, targets: Array[Character]):
+	await skill_executor.execute_skill(skill, user, targets)
+	combat_attack_completed.emit()
+
 
 # ==============================================
 # DYNAMIC ENEMY SELECTION HANDLERS
@@ -267,8 +350,16 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		for player in get_parent().get_tree().get_nodes_in_group("player_battlers"):
-			print(player.position.x)
+		for skill in turn_manager.get_current_battler().get_equipped_skills():
+			print(skill.skill_name)
+	
+	if Input.is_action_just_pressed("cancel") and enemy_select_buttons_active:
+		show_battle_hud.emit(true)
+		show_select_buttons.emit(false)
+		if skill_being_used:
+			show_skill_hud.emit(true)
+		else:
+			show_skill_hud.emit(false)
 
 # ==============================================
 # SAVE/LOAD

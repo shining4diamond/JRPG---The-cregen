@@ -51,6 +51,9 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	entity.textureBasePath = config.textureBasePath
 	entity.animation.load_textures(config.textureBasePath)
 	
+	for skill in config.skillsPath:
+		entity.skillSystem.equip_skill(load(skill))
+	
 	# Set character type
 	if config.type == "PLAYER":
 		#entity.global_position = config.position

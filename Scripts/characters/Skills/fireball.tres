@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://baj2050nimajl"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Fireball"
+skill_description = "Launches a fireball at the enemy"
+skill_type = 1
+target_type = 0
+mp_cost = 25
+hp_cost = 0
+cooldown_turns = 0
+base_power = 40
+power_scaling = 1.2
+can_crit = true
+crit_chance = 0.15
+crit_multiplier = 1.5
+applies_status = true
+status_effect = "burn"
+status_duration = 3
+status_chance = 0.3
+animation_name = "melee"
