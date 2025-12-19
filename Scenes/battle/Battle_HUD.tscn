@@ -189,13 +189,14 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="SkillDescription_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer/PanelContainer/MarginContainer"]
+[node name="SkillDescription_Label" type="RichTextLabel" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_vertical = 1
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-autowrap_mode = 3
+bbcode_enabled = true
+text = "LOREM IPSUM ASDADASDASD DSDSD SDS DSDSD S"
+fit_content = true
+scroll_active = false
 
 [node name="BottomRight_Container" type="MarginContainer" parent="."]
 anchors_preset = 3

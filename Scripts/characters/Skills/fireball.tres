@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Fireball"
-skill_description = "Launches a fireball at the enemies dealing %MAGICAL_DAMAGE"
+skill_description = "Launches a fireball to [b]all enemies[/b] dealing [b][color=red]%MAGICAL_DAMAGE[/color][/b]"
 skill_type = 1
 target_type = 1
 mp_cost = 25

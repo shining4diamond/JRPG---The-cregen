@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Sacrifice"
-skill_description = "Deals %PHYSICAL_DAMAGE massive damage at the cost of your own HP"
+skill_description = "Deals [b][color=red]%PHYSICAL_DAMAGE[/color][/b] to [b]an enemy[/b] at the cost of your own HP"
 hp_cost = 50
 cooldown_turns = 4
 base_power = 100
