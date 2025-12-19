@@ -1,8 +1,0 @@
-res://Scenes/battle/Battle_HUD.tscn
-res://Scripts/battle/BattleManager.gd
-res://Scripts/battle/BattleUI.gd
-res://Scripts/ui/HUD_Battle.gd
-res://Scripts/characters/Player/CharacterSkillSystem.gd
-res://Scripts/battle/BattleSkillExecutor.gd
-res://Scripts/battle/TurnManager.gd
-res://Scripts/characters/Skills/whirlwind.tres
