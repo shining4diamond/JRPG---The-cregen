@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://cec4do28csjr3"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Group Heal"
+skill_description = "Restores HP to all allies"
+skill_type = 2
+target_type = 3
+cooldown_turns = 3
+base_power = 30
+power_scaling = 0.6

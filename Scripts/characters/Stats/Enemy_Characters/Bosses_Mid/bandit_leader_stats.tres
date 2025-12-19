@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://wjx73ug5vfiw"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_83yjw"]
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_younc"]
+
+[resource]
+script = ExtResource("1_83yjw")
+character_name = "Bandit Leader"
+max_hp = 280
+current_hp = 280
+max_mp = 80
+current_mp = 80
+attack = 80
+defense = 28
+m_attack = 18
+m_defense = 20
+turn_speed = 58
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

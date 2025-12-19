@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://diroiw1728k50"]
+
+[ext_resource type="Script" uid="uid://dcsfgrnktuscf" path="res://Scripts/battle/BattleManager.gd" id="1_12yvw"]
+
+[node name="BattleManager" type="Node" groups=["game_events"]]
+script = ExtResource("1_12yvw")
+
+[node name="Enemy_HBoxContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 930.0
+offset_top = 360.0
+offset_right = 930.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Player_HBoxContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 930.0
+offset_top = 360.0
+offset_right = 930.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Enemies" type="MarginContainer" parent="."]
+offset_left = 930.0
+offset_right = 930.0
+offset_bottom = 720.0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Enemy_VBoxContainer" type="VBoxContainer" parent="Enemies"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Players" type="MarginContainer" parent="."]
+offset_left = 350.0
+offset_right = 350.0
+offset_bottom = 720.0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Player_VBoxContainer" type="VBoxContainer" parent="Players"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true

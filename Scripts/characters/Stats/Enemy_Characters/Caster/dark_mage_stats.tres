@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://dfrubherx87t6"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_bpjv7"]
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_h1kw1"]
+
+[resource]
+script = ExtResource("1_h1kw1")
+character_name = "Dark Mage"
+max_hp = 180
+current_hp = 180
+max_mp = 200
+current_mp = 200
+attack = 30
+defense = 12
+m_attack = 50
+m_defense = 30
+turn_speed = 48
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

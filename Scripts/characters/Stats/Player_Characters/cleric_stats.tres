@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://dqk204g6kamb6"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_hmgqc"]
+
+[resource]
+script = ExtResource("1_hmgqc")
+character_name = "Cleric"
+max_hp = 250
+current_hp = 250
+max_mp = 300
+current_mp = 300
+attack = 18
+defense = 20
+m_attack = 38
+m_defense = 40
+turn_speed = 50
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

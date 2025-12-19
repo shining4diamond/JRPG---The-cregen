@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://dpwum7chq03jt"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_7q0fx"]
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_w442g"]
+
+[resource]
+script = ExtResource("1_7q0fx")
+character_name = "Survivor"
+max_hp = 450
+current_hp = 450
+max_mp = 80
+current_mp = 80
+attack = 70
+defense = 30
+m_attack = 8
+m_defense = 18
+turn_speed = 40
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

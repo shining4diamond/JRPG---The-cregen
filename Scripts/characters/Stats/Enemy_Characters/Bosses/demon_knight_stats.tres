@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://pam4v2fywunx"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_4kyvp"]
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_67ds7"]
+
+[resource]
+script = ExtResource("1_67ds7")
+character_name = "Demon Knight"
+max_hp = 500
+current_hp = 500
+max_mp = 120
+current_mp = 120
+attack = 120
+defense = 45
+m_attack = 35
+m_defense = 38
+turn_speed = 42
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

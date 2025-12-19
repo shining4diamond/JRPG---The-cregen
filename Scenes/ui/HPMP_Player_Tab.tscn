@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmxcwun6c00m7"]
+
+[ext_resource type="PackedScene" uid="uid://8nvx8mjxxpni" path="res://Scenes/ui/HPMP_Player.tscn" id="1_k0om1"]
+
+[node name="Player_Character" type="HBoxContainer"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+
+[node name="HPMP_Player" parent="." instance=ExtResource("1_k0om1")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Spacer_Player" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2

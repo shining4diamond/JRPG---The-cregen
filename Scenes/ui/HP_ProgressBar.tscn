@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtwrwafmny1gy"]
+
+[ext_resource type="StyleBox" uid="uid://c6m64in7tshnp" path="res://Scenes/ui/bg_progressbar.tres" id="1_x3n7d"]
+[ext_resource type="StyleBox" uid="uid://ukqk8hg6dbje" path="res://Scenes/ui/fill_progressbar.tres" id="2_3y6fh"]
+
+[node name="HP_ProgressBar" type="ProgressBar"]
+offset_left = 22.0
+offset_top = 19.0
+offset_right = 113.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = ExtResource("1_x3n7d")
+theme_override_styles/fill = ExtResource("2_3y6fh")
+value = 75.0
+show_percentage = false
+
+[node name="Current_HP_Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 54.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "1234"

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk1hpwbuhhtc4"]
+
+[ext_resource type="Script" uid="uid://ctpqbpndx1x2s" path="res://Scripts/battle/battle.gd" id="1_c1xev"]
+[ext_resource type="PackedScene" uid="uid://b1438rf3cshls" path="res://Scenes/battle/battle_end_hud.tscn" id="2_ivai1"]
+[ext_resource type="PackedScene" uid="uid://w7r871fv5wnt" path="res://Scenes/battle/save_load_debug.tscn" id="4_63vvg"]
+[ext_resource type="PackedScene" uid="uid://diroiw1728k50" path="res://Scenes/battle/battle_manager.tscn" id="4_c1xev"]
+[ext_resource type="Script" uid="uid://da4i4cbswwe5n" path="res://Scripts/utilities/saver_loader.gd" id="5_ivai1"]
+[ext_resource type="PackedScene" uid="uid://ca6lx1vrqdvv8" path="res://Scenes/battle/Battle_HUD.tscn" id="5_mgqhe"]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_c1xev")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="BattleEnd_HUD" parent="." instance=ExtResource("2_ivai1")]
+visible = false
+
+[node name="Battle_HUD" parent="." instance=ExtResource("5_mgqhe")]
+unique_name_in_owner = true
+
+[node name="SAVE_LOAD_DEBUG" parent="." instance=ExtResource("4_63vvg")]
+unique_name_in_owner = true
+
+[node name="Instructions" type="Label" parent="."]
+visible = false
+offset_left = 1072.0
+offset_top = 349.0
+offset_right = 1273.0
+offset_bottom = 716.0
+theme_override_font_sizes/font_size = 24
+text = "W - UP
+A - LEFT
+S - DOWN
+D - RIGHT
+SHIFT - RUN
+CTRL - CROUCH
+SPACE - ATTACK
+1 - TAKE DAMAGE
+2 - DIE
+3 - REVIVE"
+metadata/_edit_use_anchors_ = true
+
+[node name="Utilities" type="Node" parent="."]
+
+[node name="SaverLoader" type="Node" parent="Utilities"]
+script = ExtResource("5_ivai1")
+
+[node name="BattleManager" parent="." instance=ExtResource("4_c1xev")]

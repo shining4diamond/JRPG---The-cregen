@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://bgkrbgimhseeo"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_pnjlk"]
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_x120m"]
+
+[resource]
+script = ExtResource("1_x120m")
+character_name = "Dragon Whelp"
+max_hp = 600
+current_hp = 600
+max_mp = 180
+current_mp = 180
+attack = 110
+defense = 50
+m_attack = 45
+m_defense = 45
+turn_speed = 38
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"

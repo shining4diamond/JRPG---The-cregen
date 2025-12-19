@@ -1,0 +1,204 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca6lx1vrqdvv8"]
+
+[ext_resource type="Script" uid="uid://cu5hxm4qmqqg3" path="res://Scripts/ui/HUD_Battle.gd" id="1_k14qo"]
+
+[node name="Battle_HUD" type="CanvasLayer"]
+script = ExtResource("1_k14qo")
+
+[node name="HPMP_Container" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.0484375
+anchor_bottom = 1.0
+offset_right = 240.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="HPMP_Tab_Grid_Container" type="GridContainer" parent="HPMP_Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TurnOrder_Container" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_right = 220.0
+offset_bottom = 104.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TurnOrder_Container"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TurnOrder_Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TurnOrder_Container/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrentTurn" type="Label" parent="TurnOrder_Container/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Current Turn"
+
+[node name="CurrentTurn_Label" type="Label" parent="TurnOrder_Container/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CurrentTurn"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TurnOrder_Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TurnOrder_Container/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="NextTurn" type="Label" parent="TurnOrder_Container/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next Turn"
+
+[node name="TurnOrder_HBoxContainer" type="HBoxContainer" parent="TurnOrder_Container/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="BattleOptions_Container" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -154.0
+offset_right = 240.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="BattleOptions_Container"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BattleOptions_Container/GridContainer"]
+layout_mode = 2
+
+[node name="BattleOptions_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="MarginContainer2" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="Attack_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Attack"
+
+[node name="Skill_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Skill"
+
+[node name="Skip_Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Skip Turn"
+
+[node name="SkillButtons_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Skill_HBoxContainer" type="HBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Power Strike"
+alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 5
+
+[node name="SkillCost_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer/Button/MarginContainer"]
+layout_mode = 2
+text = "MP: 60"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CD_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer"]
+layout_mode = 2
+text = "2 Turn left"
+
+[node name="BottomRight_Container" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -154.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="BottomRight_Container"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomRight_Container/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BattleOptions_VBoxContainer" type="VBoxContainer" parent="BottomRight_Container/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Commands_Label" type="Label" parent="BottomRight_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Press C to cancel attack"

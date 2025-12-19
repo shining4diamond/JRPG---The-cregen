@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=3 format=3 uid="uid://mdqykf4tkaqs"]
+
+[ext_resource type="Script" uid="uid://dt2ty4876uv6i" path="res://Scripts/characters/Stats/stats_resource.gd" id="1_qo3rk"]
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_volmb"]
+
+[resource]
+script = ExtResource("1_qo3rk")
+character_name = "Goblin"
+max_hp = 80
+current_hp = 80
+max_mp = 30
+current_mp = 30
+attack = 30
+defense = 8
+m_attack = 5
+m_defense = 6
+turn_speed = 55
+metadata/_custom_type_script = "uid://dt2ty4876uv6i"
