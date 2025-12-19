@@ -174,20 +174,15 @@ func set_current_turn_index(index: int):
 # BATTLERS MANAGER
 # ==============================================
 func add_battler_to_dead_battlers(target: Character):
-	print(enemy_battlers)
-	print(target.name, " ", target.stats.current_hp, " ", target.state.isDead)
 	if player_battlers.has(target):
 		var index = player_battlers.find(target)
 		player_battlers.remove_at(index)
 		dead_player_battlers.append(target)
 	
 	if enemy_battlers.has(target):
-		print("here")
 		var index = enemy_battlers.find(target)
-		print(index)
 		enemy_battlers.remove_at(index)
 		dead_enemy_battlers.append(target)
-	print(enemy_battlers)
 
 func add_dead_battler_to_battlers(target: Character):
 	if dead_player_battlers.has(target):

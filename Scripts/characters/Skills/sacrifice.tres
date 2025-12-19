@@ -5,15 +5,11 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Sacrifice"
-skill_description = "Deal massive damage at the cost of your own HP"
-skill_type = 0  # PHYSICAL_ATTACK
-target_type = 0  # SINGLE_ENEMY
-mp_cost = 0
+skill_description = "Deals %PHYSICAL_DAMAGE massive damage at the cost of your own HP"
 hp_cost = 50
 cooldown_turns = 4
 base_power = 100
 power_scaling = 2.0
-can_crit = true
 crit_chance = 0.25
 crit_multiplier = 2.5
 animation_name = "melee2"

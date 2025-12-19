@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Group Heal"
-skill_description = "Restores HP to all allies"
+skill_description = "Restores %HEAL_AMOUNT HP to all allies"
 skill_type = 2
 target_type = 3
 cooldown_turns = 3

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_v7jlc")
 skill_name = "Revive"
-skill_description = "Revive an ally"
+skill_description = "Revive an ally and restores %HEAL_AMOUNT HP"
 skill_type = 6
 target_type = 2
 hp_cost = 50

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Power Strike"
-skill_description = "A powerful strike dealing heavy damage"
+skill_description = "A powerful strike dealing heavy damage dealing %PHYSICAL_DAMAGE."
 mp_cost = 15
 cooldown_turns = 2
 base_power = 30

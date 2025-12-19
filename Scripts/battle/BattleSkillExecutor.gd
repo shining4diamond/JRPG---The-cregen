@@ -65,7 +65,7 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 	target.stats.current_hp = max(0, target.stats.current_hp - damage)
 	
 	# Mostra danno (puoi aggiungere un label floating)
-	_show_damage_number(target, damage)
+	_show_damage_number(user, target, damage)
 	
 	# Applica status effect
 	if skill.applies_status and randf() < skill.status_chance:
@@ -112,8 +112,8 @@ func _apply_status_effect(target: Character, effect: String, duration: int):
 	# TODO: Implementa sistema di status effects
 
 # Mostra numero danno (placeholder)
-func _show_damage_number(target: Character, damage: int):
-	print("%s takes %d damage!" % [target.stats.character_name, damage])
+func _show_damage_number(executor: Character, target: Character, damage: int):
+	print("%s takes %d damage from %s" % [target.stats.character_name, damage, executor.stats.character_name])
 	# TODO: Crea label floating per mostrare danno
 
 # Mostra numero cura (placeholder)

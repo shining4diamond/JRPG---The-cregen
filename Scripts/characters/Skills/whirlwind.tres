@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Whirlwind"
-skill_description = "Attacks all enemies with a spinning strike"
+skill_description = "Attacks all enemies with a spinning strike dealing %PHYSICAL_DAMAGE"
+target_type = 1
 cooldown_turns = 3
 base_power = 20
 power_scaling = 0.8

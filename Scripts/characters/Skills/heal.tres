@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Heal"
-skill_description = "Restores HP to an ally"
+skill_description = "Restores %HEAL_AMOUNT HP to an ally"
 skill_type = 2
 target_type = 2
 base_power = 50

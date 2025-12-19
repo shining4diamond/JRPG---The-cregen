@@ -88,9 +88,10 @@ unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -154.0
-offset_right = 240.0
+offset_top = -211.0
+offset_right = 1280.0
 grow_vertical = 0
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -98,13 +99,15 @@ theme_override_constants/margin_bottom = 20
 
 [node name="GridContainer" type="GridContainer" parent="BattleOptions_Container"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BattleOptions_Container/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 2
 
 [node name="BattleOptions_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 size_flags_vertical = 8
 
 [node name="MarginContainer2" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/BattleOptions_VBoxContainer"]
@@ -137,7 +140,7 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 
 [node name="Skill_HBoxContainer" type="HBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer"]
 layout_mode = 2
@@ -167,6 +170,32 @@ vertical_alignment = 1
 [node name="CD_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer"]
 layout_mode = 2
 text = "2 Turn left"
+
+[node name="SkillDescription_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SkillDescription_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+autowrap_mode = 3
 
 [node name="BottomRight_Container" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -201,4 +230,5 @@ size_flags_vertical = 8
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_vertical = 8
 text = "Press C to cancel attack"

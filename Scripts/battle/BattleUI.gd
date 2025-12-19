@@ -92,6 +92,9 @@ func show_skill_menu(character: Character):
 		print("No equipped skills available")
 		return
 	
+	manager.battle_hud.get_node_or_null("%SkillDescription_VBoxContainer").show()
+	manager.skill_button.disabled = true
+	
 	# Qui puoi creare un pannello UI dinamico
 	# Per ora stampiamo le skill disponibili
 	#print("Available skills for %s:" % character.stats.character_name)
@@ -119,6 +122,8 @@ func _create_skill_buttons(skills: Array[SkillResource], character: Character):
 	
 	# Crea bottone per ogni skill
 	for skill in skills:
+		skill.skill_description = _set_skill_description_variables(skill.skill_description, skill, character)
+		
 		var skill_hbox = skill_hbox_duplicate.duplicate()
 		var button = skill_hbox.get_node_or_null("Button")
 		button.text = skill.skill_name
@@ -137,9 +142,13 @@ func _create_skill_buttons(skills: Array[SkillResource], character: Character):
 		
 		# Connetti segnale
 		button.pressed.connect(func(): _on_skill_button_pressed(skill))
+		button.focus_entered.connect(func(): _on_skill_button_focus_entered(skill))
+		button.mouse_entered.connect(func(): _on_skill_button_mouse_entered(button))
 		
 		skill_container.add_child(skill_hbox)
 		skill_hbox.show()
+		
+		button.grab_focus()
 	
 	# Mostra container
 	skill_container.visible = true
@@ -148,8 +157,29 @@ func _on_skill_button_pressed(skill: SkillResource):
 	"""Callback quando una skill viene premuta"""
 	manager.skill_selected.emit(skill)
 
+func _on_skill_button_focus_entered(skill: SkillResource):
+	manager.battle_hud.get_node_or_null("%SkillDescription_Label").text = skill.skill_description
+
+func _on_skill_button_mouse_entered(button: Button):
+	button.grab_focus()
+
+func _set_skill_description_variables(skill_description: String, skill: SkillResource, user: Character):
+	if skill_description.find("%PHYSICAL_DAMAGE"):
+		var damage = int(skill.base_power + (user.stats.attack * skill.power_scaling))
+		skill_description = skill_description.replace("%PHYSICAL_DAMAGE", str(damage))
+		
+	if skill_description.find("%MAGICAL_DAMAGE"):
+		var damage = int(skill.base_power + (user.stats.m_attack * skill.power_scaling))
+		skill_description = skill_description.replace("%MAGICAL_DAMAGE", str(damage))
+		
+	if skill_description.find("%HEAL_AMOUNT"):
+		var heal = int(skill.base_power + (user.stats.m_attack * skill.power_scaling))
+		skill_description = skill_description.replace("%HEAL_AMOUNT", str(heal))
+	
+	return skill_description
+
 func hide_skill_menu():
 	"""Nascondi il menu skill"""
-	var skill_container = manager.battle_hud.get_node_or_null("%SkillButtons_Container")
-	if skill_container:
-		skill_container.visible = false
+	manager.battle_hud.get_node_or_null("%SkillButtons_VBoxContainer").hide()
+	manager.battle_hud.get_node_or_null("%SkillDescription_VBoxContainer").hide()
+	manager.skill_button.disabled = false

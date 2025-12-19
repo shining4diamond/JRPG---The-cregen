@@ -30,7 +30,7 @@ res://AddonsExamples/godot_state_charts_examples/save_and_load/save_and_load.tsc
 res://AddonsExamples/godot_state_charts_examples/stepping/stepping.tscn::a12c84bb63ea2b3e530c51d998b66579::1764926959::res://.godot/exported/133200997/export-8529d22f2b73a6fef5c4bb016dade240-stepping.scn
 res://AddonsExamples/godot_state_charts_examples/new_theme.tres::329b9fdf3a9f16868bedde004e534088::1764925412::res://.godot/exported/133200997/export-c044aff95caaefd923c0d3ee20c67494-new_theme.res
 res://AddonsExamples/safe_resource_loader_example/example.tscn::e3b9450ad547b99404ffcd3599822515::1764926962::res://.godot/exported/133200997/export-a448983eb0309e88b1db15aab00b5754-example.scn
-res://Scenes/battle/Battle_HUD.tscn::cfe2b20acf4615964542fe65f3c1b73f::1765975000::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
+res://Scenes/battle/Battle_HUD.tscn::6ae2607bc53606666d80e48abe61ed9c::1766174009::res://.godot/exported/133200997/export-2cbd7fa4c0b2a7d9eb2361da3be3b7d1-Battle_HUD.scn
 res://Scenes/characters/character_14fps.tscn::46065134e8e70cc40f3966cd5189518a::1765874037::res://.godot/exported/133200997/export-3c24d63006829f275b7228f3bb4d08bf-character_14fps.scn
 res://Scenes/characters/character_15fps.tscn::4b8b170f004ef48bf7196fc49c7cbdd8::1766138534::res://.godot/exported/133200997/export-90dd54a49bce8a5cf8e444a4617fcf80-character_15fps.scn
 res://Scenes/characters/character_select_button.tres::887662826f30d06342c2de4abd75b255::1765224953::res://.godot/exported/133200997/export-2054df95591489eb9577c85687c110eb-character_select_button.res
@@ -62,10 +62,10 @@ res://Scripts/characters/Stats/Player_Characters/mage_stats.tres::7c6c86fd87f04d
 res://Scripts/characters/Stats/Player_Characters/paladin_stats.tres::b4fa207f5a916b096ba691aba724044a::1765717613::res://.godot/exported/133200997/export-1f7e845536852a81e7eaaa53b9848eab-paladin_stats.res
 res://Scripts/characters/Stats/Player_Characters/ranger_stats.tres::ec7759aefaebb7ad9a1ba54bb6b4dd95::1765717617::res://.godot/exported/133200997/export-e231cee94aec4ef1a8a49911c1582a4f-ranger_stats.res
 res://Scripts/characters/Stats/Player_Characters/rogue_stats.tres::9785ca7fd9a3a8e89a82761acb215499::1765717621::res://.godot/exported/133200997/export-ac12633585268fb9a0b69043026bdfb8-rogue_stats.res
-res://Scripts/characters/Skills/fireball.tres::5437051388d38ce34b482de5559f0ab7::1766149416::res://.godot/exported/133200997/export-7a66c8355018d71685f124d94c68f2cd-fireball.res
-res://Scripts/characters/Skills/group_heal.tres::ae4d5975c5c372a804bad652f3ac4b8f::1766144008::res://.godot/exported/133200997/export-cd133d6a44daf23ab1d17b174ea423c4-group_heal.res
-res://Scripts/characters/Skills/heal.tres::b295c0e11ded1a6292c0b754cacd86c9::1766165553::res://.godot/exported/133200997/export-5569e3b5669c12f806cee12dbf6c0888-heal.res
-res://Scripts/characters/Skills/power_strike.tres::99f286cd9c1d744503d1234d0d947dc7::1765911078::res://.godot/exported/133200997/export-fd8790499f02e56ae4f8297729d73a96-power_strike.res
-res://Scripts/characters/Skills/sacrifice.tres::c47cce65124eef8fc1b2dc5a607f3650::1765908415::res://.godot/exported/133200997/export-4adfac7f52fa4d1cb6a906a3adcc6c81-sacrifice.res
-res://Scripts/characters/Skills/whirlwind.tres::de0aa3aa40d94a2bb5666ff25c167c9f::1765969539::res://.godot/exported/133200997/export-110d860d15c22ed3a78b3fc1c4102a63-whirlwind.res
-res://Scripts/characters/Skills/revive.tres::9c4bfe81adfffc4ae405e16d3ee54154::1766160127::res://.godot/exported/133200997/export-fe7904e92ac1f4df9603df250eb67d0a-revive.res
+res://Scripts/characters/Skills/fireball.tres::7d8a30deb371514832922008439dd76f::1766173298::res://.godot/exported/133200997/export-7a66c8355018d71685f124d94c68f2cd-fireball.res
+res://Scripts/characters/Skills/group_heal.tres::ad78d6591feda3e0d6629e691aa5d466::1766173622::res://.godot/exported/133200997/export-cd133d6a44daf23ab1d17b174ea423c4-group_heal.res
+res://Scripts/characters/Skills/heal.tres::e9821a4cac292ef5c1f94bdafcffe684::1766173966::res://.godot/exported/133200997/export-5569e3b5669c12f806cee12dbf6c0888-heal.res
+res://Scripts/characters/Skills/power_strike.tres::f0f6135420190abe10caefefa6702ddf::1766173385::res://.godot/exported/133200997/export-fd8790499f02e56ae4f8297729d73a96-power_strike.res
+res://Scripts/characters/Skills/sacrifice.tres::24fc1e48ea326978d232ab13dbae1955::1766173990::res://.godot/exported/133200997/export-4adfac7f52fa4d1cb6a906a3adcc6c81-sacrifice.res
+res://Scripts/characters/Skills/whirlwind.tres::5d9e8ec47c7ea12af8976f5ef807060d::1766174009::res://.godot/exported/133200997/export-110d860d15c22ed3a78b3fc1c4102a63-whirlwind.res
+res://Scripts/characters/Skills/revive.tres::2f5ba72f55f9c95f4303332761eb99be::1766173966::res://.godot/exported/133200997/export-fe7904e92ac1f4df9603df250eb67d0a-revive.res
