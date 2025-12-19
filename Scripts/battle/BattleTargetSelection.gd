@@ -6,6 +6,9 @@ var manager: BattleManager
 # Dictionary per mappare party_member -> Button
 var enemy_select_buttons: Dictionary = {}
 var player_select_buttons: Dictionary = {}
+var dead_enemy_select_buttons: Dictionary = {}
+var dead_player_select_buttons: Dictionary = {}
+
 var enemy_select_buttons_active: bool = false
 var player_select_buttons_active: bool = false
 
@@ -19,6 +22,7 @@ func show_select_button(show: bool, target: String = "ALL"):
 	
 	var first_button_focused = false
 	var targets
+	
 	if target == "ALL":
 		targets = turn_mgr.battlers
 		if show:
@@ -27,28 +31,44 @@ func show_select_button(show: bool, target: String = "ALL"):
 		else:
 			enemy_select_buttons_active = false
 			player_select_buttons_active = false
-			
+	
 	elif target== "ENEMY":
 		targets = turn_mgr.enemy_battlers
 		if show:
 			enemy_select_buttons_active = true
 		else:
 			enemy_select_buttons_active = false
+	
 	elif target == "ALLY":
 		targets = turn_mgr.player_battlers
 		if show:
 			player_select_buttons_active = true
 		else:
 			player_select_buttons_active = false
-			
+	
+	elif target== "DEAD_ENEMY":
+		targets = turn_mgr.dead_enemy_battlers
+		if show:
+			enemy_select_buttons_active = true
+		else:
+			enemy_select_buttons_active = false
+	
+	elif target == "DEAD_ALLY":
+		targets = turn_mgr.dead_player_battlers
+		if show:
+			player_select_buttons_active = true
+		else:
+			player_select_buttons_active = false
+	
 	else:
 		targets = null
 	
 	for character in targets:
-		if is_instance_valid(character) and not character.state.isDead:
+		if is_instance_valid(character):
 			var button = character.get_node_or_null("Sprite2D/Select_Button")
 			if button:
 				button.visible = show
+				
 				manager.commands_label.visible = show
 				if button.visible:
 					manager.target_selection.enemy_select_buttons_active = true
@@ -141,6 +161,7 @@ func _setup_focus_navigation(button: Button, select_buttons: Dictionary):
 
 func _sort_desc(a,b):
 	return a>b
+
 func _on_battler_focus(party_member: int):
 	"""Handler per quando un bottone nemico riceve il focus"""
 	var character = _return_battler_on_party_member(party_member)
@@ -181,19 +202,28 @@ func _unfocus_battler(party_member: int):
 	if character:
 		character.battleAction._on_select_button_mouse_exited()
 
-func remove_battler_select_button(party_member: int):
-	"""Rimuove un bottone dalla lista (quando il nemico muore)"""
-	if enemy_select_buttons.has(party_member):
-		enemy_select_buttons.erase(party_member)
-		# Aggiorna la navigazione focus per i bottoni rimanenti
-		_update_all_focus_navigation()
-
 func _update_all_focus_navigation():
-	"""Aggiorna la navigazione focus per tutti i bottoni rimasti"""
-	for party_member in enemy_select_buttons.keys():
-		var button = enemy_select_buttons[party_member]
+	enemy_select_buttons = {}
+	player_select_buttons = {}
+	dead_enemy_select_buttons = {}
+	dead_player_select_buttons = {}
+	
+	for character in manager.turn_manager.enemy_battlers:
+		var button = character.get_node_or_null("Sprite2D/Select_Button")
+		enemy_select_buttons[character.stats.party_member] = button
 		_setup_focus_navigation(button, enemy_select_buttons)
 	
-	for party_member in player_select_buttons.keys():
-		var button = player_select_buttons[party_member]
+	for character in manager.turn_manager.player_battlers:
+		var button = character.get_node_or_null("Sprite2D/Select_Button")
+		player_select_buttons[character.stats.party_member] = button
 		_setup_focus_navigation(button, player_select_buttons)
+		
+	for character in manager.turn_manager.dead_enemy_battlers:
+		var button = character.get_node_or_null("Sprite2D/Select_Button")
+		dead_enemy_select_buttons[character.stats.party_member] = button
+		_setup_focus_navigation(button, dead_enemy_select_buttons)
+	
+	for character in manager.turn_manager.dead_player_battlers:
+		var button = character.get_node_or_null("Sprite2D/Select_Button")
+		dead_player_select_buttons[character.stats.party_member] = button
+		_setup_focus_navigation(button, dead_player_select_buttons)

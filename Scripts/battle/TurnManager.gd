@@ -6,6 +6,8 @@ var current_turn_index: int = 0
 var battlers: Array = []
 var player_battlers: Array = []
 var enemy_battlers: Array = []
+var dead_player_battlers: Array = []
+var dead_enemy_battlers: Array = []
 
 var manager: BattleManager
 var is_processing_turn: bool = false  # Flag per prevenire operazioni durante save/load
@@ -165,3 +167,36 @@ func get_current_turn_index() -> int:
 
 func set_current_turn_index(index: int):
 	current_turn_index = index
+
+
+
+# ==============================================
+# BATTLERS MANAGER
+# ==============================================
+func add_battler_to_dead_battlers(target: Character):
+	print(enemy_battlers)
+	print(target.name, " ", target.stats.current_hp, " ", target.state.isDead)
+	if player_battlers.has(target):
+		var index = player_battlers.find(target)
+		player_battlers.remove_at(index)
+		dead_player_battlers.append(target)
+	
+	if enemy_battlers.has(target):
+		print("here")
+		var index = enemy_battlers.find(target)
+		print(index)
+		enemy_battlers.remove_at(index)
+		dead_enemy_battlers.append(target)
+	print(enemy_battlers)
+
+func add_dead_battler_to_battlers(target: Character):
+	if dead_player_battlers.has(target):
+		var index = dead_player_battlers.find(target)
+		dead_player_battlers.remove_at(index)
+		player_battlers.append(target)
+	
+	if dead_enemy_battlers.has(target):
+		var index = dead_enemy_battlers.find(target)
+		dead_enemy_battlers.remove_at(index)
+		enemy_battlers.append(target)
+	

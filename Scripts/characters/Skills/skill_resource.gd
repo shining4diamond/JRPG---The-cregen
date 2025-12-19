@@ -7,7 +7,8 @@ enum SkillType {
 	HEAL,
 	BUFF,
 	DEBUFF,
-	SPECIAL
+	SPECIAL,
+	REVIVE
 }
 
 enum TargetType {
@@ -73,7 +74,7 @@ func calculate_damage(attacker_stats: StatsResource, defender_stats: StatsResour
 
 # Funzione per calcolare la cura
 func calculate_healing(caster_stats: StatsResource) -> int:
-	if skill_type != SkillType.HEAL:
+	if skill_type != SkillType.HEAL and skill_type != SkillType.REVIVE:
 		return 0
 	
 	var healing = base_power + (caster_stats.m_attack * power_scaling)

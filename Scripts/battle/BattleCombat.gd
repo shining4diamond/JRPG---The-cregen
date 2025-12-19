@@ -23,3 +23,5 @@ func execute_attack(attacker: Character, defender: Character):
 		
 	if is_instance_valid(defender) and defender.state.isDead:
 		manager.remove_ui_from_enemy.emit(defender)
+		manager.turn_manager.add_battler_to_dead_battlers(defender)
+		

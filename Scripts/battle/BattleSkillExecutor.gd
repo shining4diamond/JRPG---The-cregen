@@ -43,6 +43,10 @@ func _apply_skill_effect(skill: SkillResource, user: Character, target: Characte
 		SkillResource.SkillType.HEAL:
 			await _apply_healing(skill, user, target)
 		
+		SkillResource.SkillType.REVIVE:
+			await _apply_revive(target)
+			await _apply_healing(skill, user, target)
+		
 		SkillResource.SkillType.BUFF:
 			await _apply_buff(skill, target)
 		
@@ -74,6 +78,7 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 	if target.stats.current_hp <= 0:
 		target.battleAction.execute_death()
 		manager.remove_ui_from_enemy.emit(target)
+		manager.turn_manager.add_battler_to_dead_battlers(target)
 
 # Applica cura
 func _apply_healing(skill: SkillResource, user: Character, target: Character):
@@ -85,6 +90,11 @@ func _apply_healing(skill: SkillResource, user: Character, target: Character):
 	
 	# Update UI
 	target.battleAction.emit_signal("update_hpmp_ui", target)
+	
+# Applica revive
+func _apply_revive(target: Character):
+	target.state.isDead = false
+	manager.turn_manager.add_dead_battler_to_battlers(target)
 
 # Applica buff (da implementare secondo le tue necessità)
 func _apply_buff(skill: SkillResource, target: Character):

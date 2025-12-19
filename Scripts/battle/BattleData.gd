@@ -11,7 +11,8 @@ const skills_paths = [
 	"res://Scripts/characters/Skills/heal.tres",
 	"res://Scripts/characters/Skills/fireball.tres",
 	"res://Scripts/characters/Skills/sacrifice.tres",
-	"res://Scripts/characters/Skills/whirlwind.tres"
+	"res://Scripts/characters/Skills/whirlwind.tres",
+	"res://Scripts/characters/Skills/revive.tres"
 ]
 
 static func create_default() -> BattleData:

@@ -95,5 +95,5 @@ func _process(_delta: float) -> void:
 	if button and button.visible == false and tween:
 		_on_select_button_mouse_exited()
 
-	if character.state.isDead and button and button.visible:
-		button.visible = false
+	#if character.state.isDead and button and button.visible:
+		#button.visible = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://0cp1fyx13nkp"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_v7jlc"]
+
+[resource]
+script = ExtResource("1_v7jlc")
+skill_name = "Revive"
+skill_description = "Revive an ally"
+skill_type = 6
+target_type = 2
+hp_cost = 50
+cooldown_turns = 4
+base_power = 150
+power_scaling = 0.8

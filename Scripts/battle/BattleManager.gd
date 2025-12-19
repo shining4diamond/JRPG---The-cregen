@@ -245,7 +245,10 @@ func _on_skill_selected(skill: SkillResource):
 		SkillResource.TargetType.SINGLE_ALLY:
 			# Mostra selezione nemico
 			show_battle_hud.emit(false)
-			show_select_buttons.emit(true, "ALLY")
+			if skill.skill_type == SkillResource.SkillType.REVIVE:
+				show_select_buttons.emit(true, "DEAD_ALLY")
+			else:
+				show_select_buttons.emit(true, "ALLY")
 			skill_being_used = true
 			# Salva skill selezionata temporaneamente
 			selected_skill = skill
@@ -281,9 +284,22 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		for skill in turn_manager.get_current_battler().get_equipped_skills():
-			print(skill.skill_name)
-	
+		#print(target_selection.dead_enemy_select_buttons)
+		#print(target_selection.dead_player_select_buttons)
+		#print(target_selection.enemy_select_buttons)
+		##print(target_selection.player_select_buttons)
+		#print(turn_manager.player_battlers)
+		#print(turn_manager.enemy_battlers)
+		#print(turn_manager.dead_player_battlers)
+		#print(turn_manager.dead_enemy_battlers)
+		
+		for battler in turn_manager.battlers:
+			print(battler.name, " ", battler.stats.current_hp, " ", battler.state.isDead)
+		print("==================================")
+		for battler in turn_manager.enemy_battlers:
+			print(battler.name, " ", battler.stats.current_hp, " ", battler.state.isDead)
+		print("==================================")
+
 	if Input.is_action_just_pressed("cancel"):
 		show_battle_hud.emit(true)
 		show_select_buttons.emit(false)

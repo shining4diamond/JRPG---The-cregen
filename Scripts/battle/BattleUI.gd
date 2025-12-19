@@ -58,8 +58,8 @@ func _remove_ui_from_enemy(entity: Character):
 	# Nascondi bottone
 	manager.target_selection._toggle_select_button_battler(entity, false)
 	
-	# Rimuovi dal dictionary dei bottoni
-	manager.remove_enemy_select_button(entity.stats.party_member)
+	# Update della navigazione dei selection button
+	manager.target_selection._update_all_focus_navigation()
 
 func _add_ui_to_enemy(entity: Character):
 	_add_hp_bar_to_enemy(entity)
