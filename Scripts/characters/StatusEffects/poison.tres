@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://b48n4k5c3icpp"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_fkahd"]
+
+[resource]
+script = ExtResource("1_fkahd")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Poison"
+effect_description = "Loses 5% max HP at the start of each turn"
+effect_type = 0  # DAMAGE_OVER_TIME
+trigger_timing = 0  # START_OF_TURN
+duration_turns = 4
+is_percentage = true
+percentage_value = 0.05  # 5% max HP
+can_stack = false
+stack_refresh_duration = true
+tint_color = Color(0.4, 1.0, 0.4, 1.0)  # Green tint
+show_floating_text = true

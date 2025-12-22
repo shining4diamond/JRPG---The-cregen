@@ -1,8 +1,8 @@
+Label
+HBoxContainer
 RichTextLabel
 MarginContainer
-Label
 PanelContainer
-HBoxContainer
 VBoxContainer
 Button
 ScrollContainer
@@ -12,4 +12,3 @@ Node
 RayCast2D
 CanvasLayer
 Marker
-Camera2D

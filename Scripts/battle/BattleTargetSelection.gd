@@ -63,13 +63,14 @@ func show_select_button(show: bool, target: String = "ALL"):
 	else:
 		targets = null
 	
+	#manager.commands_label.visible = show
+	
 	for character in targets:
 		if is_instance_valid(character):
 			var button = character.get_node_or_null("Sprite2D/Select_Button")
 			if button:
 				button.visible = show
 				
-				manager.commands_label.visible = show
 				if button.visible:
 					manager.target_selection.enemy_select_buttons_active = true
 				else:

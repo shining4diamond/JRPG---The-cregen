@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://dpmfbo06k16qo"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_4se68"]
+
+[resource]
+script = ExtResource("1_4se68")
+effect_description = "Launches a fireball to [b]all enemies[/b] dealing [b][color=red]%MAGICAL_DAMAGE[/color][/b][b]%STATUS_PERCENTEAGE_APPLY[/b] chance to apply [b]burning [/b]for [b]%STATUS_DURATION[/b] turns, dealing [color=red][b]%STATUS_DAMAGE[/b][/color] per turn. Stack up to [b]%STATUS_STACK_MAX[/b] times."
+damage_per_turn = 15
+tint_color = Color(1, 0.4, 0.2, 1)
+can_stack = true
+max_stacks = 3
+stack_refresh_duration = false
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"

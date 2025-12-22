@@ -15,6 +15,14 @@ const skills_paths = [
 	"res://Scripts/characters/Skills/revive.tres"
 ]
 
+const demon_knight = {
+	"scenePath":character_14fps,
+	"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
+	"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Bosses/demon_knight_stats.tres",
+	"skillsPath": skills_paths,
+	"type":"ENEMY"
+}
+
 static func create_default() -> BattleData:
 	var data = BattleData.new()
 	data.entities_config = {
@@ -25,13 +33,7 @@ static func create_default() -> BattleData:
 			"skillsPath": skills_paths,
 			"type":"PLAYER"
 		},
-		"2":{
-			"scenePath":character_14fps,
-			"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
-			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Early_Game/goblin_stats.tres",
-			"skillsPath": skills_paths,
-			"type":"ENEMY"
-		},
+		"2":demon_knight,
 		"3":{
 			"scenePath":character_15fps,
 			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
@@ -39,13 +41,7 @@ static func create_default() -> BattleData:
 			"skillsPath": skills_paths,
 			"type":"PLAYER"
 		},
-		"4":{
-			"scenePath":character_14fps,
-			"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
-			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Dps/wolf_stats.tres",
-			"skillsPath": skills_paths,
-			"type":"ENEMY"
-		},
+		"4":demon_knight,
 		"5":{
 			"scenePath":character_15fps,
 			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
@@ -53,38 +49,20 @@ static func create_default() -> BattleData:
 			"skillsPath": skills_paths,
 			"type":"PLAYER"
 		},
-		"6":{
-			"scenePath":character_14fps,
-			"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
-			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Tank/skeleton_stats.tres",
-			"skillsPath": skills_paths,
-			"type":"ENEMY"
-		},
-		"7":{
-			"scenePath":character_14fps,
-			"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
-			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Tank/skeleton_stats.tres",
-			"skillsPath": skills_paths,
-			"type":"ENEMY"
-		},
-		"8":{
-			"scenePath":character_14fps,
-			"textureBasePath":"res://Assets/characters/FREE Character HD Survivor W Bike/",
-			"statsPath":"res://Scripts/characters/Stats/Enemy_Characters/Tank/skeleton_stats.tres",
-			"skillsPath": skills_paths,
-			"type":"ENEMY"
-		},
+		"6":demon_knight,
+		"7":demon_knight,
+		"8":demon_knight,
 		"9":{
 			"scenePath":character_15fps,
 			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
-			"statsPath":"res://Scripts/characters/Stats/Player_Characters/ranger_stats.tres",
+			"statsPath":"res://Scripts/characters/Stats/Player_Characters/cleric_stats.tres",
 			"skillsPath": skills_paths,
 			"type":"PLAYER"
 		},
 		"10":{
 			"scenePath":character_15fps,
 			"textureBasePath":"res://Assets/characters/2D HD Character Knight/Spritesheets/With shadows/",
-			"statsPath":"res://Scripts/characters/Stats/Player_Characters/ranger_stats.tres",
+			"statsPath":"res://Scripts/characters/Stats/Player_Characters/mage_stats.tres",
 			"skillsPath": skills_paths,
 			"type":"PLAYER"
 		}

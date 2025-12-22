@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://bq3gn4s1lbson"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_wisca"]
+
+[resource]
+script = ExtResource("1_wisca")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Defense Down"
+effect_description = "Defense decreased by 15"
+effect_type = 2  # STAT_MODIFIER
+trigger_timing = 0  # Non rilevante per stat modifier
+duration_turns = 3
+defense_modifier = -15
+can_stack = false
+stack_refresh_duration = true
+tint_color = Color(0.6, 0.6, 0.6, 1.0)  # Gray tint
+show_floating_text = false

@@ -68,8 +68,11 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 	_show_damage_number(user, target, damage)
 	
 	# Applica status effect
-	if skill.applies_status and randf() < skill.status_chance:
-		_apply_status_effect(target, skill.status_effect, skill.status_duration)
+	if skill.applies_status and skill.status_effect != "":
+		var should_apply = randf() < skill.status_chance if skill.status_chance > 0 else true
+		
+		if should_apply:
+			_apply_status_effect(user, target, skill)
 	
 	# Update UI
 	target.battleAction.emit_signal("update_hpmp_ui", target)
@@ -79,6 +82,12 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 		target.battleAction.execute_death()
 		manager.remove_ui_from_enemy.emit(target)
 		manager.turn_manager.add_battler_to_dead_battlers(target)
+
+
+func _get_status_effect_by_name(effect_name: String) -> StatusEffect:
+	var path = "res://Scripts/Characters/StatusEffects/" + effect_name + ".tres"
+	return load(path)
+
 
 # Applica cura
 func _apply_healing(skill: SkillResource, user: Character, target: Character):
@@ -107,9 +116,14 @@ func _apply_debuff(skill: SkillResource, target: Character):
 	# TODO: Implementa sistema di buff/debuff permanenti
 
 # Applica status effect
-func _apply_status_effect(target: Character, effect: String, duration: int):
-	print("Applying status %s to %s for %d turns" % [effect, target.name, duration])
-	# TODO: Implementa sistema di status effects
+func _apply_status_effect(user: Character, target: Character, skill: SkillResource):
+	var effect = _get_status_effect_by_name(skill.status_effect)
+	if effect:
+		var applied = target.apply_status_effect(effect, 1)
+		if applied:
+			print("%s applied %s to %s for %d turns!" % [user.stats.character_name, effect.effect_name, target.stats.character_name, effect.duration_turns])
+			manager.ui._update_status_effect_ui(target)
+
 
 # Mostra numero danno (placeholder)
 func _show_damage_number(executor: Character, target: Character, damage: int):

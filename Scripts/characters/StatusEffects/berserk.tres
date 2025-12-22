@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://davsit82wcs1p"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_3p0i4"]
+
+[resource]
+script = ExtResource("1_3p0i4")
+effect_name = "Berserk"
+effect_description = "Attack greatly increased but defense decreased"
+effect_type = 2
+duration_turns = 4
+attack_modifier = 30
+defense_modifier = -15
+tint_color = Color(1, 0.3, 0.3, 1)
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"

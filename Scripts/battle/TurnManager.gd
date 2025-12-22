@@ -49,6 +49,19 @@ func advance_turn(skip_timer: bool = false):
 		is_processing_turn = false
 		return
 	
+	if is_instance_valid(current_battler) and not current_battler.state.isDead:
+		var end_results = current_battler.trigger_status_effects(StatusEffect.TriggerTiming.END_OF_TURN)
+		if end_results.size() > 0:
+			await _process_status_results(current_battler, end_results)
+			manager.ui._update_status_effect_ui(current_battler)
+
+			
+			# Controlla di nuovo morte dopo END_OF_TURN effects
+			if current_battler.state.isDead:
+				manager.remove_ui_from_enemy.emit(current_battler)
+				add_battler_to_dead_battlers(current_battler)
+
+	
 	# Salva i dati del battler corrente PRIMA di cambiare
 	var last_battler_party_member = -999
 	if is_instance_valid(current_battler):
@@ -101,6 +114,7 @@ func _update_turn():
 		
 	if is_player_turn():
 		manager.show_battle_hud.emit(true)
+		manager.show_skill_hud.emit(false)
 		manager.attack_button.grab_focus()
 	else:
 		manager.show_battle_hud.emit(false)
@@ -124,11 +138,40 @@ func _activate_battler(battler: Character):
 	# Aggiorna la turn order bar
 	manager.battle_hud._set_current_turn_name(current_battler.stats.character_name)
 	
+	var start_results = battler.trigger_status_effects(StatusEffect.TriggerTiming.START_OF_TURN)
+	if start_results.size() > 0:
+		await _process_status_results(battler, start_results)
+		manager.ui._update_status_effect_ui(battler)
+	
+	if battler.is_stunned():
+		print("%s is stunned and cannot act!" % battler.stats.character_name)
+		# Salta il turno
+		is_processing_turn = false
+		advance_turn(false)
+		return
+	
 	if battler.stats.character_type == StatsResource.CharacterType.PLAYER:
 		battler.battleMovement.toggle_focus_movement()
 	
 	if battler.stats.party_member > 0:
 		manager.toggle_focus_on_player.emit(battler.stats.party_member)
+
+func _process_status_results(battler: Character, results: Array[Dictionary]):
+	"""Processa i risultati degli status effects"""
+	for result in results:
+		if result.message != "":
+			print(result.message)
+		
+		# Update UI per damage/healing
+		if result.damage > 0 or result.healing > 0:
+			battler.battleAction.emit_signal("update_hpmp_ui", battler)
+		
+		# Check morte da DoT
+		if battler.state.isDead:
+			manager.remove_ui_from_enemy.emit(battler)
+			manager.turn_manager.add_battler_to_dead_battlers(battler)
+		
+		await manager.get_tree().create_timer(0.5).timeout
 
 # ==============================================
 # BATTLE END CHECK

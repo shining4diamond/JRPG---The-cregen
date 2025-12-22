@@ -56,7 +56,6 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 	
 	# Set character type
 	if config.type == "PLAYER":
-		#entity.global_position = config.position
 		entity.stats.character_type = StatsResource.CharacterType.PLAYER
 		entity.stats.party_member = player_battlers.size() + 1
 		entity.name = "Player" + str(entity.stats.party_member)
@@ -68,6 +67,7 @@ func _spawn_single_entity(config: Dictionary) -> Character:
 		# Add UI usando il manager
 		if is_instance_valid(manager.ui):
 			manager.ui._add_ui_to_enemy(entity)
-		
+	
+	
 	manager.target_selection._toggle_select_button_battler(entity, false)
 	return entity

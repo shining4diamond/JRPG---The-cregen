@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://12iy3pv1nt0r"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_363vb"]
+
+[resource]
+script = ExtResource("1_363vb")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Bleed"
+effect_description = "Heavy bleeding causes severe damage each turn"
+effect_type = 0  # DAMAGE_OVER_TIME
+trigger_timing = 1  # END_OF_TURN
+duration_turns = 2
+damage_per_turn = 30
+can_stack = true
+max_stacks = 2
+tint_color = Color(1.0, 0.2, 0.2, 1.0)  # Red tint
+show_floating_text = true

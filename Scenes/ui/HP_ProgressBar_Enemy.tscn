@@ -15,3 +15,17 @@ theme_override_styles/background = ExtResource("1_bunu1")
 theme_override_styles/fill = ExtResource("2_q144e")
 value = 75.0
 show_percentage = false
+
+[node name="StatusEffect_HBox_Container" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.8657638
+anchor_top = 0.47678775
+anchor_right = -1.8657638
+anchor_bottom = 2.6700113
+offset_left = 312.0
+offset_right = 624.0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+metadata/_edit_use_anchors_ = true

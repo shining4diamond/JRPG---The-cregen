@@ -12,23 +12,14 @@ func _init(p_manager: BattleManager):
 
 func show_battle_hud(show: bool):
 	if is_instance_valid(manager.battle_hud):
-		var container = manager.battle_hud.get_node_or_null("%BattleOptions_Container")
-		if container:
-			container.visible = show
-		
-		# Nascondi menu skill quando nascondi HUD
-		if not show:
-			hide_skill_menu()
+		manager.battle_hud.get_node_or_null("%BattleOptions_Container").visible = show
 
 func show_skill_hud(show: bool):
 	if is_instance_valid(manager.battle_hud):
-		var container = manager.battle_hud.get_node_or_null("%SkillButtons_VBoxContainer")
-		if container:
-			container.visible = show
-		
-		# Nascondi menu skill quando nascondi HUD
-		if not show:
-			hide_skill_menu()
+		manager.battle_hud.get_node_or_null("%SkillButtons_VBoxContainer").visible = show
+		manager.battle_hud.get_node_or_null("%SkillDescription_VBoxContainer").visible = show
+		manager.skill_button.disabled = show
+		manager.commands_label.visible = show
 
 func _show_battle_end_hud(message: String):
 	if is_instance_valid(manager.battleend_hud) and \
@@ -94,6 +85,7 @@ func show_skill_menu(character: Character):
 	
 	manager.battle_hud.get_node_or_null("%SkillDescription_VBoxContainer").show()
 	manager.skill_button.disabled = true
+	manager.commands_label.show()
 	
 	# Qui puoi creare un pannello UI dinamico
 	# Per ora stampiamo le skill disponibili
@@ -122,8 +114,6 @@ func _create_skill_buttons(skills: Array[SkillResource], character: Character):
 	
 	# Crea bottone per ogni skill
 	for skill in skills:
-		skill.skill_description = _set_skill_description_variables(skill.skill_description, skill, character)
-		
 		var skill_hbox = skill_hbox_duplicate.duplicate()
 		var button = skill_hbox.get_node_or_null("Button")
 		button.text = skill.skill_name
@@ -158,28 +148,62 @@ func _on_skill_button_pressed(skill: SkillResource):
 	manager.skill_selected.emit(skill)
 
 func _on_skill_button_focus_entered(skill: SkillResource):
-	manager.battle_hud.get_node_or_null("%SkillDescription_Label").text = skill.skill_description
+	var label = manager.battle_hud.get_node_or_null("%SkillDescription_Label")
+	var text = _set_skill_description_variables(skill.skill_description, skill, manager.turn_manager.current_battler)
+	label.text = text
 
 func _on_skill_button_mouse_entered(button: Button):
 	button.grab_focus()
 
 func _set_skill_description_variables(skill_description: String, skill: SkillResource, user: Character):
-	if skill_description.find("%PHYSICAL_DAMAGE"):
+	
+	if skill_description.find("%PHYSICAL_DAMAGE") > 0:
 		var damage = int(skill.base_power + (user.stats.attack * skill.power_scaling))
 		skill_description = skill_description.replace("%PHYSICAL_DAMAGE", str(damage))
-		
-	if skill_description.find("%MAGICAL_DAMAGE"):
+	
+	if skill_description.find("%MAGICAL_DAMAGE") > 0:
 		var damage = int(skill.base_power + (user.stats.m_attack * skill.power_scaling))
 		skill_description = skill_description.replace("%MAGICAL_DAMAGE", str(damage))
-		
-	if skill_description.find("%HEAL_AMOUNT"):
+	
+	if skill_description.find("%HEAL_AMOUNT") > 0:
 		var heal = int(skill.base_power + (user.stats.m_attack * skill.power_scaling))
 		skill_description = skill_description.replace("%HEAL_AMOUNT", str(heal))
 	
+	if skill_description.find("%STATUS_PERCENTEAGE_APPLY") > 0:
+		var percenteage = str(skill.status_chance * 100) + "%"
+		skill_description = skill_description.replace("%STATUS_PERCENTEAGE_APPLY", percenteage)
+	
+	if skill_description.find("%STATUS_DURATION") > 0:
+		var duration = skill.status.duration_turns
+		skill_description = skill_description.replace("%STATUS_DURATION", str(duration))
+	
+	if skill_description.find("%STATUS_DAMAGE") > 0:
+		var status_damage = skill.status.damage_per_turn
+		skill_description = skill_description.replace("%STATUS_DAMAGE", str(status_damage))
+	
+	if skill_description.find("%STATUS_STACK_MAX") > 0:
+		var stack_max = skill.status.max_stacks
+		skill_description = skill_description.replace("%STATUS_STACK_MAX", str(stack_max))
+	
 	return skill_description
 
-func hide_skill_menu():
-	"""Nascondi il menu skill"""
-	manager.battle_hud.get_node_or_null("%SkillButtons_VBoxContainer").hide()
-	manager.battle_hud.get_node_or_null("%SkillDescription_VBoxContainer").hide()
-	manager.skill_button.disabled = false
+
+func _update_status_effect_ui(target: Character):
+	if target in manager.turn_manager.enemy_battlers:
+		_update_status_effect_ui_enemy(target)
+	
+	if target in manager.turn_manager.player_battlers:
+		print("target: player") 
+
+func _update_status_effect_ui_enemy(target: Character):
+	var container = target.get_node_or_null("HP_ProgressBar_Enemy").get_node_or_null("%StatusEffect_HBox_Container")
+	if container:
+		for child in container.get_children():
+			container.remove_child(child)
+			child.queue_free()
+		
+		for active_effect in target.get_active_status_effects():
+			var label = Label.new()
+			label.text = active_effect.effect_name + str(active_effect.current_stacks) + " " + str(active_effect.remaining_turns)
+			print(label.text)
+			container.add_child(label)

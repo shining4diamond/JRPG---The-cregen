@@ -49,7 +49,6 @@ signal battle_ended(message: String)
 # ==============================================
 var selected_character: Character
 var selected_skill: SkillResource = null  # Skill temporaneamente selezionata
-var skill_being_used: bool = false
 
 # ==============================================
 # COMPONENTI
@@ -143,13 +142,13 @@ func _on_entities_spawned(players: Array, enemies: Array):
 	battle_hud.connect_enemy_signals()
 	for enemy in enemies:
 		battle_hud._update_hp_ui(enemy)
+		enemy.position = Vector2.ZERO
 	
 	# Start first turn
 	turn_manager.start_first_turn()
 
 func _on_select_enemy_pressed(selected_char: Character):
 	show_battle_hud.emit(false)
-	skill_being_used = false
 	
 	var selecter_characters: Array[Character] = []
 	selecter_characters.append(selected_char)
@@ -172,7 +171,7 @@ func _on_attack_button_pressed():
 	show_select_buttons.emit(true, "ENEMY")
 	show_battle_hud.emit(false)
 	show_skill_hud.emit(false)
-	skill_being_used = false
+	commands_label.show()
 
 func _on_skip_button_pressed():
 	show_skill_hud.emit(false)
@@ -217,6 +216,8 @@ func _on_skill_button_pressed():
 		ui.show_skill_menu(current)
 
 func _on_skill_selected(skill: SkillResource):
+	show_battle_hud.emit(false)
+	
 	var user = turn_manager.get_current_battler()
 	if not user:
 		return
@@ -229,9 +230,7 @@ func _on_skill_selected(skill: SkillResource):
 		
 		SkillResource.TargetType.SINGLE_ENEMY:
 			# Mostra selezione nemico
-			show_battle_hud.emit(false)
 			show_select_buttons.emit(true, "ENEMY")
-			skill_being_used = true
 			# Salva skill selezionata temporaneamente
 			selected_skill = skill
 		
@@ -244,12 +243,10 @@ func _on_skill_selected(skill: SkillResource):
 		
 		SkillResource.TargetType.SINGLE_ALLY:
 			# Mostra selezione nemico
-			show_battle_hud.emit(false)
 			if skill.skill_type == SkillResource.SkillType.REVIVE:
 				show_select_buttons.emit(true, "DEAD_ALLY")
 			else:
 				show_select_buttons.emit(true, "ALLY")
-			skill_being_used = true
 			# Salva skill selezionata temporaneamente
 			selected_skill = skill
 			pass
@@ -284,29 +281,18 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		#print(target_selection.dead_enemy_select_buttons)
-		#print(target_selection.dead_player_select_buttons)
-		#print(target_selection.enemy_select_buttons)
-		##print(target_selection.player_select_buttons)
-		#print(turn_manager.player_battlers)
-		#print(turn_manager.enemy_battlers)
-		#print(turn_manager.dead_player_battlers)
-		#print(turn_manager.dead_enemy_battlers)
-		
-		for battler in turn_manager.battlers:
-			print(battler.name, " ", battler.stats.current_hp, " ", battler.state.isDead)
-		print("==================================")
-		for battler in turn_manager.enemy_battlers:
-			print(battler.name, " ", battler.stats.current_hp, " ", battler.state.isDead)
-		print("==================================")
+		print(target_selection.enemy_select_buttons_active)
+		print(target_selection.player_select_buttons_active)
 
 	if Input.is_action_just_pressed("cancel"):
+		if skill_button.disabled and \
+				not target_selection.enemy_select_buttons_active and \
+				not target_selection.player_select_buttons_active:
+			show_skill_hud.emit(false)
+		
 		show_battle_hud.emit(true)
 		show_select_buttons.emit(false)
-		if skill_being_used:
-			show_skill_hud.emit(true)
-		else:
-			show_skill_hud.emit(false)
+		
 
 # ==============================================
 # SAVE/LOAD

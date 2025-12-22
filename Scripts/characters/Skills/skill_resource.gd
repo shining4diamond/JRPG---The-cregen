@@ -40,6 +40,7 @@ enum TargetType {
 
 @export_group("Effects")
 @export var applies_status: bool = false
+@export var status: StatusEffect
 @export var status_effect: String = ""  # es: "poison", "stun", "burn"
 @export var status_duration: int = 0
 @export var status_chance: float = 0.0

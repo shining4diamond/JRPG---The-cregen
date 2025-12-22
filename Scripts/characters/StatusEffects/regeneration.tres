@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://cl36re06icu6t"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_t0cuy"]
+
+[resource]
+script = ExtResource("1_t0cuy")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Regeneration"
+effect_description = "Heals HP at the start of each turn"
+effect_type = 3  # HEALING_OVER_TIME
+trigger_timing = 0  # START_OF_TURN
+duration_turns = 5
+healing_per_turn = 20
+can_stack = false
+stack_refresh_duration = true
+tint_color = Color(0.4, 1.0, 0.4, 1.0)  # Green tint
+show_floating_text = true

@@ -1,4 +1,5 @@
 A:/Godot/JRPG - The cregen/jrpg---the-cregen
+res://Scripts/characters/StatusEffects
 res://Scripts/characters/Skills
 res://Scenes/ui
 res://Scripts/characters/Stats/Enemy_Characters

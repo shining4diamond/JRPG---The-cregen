@@ -7,7 +7,7 @@
 script = ExtResource("1_miurb")
 character_name = "Knight"
 max_hp = 450
-current_hp = 20
+current_hp = 450
 max_mp = 80
 current_mp = 80
 attack = 35

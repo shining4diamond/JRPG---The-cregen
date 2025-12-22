@@ -19,6 +19,7 @@ var combat: CharacterCombat
 var battleAction: CharacterBattleAction
 var battleMovement: CharacterBattleMovement
 var skillSystem: CharacterSkillSystem
+var statusManager: CharacterStatusManager
 
 func _ready() -> void:
 	# Inizializza stato
@@ -30,6 +31,7 @@ func _ready() -> void:
 	battleAction = CharacterBattleAction.new(animation_tree, state, attacking_timer, animation, self)
 	battleMovement = CharacterBattleMovement.new(self, state)
 	skillSystem = CharacterSkillSystem.new(self)
+	statusManager = CharacterStatusManager.new(self)
 
 	animation_tree.active = true
 
@@ -87,6 +89,37 @@ func get_usable_skills() -> Array[SkillResource]:
 func get_equipped_skills() -> Array[SkillResource]:
 	return stats.equipped_skills
 
+# ==============================================
+# Status System <-- NUOVO
+# ==============================================
+
+func apply_status_effect(effect: StatusEffect, stacks: int = 1) -> bool:
+	"""Applica uno status effect"""
+	return statusManager.apply_status(effect, stacks)
+
+func remove_status_effect(effect_name: String) -> bool:
+	"""Rimuove uno status effect"""
+	return statusManager.remove_status(effect_name)
+
+func trigger_status_effects(timing: StatusEffect.TriggerTiming) -> Array[Dictionary]:
+	"""Triggera gli status effects"""
+	return statusManager.trigger_effects(timing)
+
+func has_status(effect_name: String) -> bool:
+	"""Controlla se ha uno status specifico"""
+	return statusManager.has_effect(effect_name)
+
+func is_stunned() -> bool:
+	"""Controlla se è stunnato"""
+	return statusManager.is_stunned()
+
+func can_act() -> bool:
+	"""Controlla se può agire"""
+	return statusManager.can_act()
+
+func get_active_status_effects() -> Array[StatusEffect]:
+	"""Ottiene tutti gli status attivi"""
+	return statusManager.get_all_effects()
 
 # ==============================================
 # SAVE/LOAD

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://qjy8l2s2sw71"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_s8as2"]
+
+[resource]
+script = ExtResource("1_s8as2")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Attack Up"
+effect_description = "Attack increased by 20"
+effect_type = 2  # STAT_MODIFIER
+trigger_timing = 0  # Non rilevante per stat modifier
+duration_turns = 3
+attack_modifier = 20
+can_stack = false
+stack_refresh_duration = true
+tint_color = Color(1.0, 0.8, 0.2, 1.0)  # Golden tint
+show_floating_text = false

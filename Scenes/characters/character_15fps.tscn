@@ -1049,7 +1049,7 @@ position = Vector2(0, 1)
 texture = ExtResource("2_1k0sv")
 hframes = 15
 vframes = 8
-frame = 37
+frame = 36
 
 [node name="Select_Button" type="Button" parent="Sprite2D"]
 unique_name_in_owner = true

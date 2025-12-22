@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://csotr0bg151hu"]
+
+[ext_resource type="Script" uid="uid://clkvxmcog5xw0" path="res://Scripts/characters/StatusEffects/StatusEffect.gd" id="1_2syhf"]
+
+[resource]
+script = ExtResource("1_2syhf")
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"
+effect_name = "Stun"
+effect_description = "Cannot act for 1 turn"
+effect_type = 1  # STUN
+trigger_timing = 0  # START_OF_TURN (per check)
+duration_turns = 1
+can_stack = false
+tint_color = Color(0.7, 0.7, 1.0, 1.0)  # Blue-ish tint
+show_floating_text = true
