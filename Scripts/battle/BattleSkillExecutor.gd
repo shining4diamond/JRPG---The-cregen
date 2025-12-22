@@ -70,7 +70,6 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 	# Applica status effect
 	if skill.applies_status and skill.status_effect != "":
 		var should_apply = randf() < skill.status_chance if skill.status_chance > 0 else true
-		
 		if should_apply:
 			_apply_status_effect(user, target, skill)
 	
@@ -82,11 +81,6 @@ func _apply_damage(skill: SkillResource, user: Character, target: Character):
 		target.battleAction.execute_death()
 		manager.remove_ui_from_enemy.emit(target)
 		manager.turn_manager.add_battler_to_dead_battlers(target)
-
-
-func _get_status_effect_by_name(effect_name: String) -> StatusEffect:
-	var path = "res://Scripts/Characters/StatusEffects/" + effect_name + ".tres"
-	return load(path)
 
 
 # Applica cura
@@ -117,7 +111,7 @@ func _apply_debuff(skill: SkillResource, target: Character):
 
 # Applica status effect
 func _apply_status_effect(user: Character, target: Character, skill: SkillResource):
-	var effect = _get_status_effect_by_name(skill.status_effect)
+	var effect = skill.status
 	if effect:
 		var applied = target.apply_status_effect(effect, 1)
 		if applied:
