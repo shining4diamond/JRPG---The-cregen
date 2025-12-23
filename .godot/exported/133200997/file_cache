@@ -45,8 +45,8 @@ res://Scenes/battle/battle_manager.tscn::f23fb022a26e285f63b0ad9368949abf::17659
 res://Scripts/utilities/Saved_game/savegame.tres::131e8646af98160dbb961b4a7272c811::1764925209::res://.godot/exported/133200997/export-a66cd0870be56655d75f9d9cbcf12c39-savegame.res
 res://Scenes/battle/battle_end_hud.tscn::7dcb2b7a5efe5b5e6b7a5d173557006c::1765710849::res://.godot/exported/133200997/export-9fbccaacf5572fe8210d23aee52e2108-battle_end_hud.scn
 res://Scenes/battle/save_load_debug.tscn::6b4198b9c4cc36c4b9f6bb1f17129d76::1765722808::res://.godot/exported/133200997/export-9ddb06ac64b6b6878207ba29b0df1440-save_load_debug.scn
-res://Scenes/ui/HPMP_Player_Tab.tscn::f5792b679b22e690eea6eaf95bbdba18::1766505751::res://.godot/exported/133200997/export-27829d35e925cf5bca9b589ba2e386e3-HPMP_Player_Tab.scn
-res://Scripts/characters/Stats/Enemy_Characters/Bosses/demon_knight_stats.tres::50d4f8f23df460471ef7e38e0cd5c611::1766434227::res://.godot/exported/133200997/export-36dc4f4df691925169b63094ceb929d9-demon_knight_stats.res
+res://Scenes/ui/HPMP_Player_Tab.tscn::f5792b679b22e690eea6eaf95bbdba18::1766507045::res://.godot/exported/133200997/export-27829d35e925cf5bca9b589ba2e386e3-HPMP_Player_Tab.scn
+res://Scripts/characters/Stats/Enemy_Characters/Bosses/demon_knight_stats.tres::b2bcc2888fecc479de405e13d5d03507::1766507045::res://.godot/exported/133200997/export-36dc4f4df691925169b63094ceb929d9-demon_knight_stats.res
 res://Scripts/characters/Stats/Enemy_Characters/Bosses/dragon_whelp_stats.tres::add9787ce4fe9814291ae288eea15226::1765984290::res://.godot/exported/133200997/export-17993958a4fed7cf5900bc950c18d600-dragon_whelp_stats.res
 res://Scripts/characters/Stats/Enemy_Characters/Bosses/lich_stats.tres::39194f0bc641c21465c4d0b0a630aa0f::1765984286::res://.godot/exported/133200997/export-18b360ce3c5c261cd0b131e218edbf1e-lich_stats.res
 res://Scripts/characters/Stats/Enemy_Characters/Bosses_Mid/bandit_leader_stats.tres::8fa9c5e11b4b899e3b4f9e3cbe64a7f7::1765984282::res://.godot/exported/133200997/export-653dca0e9b6566825cd033e7c225a7a3-bandit_leader_stats.res
