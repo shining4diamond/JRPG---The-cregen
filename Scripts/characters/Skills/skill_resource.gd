@@ -31,7 +31,7 @@ enum TargetType {
 @export var hp_cost: int = 0
 @export var cooldown_turns: int = 0
 
-@export_group("Damage/Healing")
+@export_group("DamageHealing")
 @export var base_power: int = 0
 @export var power_scaling: float = 1.0  # Moltiplicatore per attack/m_attack
 @export var can_crit: bool = true

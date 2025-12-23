@@ -53,9 +53,6 @@ func advance_turn(skip_timer: bool = false):
 		var end_results = current_battler.trigger_status_effects(StatusEffect.TriggerTiming.END_OF_TURN)
 		if end_results.size() > 0:
 			await _process_status_results(current_battler, end_results)
-			manager.ui._update_status_effect_ui(current_battler)
-
-			
 			# Controlla di nuovo morte dopo END_OF_TURN effects
 			if current_battler.state.isDead:
 				manager.remove_ui_from_enemy.emit(current_battler)
@@ -69,10 +66,13 @@ func advance_turn(skip_timer: bool = false):
 		if current_battler.stats.character_type == StatsResource.CharacterType.PLAYER:
 			current_battler.battleMovement.toggle_focus_movement()
 	
+	manager.ui._update_status_effect_ui(current_battler)
 	# Avanza l'indice
 	current_turn_index = (current_turn_index + 1) % battlers.size()
 	current_battler = battlers[current_turn_index]
 	
+	manager.ui._update_status_effect_ui(current_battler)
+
 	# Controlla fine battaglia
 	if _check_for_battle_end():
 		is_processing_turn = false
@@ -139,9 +139,9 @@ func _activate_battler(battler: Character):
 	manager.battle_hud._set_current_turn_name(current_battler.stats.character_name)
 	
 	var start_results = battler.trigger_status_effects(StatusEffect.TriggerTiming.START_OF_TURN)
+	
 	if start_results.size() > 0:
 		await _process_status_results(battler, start_results)
-		manager.ui._update_status_effect_ui(battler)
 	
 	if battler.is_stunned():
 		print("%s is stunned and cannot act!" % battler.stats.character_name)

@@ -4,14 +4,9 @@
 
 [resource]
 script = ExtResource("1_s8as2")
-metadata/_custom_type_script = "uid://clkvxmcog5xw0"
 effect_name = "Attack Up"
 effect_description = "Attack increased by 20"
-effect_type = 2  # STAT_MODIFIER
-trigger_timing = 0  # Non rilevante per stat modifier
-duration_turns = 3
+effect_type = 2
 attack_modifier = 20
-can_stack = false
-stack_refresh_duration = true
-tint_color = Color(1.0, 0.8, 0.2, 1.0)  # Golden tint
-show_floating_text = false
+tint_color = Color(1, 0.8, 0.2, 1)
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"

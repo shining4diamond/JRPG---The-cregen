@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://baj2050nimajl"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+[ext_resource type="Resource" uid="uid://dpmfbo06k16qo" path="res://Scripts/characters/StatusEffects/burn.tres" id="2_r1kl4"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Fireball"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p][/p][p]Launches a fireball to [b]all enemies[/b] dealing [b][color=red]%MAGICAL_DAMAGE[/color][/b][p]It has a [b]%STATUS_PERCENTEAGE_APPLY[/b] chance to apply [b]burning [/b]for [b]%STATUS_DURATION[/b] turns, dealing [color=red][b]%STATUS_DAMAGE[/b][/color] per turn. Stack up to [b]%STATUS_STACK_MAX[/b] times.[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
+skill_type = 1
+target_type = 1
+mp_cost = 50
+cooldown_turns = 2
+base_power = 40
+power_scaling = 1.2
+crit_chance = 0.15
+applies_status = true
+status = ExtResource("2_r1kl4")
+status_effect = "burn"
+status_duration = 3
+status_chance = 0.3

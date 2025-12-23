@@ -181,22 +181,26 @@ func _toggle_focus_on_hpmp_player(party_member: int):
 		return
 	
 	var panel_data = player_panels[party_member]
-	var spacer = panel_data.spacer
+	#var spacer = panel_data.spacer
+	var panel = panel_data.panel
 	
 	# Crea tween
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	
-	if spacer.visible:
+	if panel.custom_minimum_size.x>180:
 		# Rimpicciolisci e poi nascondi
-		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.0, 0.3)
-		tween.tween_callback(spacer.hide)
+		#tween.tween_property(spacer, "size_flags_stretch_ratio", 0.0, 0.3)
+		#tween.tween_callback(spacer.hide)
+		tween.tween_property(panel, "custom_minimum_size", Vector2(180,0), 0.3)
 	else:
 		# Mostra e poi ingrandisci
-		spacer.show()
-		spacer.size_flags_stretch_ratio = 0.0
-		tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
+		#spacer.show()
+		#spacer.size_flags_stretch_ratio = 0.0
+		#tween.tween_property(spacer, "size_flags_stretch_ratio", 0.2, 0.3)
+		tween.tween_property(panel, "custom_minimum_size", Vector2(220,0), 0.3)
+
 
 func _set_current_turn_name(turn_name: String):
 	var label = current_turn_label.duplicate()

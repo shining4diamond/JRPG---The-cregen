@@ -22,7 +22,6 @@ func show_select_button(show: bool, target: String = "ALL"):
 	
 	var first_button_focused = false
 	var targets
-	
 	if target == "ALL":
 		targets = turn_mgr.battlers
 		if show:

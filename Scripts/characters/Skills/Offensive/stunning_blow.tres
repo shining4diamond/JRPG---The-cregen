@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://ml1y2yw8dnvg"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_il7hf"]
+[ext_resource type="Resource" uid="uid://dpmfbo06k16qo" path="res://Scripts/characters/StatusEffects/burn.tres" id="2_h427x"]
+
+[resource]
+script = ExtResource("1_il7hf")
+skill_name = "Stunning Blow"
+skill_description = "Heavy blow dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] with 25% chance to [b][color=blue]Stun[/color][/b]"
+skill_type = 0
+target_type = 0
+mp_cost = 25
+cooldown_turns = 2
+base_power = 40
+power_scaling = 1.4
+applies_status = true
+status_effect = "stun"
+status_chance = 0.25
+animation_name = "melee2"

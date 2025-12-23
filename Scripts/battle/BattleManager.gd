@@ -226,7 +226,9 @@ func _on_skill_selected(skill: SkillResource):
 	match skill.target_type:
 		SkillResource.TargetType.SELF:
 			# Usa immediatamente su se stesso
-			skill_execute_requested.emit(skill, user, [user])
+			var target: Array[Character]
+			target.append(user)
+			skill_execute_requested.emit(skill, user, target)
 		
 		SkillResource.TargetType.SINGLE_ENEMY:
 			# Mostra selezione nemico
@@ -281,8 +283,8 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		print(target_selection.enemy_select_buttons_active)
-		print(target_selection.player_select_buttons_active)
+		for player in turn_manager.player_battlers:
+			print(player.stats.attack)
 
 	if Input.is_action_just_pressed("cancel"):
 		if skill_button.disabled and \

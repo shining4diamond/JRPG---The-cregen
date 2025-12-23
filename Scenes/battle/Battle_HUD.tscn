@@ -137,7 +137,6 @@ text = "Skip Turn"
 
 [node name="SkillButtons_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -162,21 +161,23 @@ grow_vertical = 2
 theme_override_constants/margin_right = 5
 
 [node name="SkillCost_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer/Button/MarginContainer"]
+visible = false
 layout_mode = 2
 text = "MP: 60"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="CD_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillButtons_VBoxContainer/Skill_HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "2 Turn left"
 
 [node name="SkillDescription_VBoxContainer" type="VBoxContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
+size_flags_vertical = 8
 
 [node name="PanelContainer" type="PanelContainer" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer"]
 layout_mode = 2
@@ -194,9 +195,20 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "LOREM IPSUM ASDADASDASD DSDSD SDS DSDSD S"
+text = "[right]Cost [b]00 MP[/b][/right]
+[p]Launches a fireball to [b]all enemies[/b] dealing [b][color=red]000[/color][/b]
+[p]It has a [b]00%[/b] chance to apply [b]burning [/b]for [b]0[/b] turns, dealing [color=red][b]00[/b][/color] per turn. Stack up to [b]0[/b] times.[p]This skill has [b]0[/b] turn cooldown"
 fit_content = true
 scroll_active = false
+
+[node name="CD_Label" type="Label" parent="BattleOptions_Container/GridContainer/HBoxContainer/SkillDescription_VBoxContainer/PanelContainer/MarginContainer/SkillDescription_Label"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_right = 58.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "2 turn left"
 
 [node name="BottomRight_Container" type="MarginContainer" parent="."]
 anchors_preset = 3

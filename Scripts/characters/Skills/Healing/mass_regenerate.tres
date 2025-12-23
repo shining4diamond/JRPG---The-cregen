@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://bf7tpjnlg6fld"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_v7jlc"]
+
+[resource]
+script = ExtResource("1_v7jlc")
+skill_name = "Mass Regeneration"
+skill_description = "Grants [b][color=green]Regeneration[/color][/b] to [b]all allies[/b]"
+skill_type = 2
+target_type = 3
+mp_cost = 50
+cooldown_turns = 5
+base_power = 5
+power_scaling = 0.3
+applies_status = true
+status_effect = "regeneration"
+status_chance = 1.0
+animation_name = "melee"

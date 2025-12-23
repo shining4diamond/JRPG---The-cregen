@@ -7,7 +7,7 @@ signal skill_cannot_use(skill: SkillResource, reason: String)
 var character: Character
 var skill_cooldowns: Dictionary = {}  # skill_name -> turns_remaining
 
-const MAX_EQUIPPED_SKILLS = 8
+const MAX_EQUIPPED_SKILLS = 999
 
 func _init(p_character: Character):
 	character = p_character
@@ -67,7 +67,7 @@ func use_skill(skill: SkillResource, targets: Array[Character]) -> bool:
 	
 	# Imposta cooldown
 	if skill.cooldown_turns > 0:
-		skill_cooldowns[skill.skill_name] = skill.cooldown_turns
+		skill_cooldowns[skill.skill_name] = skill.cooldown_turns + 1
 	
 	# Emetti segnale
 	skill_used.emit(skill, character, targets)

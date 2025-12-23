@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://bektf4ehbn2we"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "War Banner"
+skill_description = "Raises attack of [b]all allies[/b] with [b][color=yellow]Attack Up[/color][/b]"
+skill_type = 3
+target_type = 3
+mp_cost = 35
+cooldown_turns = 5
+applies_status = true
+status_effect = "attack_up"
+status_chance = 1.0
+animation_name = "melee"

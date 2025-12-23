@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://baj2050nimajl"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Power Strike"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]A powerful strike dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] to [b]an enemy[/b].[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
+mp_cost = 15
+cooldown_turns = 2
+base_power = 30
+power_scaling = 1.5
+crit_chance = 0.2
+crit_multiplier = 2.0
+animation_name = "melee2"
+metadata/_custom_type_script = "uid://1mjd1ii5mmsh"

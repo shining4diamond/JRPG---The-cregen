@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://dtactsvkebynl"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Weakness Curse"
+skill_description = "Curses [b]all enemies[/b] with [b][color=gray]Defense Down[/color][/b]"
+skill_type = 4
+target_type = 1
+mp_cost = 30
+cooldown_turns = 4
+applies_status = true
+status_effect = "defense_down"
+status_chance = 1.0
+animation_name = "melee"

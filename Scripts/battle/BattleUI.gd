@@ -87,15 +87,6 @@ func show_skill_menu(character: Character):
 	manager.skill_button.disabled = true
 	manager.commands_label.show()
 	
-	# Qui puoi creare un pannello UI dinamico
-	# Per ora stampiamo le skill disponibili
-	#print("Available skills for %s:" % character.stats.character_name)
-	#for i in skills.size():
-		#var skill = skills[i]
-		#var cooldown = character.skillSystem.get_cooldown(skill)
-		#print("%d. %s (MP: %d, CD: %d)" % [i+1, skill.skill_name, skill.mp_cost, cooldown])
-	
-	# TODO: Implementare UI completa con pulsanti
 	_create_skill_buttons(skills, character)
 
 func _create_skill_buttons(skills: Array[SkillResource], character: Character):
@@ -123,13 +114,6 @@ func _create_skill_buttons(skills: Array[SkillResource], character: Character):
 		var cooldown = character.skillSystem.get_cooldown(skill)
 		button.disabled = not skill.can_use(character.stats, cooldown)
 		
-		var CD_Label = skill_hbox.get_node_or_null("CD_Label")
-		if button.disabled and cooldown > 0:
-			CD_Label.text = "Cooldown: %d turns" % cooldown
-		else:
-			CD_Label.text = ""
-		
-		
 		# Connetti segnale
 		button.pressed.connect(func(): _on_skill_button_pressed(skill))
 		button.focus_entered.connect(func(): _on_skill_button_focus_entered(skill))
@@ -151,12 +135,35 @@ func _on_skill_button_focus_entered(skill: SkillResource):
 	var label = manager.battle_hud.get_node_or_null("%SkillDescription_Label")
 	var text = _set_skill_description_variables(skill.skill_description, skill, manager.turn_manager.current_battler)
 	label.text = text
+	_update_skill_cooldown_label(manager.turn_manager.current_battler, skill)
+
 
 func _on_skill_button_mouse_entered(button: Button):
 	button.grab_focus()
 
+func _update_skill_cooldown_label(user, skill):
+	var cooldown = user.skillSystem.get_cooldown(skill)
+	var CD_Label = manager.battle_hud.get_node_or_null("%CD_Label")
+	if cooldown > 0:
+		CD_Label.show()
+		CD_Label.text = "Cooldown: %d turns" % cooldown
+	else:
+		CD_Label.hide()
+
 func _set_skill_description_variables(skill_description: String, skill: SkillResource, user: Character):
 	
+	if skill_description.find("%COST_AMOUNT") > 0:
+		var cost = skill.hp_cost if skill.hp_cost > 0 else skill.mp_cost
+		skill_description = skill_description.replace("%COST_AMOUNT", str(cost))
+		
+	if skill_description.find("%HPMP_COST") > 0:
+		var hpmp = "HP" if skill.hp_cost > 0 else "MP"
+		skill_description = skill_description.replace("%HPMP_COST", hpmp)
+		
+	if skill_description.find("%TURN_COOLDOWN") > 0:
+		var cooldown = skill.cooldown_turns
+		skill_description = skill_description.replace("%TURN_COOLDOWN", str(cooldown))
+		
 	if skill_description.find("%PHYSICAL_DAMAGE") > 0:
 		var damage = int(skill.base_power + (user.stats.attack * skill.power_scaling))
 		skill_description = skill_description.replace("%PHYSICAL_DAMAGE", str(damage))
@@ -185,6 +192,16 @@ func _set_skill_description_variables(skill_description: String, skill: SkillRes
 		var stack_max = skill.status.max_stacks
 		skill_description = skill_description.replace("%STATUS_STACK_MAX", str(stack_max))
 	
+	if skill_description.find("%ATTACK_MODIFIER") > 0:
+		var attack_modifier = skill.status.attack_modifier
+		skill_description = skill_description.replace("%ATTACK_MODIFIER", str(attack_modifier))
+	
+	if skill_description.find("%DEFENSE_MODIFIER") > 0:
+		var defense_modifier = skill.status.defense_modifier
+		skill_description = skill_description.replace("%DEFENSE_MODIFIER", str(defense_modifier))
+		
+		
+	
 	return skill_description
 
 
@@ -193,7 +210,7 @@ func _update_status_effect_ui(target: Character):
 		_update_status_effect_ui_enemy(target)
 	
 	if target in manager.turn_manager.player_battlers:
-		print("target: player") 
+		_update_status_effect_ui_player(target)
 
 func _update_status_effect_ui_enemy(target: Character):
 	var container = target.get_node_or_null("HP_ProgressBar_Enemy").get_node_or_null("%StatusEffect_HBox_Container")
@@ -205,5 +222,18 @@ func _update_status_effect_ui_enemy(target: Character):
 		for active_effect in target.get_active_status_effects():
 			var label = Label.new()
 			label.text = active_effect.effect_name + str(active_effect.current_stacks) + " " + str(active_effect.remaining_turns)
-			print(label.text)
+			container.add_child(label)
+
+func _update_status_effect_ui_player(target: Character):
+	var HPMP_Tab_Grid_Container = manager.battle_hud.get_node_or_null("%HPMP_Tab_Grid_Container")
+	var player_tab = HPMP_Tab_Grid_Container.get_node_or_null(str(target.stats.party_member))
+	var container = player_tab.get_node_or_null("Status_Effects")
+	if container:
+		for child in container.get_children():
+			container.remove_child(child)
+			child.queue_free()
+		
+		for active_effect in target.get_active_status_effects():
+			var label = Label.new()
+			label.text = active_effect.effect_name + str(active_effect.current_stacks) + " " + str(active_effect.remaining_turns)
 			container.add_child(label)

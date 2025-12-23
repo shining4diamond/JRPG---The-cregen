@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://b8uhnq31dac7c"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_il7hf"]
+[ext_resource type="Resource" uid="uid://dpmfbo06k16qo" path="res://Scripts/characters/StatusEffects/burn.tres" id="2_h427x"]
+
+[resource]
+script = ExtResource("1_il7hf")
+skill_name = "Poison Strike"
+skill_description = "Coats blade in poison dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] with 60% chance to [b][color=green]Poison[/color][/b]"
+skill_type = 0
+target_type = 0
+mp_cost = 18
+base_power = 25
+power_scaling = 1.2
+applies_status = true
+status_effect = "poison"
+status_chance = 0.6
+animation_name = "melee2"

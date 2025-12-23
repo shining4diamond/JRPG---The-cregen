@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://bbhxsjub1dxrk"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Toxic Cloud"
+skill_description = "Releases a toxic cloud on [b]all enemies[/b] for [b][color=red]%MAGICAL_DAMAGE[/color][/b] with 70% chance to [b][color=green]Poison[/color][/b]"
+skill_type = 1
+target_type = 1
+mp_cost = 35
+cooldown_turns = 4
+base_power = 25
+power_scaling = 0.9
+applies_status = true
+status_effect = "poison"
+status_chance = 0.7
+animation_name = "melee"

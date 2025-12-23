@@ -48,7 +48,7 @@ func _apply_skill_effect(skill: SkillResource, user: Character, target: Characte
 			await _apply_healing(skill, user, target)
 		
 		SkillResource.SkillType.BUFF:
-			await _apply_buff(skill, target)
+			await _apply_buff(skill, user, target)
 		
 		SkillResource.SkillType.DEBUFF:
 			await _apply_debuff(skill, target)
@@ -100,9 +100,12 @@ func _apply_revive(target: Character):
 	manager.turn_manager.add_dead_battler_to_battlers(target)
 
 # Applica buff (da implementare secondo le tue necessità)
-func _apply_buff(skill: SkillResource, target: Character):
-	print("Applying buff: %s to %s" % [skill.skill_name, target.name])
-	# TODO: Implementa sistema di buff/debuff permanenti
+func _apply_buff(skill: SkillResource, user: Character, target: Character):
+	# Applica status effect
+	if skill.applies_status and skill.status_effect != "":
+		var should_apply = randf() < skill.status_chance if skill.status_chance > 0 else true
+		if should_apply:
+			_apply_status_effect(user, target, skill)
 
 # Applica debuff
 func _apply_debuff(skill: SkillResource, target: Character):

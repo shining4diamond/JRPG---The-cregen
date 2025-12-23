@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://c76j4bo03s8qt"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_v7jlc"]
+
+[resource]
+script = ExtResource("1_v7jlc")
+skill_name = "Cleanse"
+skill_description = "Removes all negative status effects from [b]an ally[/b] and heals [b][color=green]%HEAL_AMOUNT[/color][/b]"
+skill_type = 2
+target_type = 2
+mp_cost = 25
+cooldown_turns = 3
+base_power = 30
+power_scaling = 0.7
+animation_name = "melee"

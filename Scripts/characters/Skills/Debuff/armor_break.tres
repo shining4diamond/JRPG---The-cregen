@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://cdgrhjf7osonr"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Armor Break"
+skill_description = "Shatters [b]an enemy's[/b] armor dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] and applying [b][color=gray]Defense Down[/color][/b]"
+skill_type = 0
+target_type = 0
+mp_cost = 22
+cooldown_turns = 2
+base_power = 25
+power_scaling = 1.0
+applies_status = true
+status_effect = "defense_down"
+status_chance = 0.8
+animation_name = "melee2"

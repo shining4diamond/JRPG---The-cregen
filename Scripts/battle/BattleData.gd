@@ -6,13 +6,15 @@ const character_15fps = "res://Scenes/characters/character_15fps.tscn"
 const character_14fps = "res://Scenes/characters/character_14fps.tscn"
 
 const skills_paths = [
-	"res://Scripts/characters/Skills/power_strike.tres",
-	"res://Scripts/characters/Skills/group_heal.tres",
-	"res://Scripts/characters/Skills/heal.tres",
-	"res://Scripts/characters/Skills/fireball.tres",
-	"res://Scripts/characters/Skills/sacrifice.tres",
-	"res://Scripts/characters/Skills/whirlwind.tres",
-	"res://Scripts/characters/Skills/revive.tres"
+	"res://Scripts/characters/Skills/Offensive/power_strike.tres",
+	"res://Scripts/characters/Skills/Offensive/fireball.tres",
+	"res://Scripts/characters/Skills/Offensive/sacrifice.tres",
+	"res://Scripts/characters/Skills/Offensive/whirlwind.tres",
+	"res://Scripts/characters/Skills/Healing/group_heal.tres",
+	"res://Scripts/characters/Skills/Healing/heal.tres",
+	"res://Scripts/characters/Skills/Healing/revive.tres",
+	"res://Scripts/characters/Skills/Buff/battle_cry.tres",
+	"res://Scripts/characters/Skills/Buff/berserk_rage.tres"
 ]
 
 const demon_knight = {

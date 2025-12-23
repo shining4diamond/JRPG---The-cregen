@@ -1,9 +1,9 @@
 Label
 HBoxContainer
+VBoxContainer
+PanelContainer
 RichTextLabel
 MarginContainer
-PanelContainer
-VBoxContainer
 Button
 ScrollContainer
 HScrollBar

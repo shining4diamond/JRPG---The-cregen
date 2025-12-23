@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://dvom5i2ugb4sh"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+
+[resource]
+script = ExtResource("1_p4q48")
+skill_name = "Ice Shard"
+skill_description = "Launches an ice shard dealing [b][color=cyan]%MAGICAL_DAMAGE[/color][/b] with 30% chance to [b][color=lightblue]Freeze[/color][/b]"
+skill_type = 1
+target_type = 0
+mp_cost = 28
+base_power = 45
+power_scaling = 1.3
+applies_status = true
+status_effect = "frozen"
+status_chance = 0.3
+animation_name = "melee"

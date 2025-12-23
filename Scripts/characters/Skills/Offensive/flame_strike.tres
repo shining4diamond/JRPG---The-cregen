@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://byajd4yun3kc4"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_il7hf"]
+[ext_resource type="Resource" uid="uid://dpmfbo06k16qo" path="res://Scripts/characters/StatusEffects/burn.tres" id="2_h427x"]
+
+[resource]
+script = ExtResource("1_il7hf")
+skill_name = "Flame Strike"
+skill_description = "Strikes with flames dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] with 40% chance to [b][color=orange]Burn[/color][/b]"
+mp_cost = 20
+base_power = 35
+power_scaling = 1.3
+crit_chance = 0.15
+crit_multiplier = 1.8
+applies_status = true
+status = ExtResource("2_h427x")
+status_effect = "burn"
+status_chance = 0.4

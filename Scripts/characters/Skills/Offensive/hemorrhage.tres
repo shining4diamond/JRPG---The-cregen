@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://csa5qat8e55bs"]
+
+[ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_il7hf"]
+[ext_resource type="Resource" uid="uid://dpmfbo06k16qo" path="res://Scripts/characters/StatusEffects/burn.tres" id="2_h427x"]
+
+[resource]
+script = ExtResource("1_il7hf")
+skill_name = "Hemorrhage"
+skill_description = "Causes severe bleeding for [b][color=red]%PHYSICAL_DAMAGE[/color][/b] with 50% chance to [b][color=darkred]Bleed[/color][/b]"
+skill_type = 0
+target_type = 0
+mp_cost = 22
+base_power = 30
+power_scaling = 1.25
+applies_status = true
+status_effect = "bleed"
+status_chance = 0.5
+animation_name = "melee"
