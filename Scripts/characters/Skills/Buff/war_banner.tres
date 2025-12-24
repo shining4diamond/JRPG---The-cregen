@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://bektf4ehbn2we"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://bektf4ehbn2we"]
 
 [ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+[ext_resource type="Resource" uid="uid://qjy8l2s2sw71" path="res://Scripts/characters/StatusEffects/attack_up.tres" id="2_q732r"]
 
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "War Banner"
-skill_description = "Raises attack of [b]all allies[/b] with [b][color=yellow]Attack Up[/color][/b]"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]Raises attack of [b]all allies[/b] by [b][color=yellow]%ATTACK_MODIFIER[/color][/b] for [b]%STATUS_DURATION[/b] turns[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
 skill_type = 3
 target_type = 3
 mp_cost = 35
 cooldown_turns = 5
 applies_status = true
+status = ExtResource("2_q732r")
 status_effect = "attack_up"
 status_chance = 1.0
-animation_name = "melee"

@@ -4,13 +4,9 @@
 
 [resource]
 script = ExtResource("1_n45fh")
-metadata/_custom_type_script = "uid://clkvxmcog5xw0"
 effect_name = "Frozen"
 effect_description = "Cannot act and defense is lowered"
-effect_type = 1  # STUN (ma ha anche stat modifier)
-trigger_timing = 0  # START_OF_TURN
-duration_turns = 1
-defense_modifier = -10  # Bonus debuff
-can_stack = false
-tint_color = Color(0.5, 0.7, 1.0, 1.0)  # Icy blue
-show_floating_text = true
+effect_type = 1
+defense_modifier = -10
+tint_color = Color(0.5, 0.7, 1, 1)
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"

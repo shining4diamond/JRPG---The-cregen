@@ -51,7 +51,7 @@ func _apply_skill_effect(skill: SkillResource, user: Character, target: Characte
 			await _apply_buff(skill, user, target)
 		
 		SkillResource.SkillType.DEBUFF:
-			await _apply_debuff(skill, target)
+			await _apply_debuff(skill, user, target)
 
 # Applica danno
 func _apply_damage(skill: SkillResource, user: Character, target: Character):
@@ -94,6 +94,9 @@ func _apply_healing(skill: SkillResource, user: Character, target: Character):
 	# Update UI
 	target.battleAction.emit_signal("update_hpmp_ui", target)
 	
+	_apply_buff(skill,user,target)
+
+
 # Applica revive
 func _apply_revive(target: Character):
 	target.state.isDead = false
@@ -108,9 +111,12 @@ func _apply_buff(skill: SkillResource, user: Character, target: Character):
 			_apply_status_effect(user, target, skill)
 
 # Applica debuff
-func _apply_debuff(skill: SkillResource, target: Character):
-	print("Applying debuff: %s to %s" % [skill.skill_name, target.name])
-	# TODO: Implementa sistema di buff/debuff permanenti
+func _apply_debuff(skill: SkillResource, user: Character, target: Character):
+	# Applica status effect
+	if skill.applies_status and skill.status_effect != "":
+		var should_apply = randf() < skill.status_chance if skill.status_chance > 0 else true
+		if should_apply:
+			_apply_status_effect(user, target, skill)
 
 # Applica status effect
 func _apply_status_effect(user: Character, target: Character, skill: SkillResource):

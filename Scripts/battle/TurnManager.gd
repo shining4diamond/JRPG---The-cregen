@@ -83,7 +83,10 @@ func advance_turn(skip_timer: bool = false):
 		manager.toggle_focus_on_player.emit(last_battler_party_member)
 	
 	# Salta battler morti
-	if not is_instance_valid(current_battler) or current_battler.state.isDead:
+	if not is_instance_valid(current_battler) or current_battler.state.isDead or current_battler.is_stunned():
+		var start_results = current_battler.trigger_status_effects(StatusEffect.TriggerTiming.START_OF_TURN)
+		if start_results.size() > 0:
+			await _process_status_results(current_battler, start_results)
 		is_processing_turn = false
 		advance_turn(skip_timer)
 		return
@@ -143,12 +146,6 @@ func _activate_battler(battler: Character):
 	if start_results.size() > 0:
 		await _process_status_results(battler, start_results)
 	
-	if battler.is_stunned():
-		print("%s is stunned and cannot act!" % battler.stats.character_name)
-		# Salta il turno
-		is_processing_turn = false
-		advance_turn(false)
-		return
 	
 	if battler.stats.character_type == StatsResource.CharacterType.PLAYER:
 		battler.battleMovement.toggle_focus_movement()

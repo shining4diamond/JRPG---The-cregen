@@ -199,8 +199,12 @@ func _set_skill_description_variables(skill_description: String, skill: SkillRes
 	if skill_description.find("%DEFENSE_MODIFIER") > 0:
 		var defense_modifier = skill.status.defense_modifier
 		skill_description = skill_description.replace("%DEFENSE_MODIFIER", str(defense_modifier))
-		
-		
+	
+	if skill_description.find("%HEALING_PER_TURN") > 0:
+		var healing_per_turn = skill.status.healing_per_turn
+		skill_description = skill_description.replace("%HEALING_PER_TURN", str(healing_per_turn))
+	
+	
 	
 	return skill_description
 

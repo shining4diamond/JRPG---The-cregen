@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://7jys56y0yiwl"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://7jys56y0yiwl"]
 
 [ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_v7jlc"]
+[ext_resource type="Resource" uid="uid://cl36re06icu6t" path="res://Scripts/characters/StatusEffects/regeneration.tres" id="2_gevo3"]
 
 [resource]
 script = ExtResource("1_v7jlc")
 skill_name = "Regenerate"
-skill_description = "Grants [b][color=green]Regeneration[/color][/b] to [b]an ally[/b], healing them over time"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]Grants [b][color=green]Regeneration[/color][/b] to [b]an ally[/b], healing by [b]%HEALING_PER_TURN[/b] for [b]%STATUS_DURATION[/b] turns[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
 skill_type = 2
 target_type = 2
 mp_cost = 25
 base_power = 10
 power_scaling = 0.5
 applies_status = true
+status = ExtResource("2_gevo3")
 status_effect = "regeneration"
-status_chance = 1.0  # Always applies
-animation_name = "melee"
+status_chance = 1.0

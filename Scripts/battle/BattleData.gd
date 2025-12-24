@@ -10,11 +10,17 @@ const skills_paths = [
 	"res://Scripts/characters/Skills/Offensive/fireball.tres",
 	"res://Scripts/characters/Skills/Offensive/sacrifice.tres",
 	"res://Scripts/characters/Skills/Offensive/whirlwind.tres",
+	"res://Scripts/characters/Skills/Offensive/blizzard.tres",
 	"res://Scripts/characters/Skills/Healing/group_heal.tres",
 	"res://Scripts/characters/Skills/Healing/heal.tres",
 	"res://Scripts/characters/Skills/Healing/revive.tres",
+	"res://Scripts/characters/Skills/Healing/regenerate.tres",
+	"res://Scripts/characters/Skills/Healing/mass_regenerate.tres",
 	"res://Scripts/characters/Skills/Buff/battle_cry.tres",
-	"res://Scripts/characters/Skills/Buff/berserk_rage.tres"
+	"res://Scripts/characters/Skills/Buff/berserk_rage.tres",
+	"res://Scripts/characters/Skills/Buff/war_banner.tres",
+	"res://Scripts/characters/Skills/Debuff/armor_break.tres",
+	"res://Scripts/characters/Skills/Debuff/weakness_curse.tres"
 ]
 
 const demon_knight = {

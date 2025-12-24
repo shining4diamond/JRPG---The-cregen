@@ -4,14 +4,9 @@
 
 [resource]
 script = ExtResource("1_t0cuy")
-metadata/_custom_type_script = "uid://clkvxmcog5xw0"
 effect_name = "Regeneration"
 effect_description = "Heals HP at the start of each turn"
-effect_type = 3  # HEALING_OVER_TIME
-trigger_timing = 0  # START_OF_TURN
-duration_turns = 5
+effect_type = 3
 healing_per_turn = 20
-can_stack = false
-stack_refresh_duration = true
-tint_color = Color(0.4, 1.0, 0.4, 1.0)  # Green tint
-show_floating_text = true
+tint_color = Color(0.4, 1, 0.4, 1)
+metadata/_custom_type_script = "uid://clkvxmcog5xw0"

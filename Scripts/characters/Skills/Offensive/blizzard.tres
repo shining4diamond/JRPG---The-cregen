@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://bq7eybwk023if"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://bq7eybwk023if"]
 
 [ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+[ext_resource type="Resource" uid="uid://b8uv2lonfmrc2" path="res://Scripts/characters/StatusEffects/frozen.tres" id="2_q2iv8"]
 
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Blizzard"
-skill_description = "Summons a blizzard on [b]all enemies[/b] for [b][color=cyan]%MAGICAL_DAMAGE[/color][/b] with 40% chance to [b][color=lightblue]Freeze[/color][/b]"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]Summons a blizzard on [b]all enemies[/b] dealing [b][color=cyan]%MAGICAL_DAMAGE[/color][/b] magical damage with a [b]%STATUS_PERCENTEAGE_APPLY[/b] chance to [b][color=lightblue]Freeze[/color][/b] the enemy and reducing his defense by [b][color=yellow]%DEFENSE_MODIFIER[/color][/b] for [b]%STATUS_DURATION[/b] turns[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
 skill_type = 1
 target_type = 1
 mp_cost = 45
@@ -13,6 +14,7 @@ cooldown_turns = 4
 base_power = 40
 power_scaling = 1.1
 applies_status = true
+status = ExtResource("2_q2iv8")
 status_effect = "frozen"
 status_chance = 0.4
 animation_name = "meleeRun"

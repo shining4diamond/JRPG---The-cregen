@@ -283,8 +283,8 @@ func get_current_battler() -> Character:
 # ==============================================
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		for player in turn_manager.player_battlers:
-			print(player.stats.attack)
+		for enemy in turn_manager.enemy_battlers:
+			print(enemy.stats.defense)
 
 	if Input.is_action_just_pressed("cancel"):
 		if skill_button.disabled and \

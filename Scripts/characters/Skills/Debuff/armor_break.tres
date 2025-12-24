@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://cdgrhjf7osonr"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://cdgrhjf7osonr"]
 
 [ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+[ext_resource type="Resource" uid="uid://bq3gn4s1lbson" path="res://Scripts/characters/StatusEffects/defense_down.tres" id="2_plxgy"]
 
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Armor Break"
-skill_description = "Shatters [b]an enemy's[/b] armor dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] and applying [b][color=gray]Defense Down[/color][/b]"
-skill_type = 0
-target_type = 0
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]Shatters [b]an enemy’s[/b] armor dealing [b][color=red]%PHYSICAL_DAMAGE[/color][/b] and it has a [b]%STATUS_PERCENTEAGE_APPLY[/b] chance to decrease defense by [b][color=yellow]%DEFENSE_MODIFIER[/color][/b] for [b]%STATUS_DURATION[/b] turns[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
 mp_cost = 22
 cooldown_turns = 2
 base_power = 25
-power_scaling = 1.0
 applies_status = true
+status = ExtResource("2_plxgy")
 status_effect = "defense_down"
 status_chance = 0.8
 animation_name = "melee2"

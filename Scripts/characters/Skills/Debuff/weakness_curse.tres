@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://dtactsvkebynl"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://dtactsvkebynl"]
 
 [ext_resource type="Script" uid="uid://1mjd1ii5mmsh" path="res://Scripts/characters/Skills/skill_resource.gd" id="1_p4q48"]
+[ext_resource type="Resource" uid="uid://bq3gn4s1lbson" path="res://Scripts/characters/StatusEffects/defense_down.tres" id="2_joj2r"]
 
 [resource]
 script = ExtResource("1_p4q48")
 skill_name = "Weakness Curse"
-skill_description = "Curses [b]all enemies[/b] with [b][color=gray]Defense Down[/color][/b]"
+skill_description = "[right]Cost [b]%COST_AMOUNT %HPMP_COST[/b][/right][p]Curses [b]all enemies[/b] decreasing defense by [b][color=yellow]%DEFENSE_MODIFIER[/color][/b] for [b]%STATUS_DURATION[/b] turns[p]This skill has [b]%TURN_COOLDOWN[/b] turn cooldown"
 skill_type = 4
 target_type = 1
 mp_cost = 30
 cooldown_turns = 4
 applies_status = true
+status = ExtResource("2_joj2r")
 status_effect = "defense_down"
 status_chance = 1.0
-animation_name = "melee"
